@@ -23,7 +23,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 /**
- * 新文本泡泡界面
  * @author xg
  *6.7
  */
@@ -37,11 +36,9 @@ public class NewPop_words_Activity extends Activity{
 	private TextView writePrivacy;
 	public void onCreate(Bundle savedInstanceState){
 		Window window = this.getWindow();
-        // 去标题栏
        window.requestFeature(window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.newpop_words_activity);
-		//返回
 				cancelText =(TextView)findViewById(R.id.cancel_text);
 				cancelText.setOnClickListener(new OnClickListener(){
 

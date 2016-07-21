@@ -11,7 +11,6 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -25,7 +24,6 @@ private ImageView imageview_back, imageview_everydayremind,
 private TextView  textview_remindtimeshow;
 public void onCreate(Bundle savedInstanceState) {
 	Window window = this.getWindow();
-    // »•±ÍÃ‚¿∏
    window.requestFeature(window.FEATURE_NO_TITLE);
 	super.onCreate(savedInstanceState);
 	init();

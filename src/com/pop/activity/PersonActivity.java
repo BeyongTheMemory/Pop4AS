@@ -12,7 +12,6 @@ import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 /**
- * ¸öÈËÐÅÏ¢½çÃæ
  * @author xg
  *6.7
  */
@@ -27,11 +26,11 @@ public class PersonActivity extends Activity{
 	
 	public void onCreate(Bundle savedInstanceState){
 		Window window = this.getWindow();
-        // È¥±êÌâÀ¸
+        // È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
        window.requestFeature(window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.person_activity);
-		//·µ»Ø
+		//ï¿½ï¿½ï¿½ï¿½
 				backText =(TextView)findViewById(R.id.back_text);
 				backText.setOnClickListener(new OnClickListener(){
 
@@ -45,7 +44,7 @@ public class PersonActivity extends Activity{
 					}
 					
 				});
-		//ÉèÖÃ
+		//ï¿½ï¿½ï¿½ï¿½
 		      optionText = (TextView)findViewById(R.id.option_text);
 		      optionText.setOnClickListener(new OnClickListener(){
 

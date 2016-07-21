@@ -17,6 +17,7 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -30,12 +31,13 @@ import android.widget.TextView;
  * @author Siyamed SINIR
  * 
  */
+
 public class SatelliteMenu extends FrameLayout {
 
-	private static final int DEFAULT_SATELLITE_DISTANCE = 150;
+	private static final int DEFAULT_SATELLITE_DISTANCE = 300;//子节点之间的距离
 	private static final float DEFAULT_TOTAL_SPACING_DEGREES = 180f;
 	private static final boolean DEFAULT_CLOSE_ON_CLICK = true;
-	private static final int DEFAULT_EXPAND_DURATION = 500;
+	private static final int DEFAULT_EXPAND_DURATION = 500;//弹出用时
 	
 	private Animation mainRotateRight;
 	private Animation mainRotateLeft;
@@ -258,7 +260,8 @@ public class SatelliteMenu extends FrameLayout {
 		recalculateMeasureDiff();
 
 		int totalHeight = imgMain.getHeight() + satelliteDistance + measureDiff;
-		int totalWidth = imgMain.getWidth() + satelliteDistance + measureDiff;
+		int totalWidth = widthMeasureSpec;//重设置了宽度,原宽度会导致弹出来的按钮被挡住
+		//int totalWidth = imgMain.getWidth() + satelliteDistance + measureDiff;//
 		setMeasuredDimension(totalWidth, totalHeight);
 	}
 
@@ -433,7 +436,7 @@ public class SatelliteMenu extends FrameLayout {
 	/**
 	 * Sets the image drawable for the center button.
 	 * 
-	 * @param resource The image drawable.
+	 * @param drawable The image drawable.
 	 */
 	public void setMainImage(Drawable drawable) {
 		this.imgMain.setImageDrawable(drawable);

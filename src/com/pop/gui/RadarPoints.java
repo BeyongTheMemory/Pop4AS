@@ -10,7 +10,6 @@ import com.pop.data.DataHandler;
 import android.graphics.Color;
 
 /** Takes care of the small radar in the top left corner and of its points
- * Ãè»æ×óÉÏ½ÇÀ×´ïÉÏµÄµã
  * @author daniele
  *
  */
@@ -20,7 +19,6 @@ public class RadarPoints implements ScreenObj {
 	/** The radar's range */
 	float range;
 	/** Radius in pixel on screen */
-	/**À×´ï°ë¾¶*/
 	public static float RADIUS = 40;
 	/** Position on screen */
 	static float originX = 0 , originY = 0;
@@ -33,11 +31,10 @@ public class RadarPoints implements ScreenObj {
 		/** Draw the radar */
 		dw.setFill(true);
 		dw.setColor(radarColor);
-		//»æÖÆÀ×´ïµÄÔ²
+		//ï¿½ï¿½ï¿½ï¿½ï¿½×´ï¿½ï¿½Ô²
 		dw.paintCircle(originX + RADIUS, originY + RADIUS, RADIUS);
 
 		/** put the markers in it */
-		/**ÔÚÀ×´ïÖÐ»æÖÆ±êÊ¾µÄµã*/
 		float scale = range / RADIUS;
 
 		DataHandler jLayer = view.getDataHandler();
@@ -47,13 +44,11 @@ public class RadarPoints implements ScreenObj {
 			float x = pm.getLocationVector().x / scale;
 			float y = pm.getLocationVector().z / scale;
 
-			if (pm.isActive() && (x * x + y * y < RADIUS * RADIUS)) {//ÅÐ¶ÏÊÇ·ñÔÚÔ²ÖÐ
-				dw.setFill(true);//ÊµÐÄ
+			if (pm.isActive() && (x * x + y * y < RADIUS * RADIUS)) {
+				dw.setFill(true);
 				
 				// For OpenStreetMap the color is changing based on the URL
-				//ÉèÖÃÑÕÉ«£¬²»Í¬µÄµØ·½µÃµ½µÄÊý¾ÝÏÔÊ¾ÑÕÉ« ²»Í¬
 					dw.setColor(pm.getColour());
-				//»æÖÆµã
 				dw.paintRect(x + RADIUS - 1, y + RADIUS - 1, 2, 2);
 			}
 		}

@@ -23,7 +23,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 /**
- * ÐÂÎÄ±¾ÅÝÅÝ½çÃæ
  * @author xg
  *6.7
  */
@@ -37,11 +36,11 @@ public class NewPop_photo_Activity extends Activity{
 	private TextView writePrivacy;
 	public void onCreate(Bundle savedInstanceState){
 		Window window = this.getWindow();
-        // È¥±êÌâÀ¸
+        // È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
        window.requestFeature(window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.newpop_photo_activity);
-		//·µ»Ø
+		//ï¿½ï¿½ï¿½ï¿½
 				cancelText =(TextView)findViewById(R.id.cancel_text);
 				cancelText.setOnClickListener(new OnClickListener(){
 

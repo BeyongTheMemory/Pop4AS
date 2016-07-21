@@ -1,11 +1,6 @@
 
 package com.pop.mgr.location;
-/**
- * 位置改变时提供的监听器对象，实现LocationListener接口
- * 好像用于在地图上进行实时注册，需重新
- *  addWalkingPathPosition注释
- *  68注释
- */
+
 import com.pop.show.MixContext;
 //import org.mixare.MixMap;
 import com.pop.mgr.downloader.DownloadManager;
@@ -49,7 +44,7 @@ class LocationObserver implements LocationListener {
 						+ location.getAccuracy());
 		try {
 			//addWalkingPathPosition(location);
-			//位置改变时先暂停所有后台下载任务
+			//位锟矫改憋拷时锟斤拷锟斤拷停锟斤拷锟叫猴拷台锟斤拷锟斤拷锟斤拷锟斤拷
 			deleteAllDownloadActivity();
 			Log.v(MixContext.TAG, "Location Changed: " + location.getProvider()
 							+ " lat: " + location.getLatitude() + " lon: "

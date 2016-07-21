@@ -36,24 +36,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-/**
- * 实现按住说话功能
- * 按住说话，开始录音，停止录音，显示到列表，点击列表项播放。
- */
+
 public class NewPop_yuyin_Activity extends Activity {
-	/** log标记 */
 	private static final String LOG_TAG = "AudioRecordTest";
-	/** 语音文件保存路径 */
 	private String mFileName = null;
-	/** 按住说话按钮 */
 	private ImageView mBtnVoice;
-	/** 用于语音播放 */
 	private MediaPlayer mPlayer = null;
-	/** 用于完成录音 */
 	private MediaRecorder mRecorder = null;
-	/** 显示语音列表 */
-	/** 语音列表 */
-	/** 录音存储路径 */
 	private static final String PATH = "/sdcard/MyVoiceForder/Record/";
 	
 	private TextView uploadButton;
@@ -66,7 +55,6 @@ public class NewPop_yuyin_Activity extends Activity {
 		initView();
 	}
 
-	/** 初始化控件 */
 	private void initView() {
 //		mVoidListView = (ListView) findViewById(R.id.voidList);
 //		mAdapter = new MyListAdapter(this);
@@ -82,12 +70,12 @@ public class NewPop_yuyin_Activity extends Activity {
 //					mPlayer.prepare();
 //					mPlayer.start();
 //				} catch (IOException e) {
-//					Log.e(LOG_TAG, "播放失败");
+//					Log.e(LOG_TAG, "锟斤拷锟斤拷失锟斤拷");
 //				}
 //			}
 //		});
 		mBtnVoice = (ImageView) findViewById(R.id.yuyinimageView1);
-		//mBtnVoice.setText("按住说话");
+		//mBtnVoice.setText("锟斤拷住说锟斤拷");
 		mBtnVoice.setOnTouchListener(new OnTouchListener() {
 
 			@Override
@@ -110,15 +98,12 @@ public class NewPop_yuyin_Activity extends Activity {
 		uploadButton.setOnClickListener(new UploadListener());
 	}
 
-	/** 初始化数据 */
 	private void initData() {
 		//mVoicesList = new ArrayList<String>();
 		mPlayer = new MediaPlayer();
 	}
 
-	/** 开始录音 */
 	private void startVoice() {
-		// 设置录音保存路径
 		mFileName = PATH + UUID.randomUUID().toString() + ".amr";
 		String state = android.os.Environment.getExternalStorageState();
 		if (!state.equals(android.os.Environment.MEDIA_MOUNTED)) {
@@ -128,7 +113,7 @@ public class NewPop_yuyin_Activity extends Activity {
 		if (!directory.exists() && !directory.mkdirs()) {
 			Log.i(LOG_TAG, "Path to file could not be created");
 		}
-		Toast.makeText(getApplicationContext(), "开始录音", 0).show();
+		Toast.makeText(getApplicationContext(), "锟斤拷始录锟斤拷", 0).show();
 		mRecorder = new MediaRecorder();
 		mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 		mRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
@@ -142,7 +127,6 @@ public class NewPop_yuyin_Activity extends Activity {
 		mRecorder.start();
 	}
 
-	/** 停止录音 */
 	private void stopVoice() {
 		mRecorder.stop();
 		mRecorder.release();
@@ -150,7 +134,7 @@ public class NewPop_yuyin_Activity extends Activity {
 //		mVoicesList.add(mFileName);
 //		mAdapter = new MyListAdapter(RecordActivity.this);
 //		mVoidListView.setAdapter(mAdapter);
-		Toast.makeText(getApplicationContext(), "保存录音" + mFileName, 0).show();
+		Toast.makeText(getApplicationContext(), "锟斤拷锟斤拷录锟斤拷" + mFileName, 0).show();
 	}
 	
     private class UploadListener implements OnClickListener{
@@ -180,7 +164,7 @@ public class NewPop_yuyin_Activity extends Activity {
     	
     }
 
-//	/** 语音列表适配器 */
+//	/** 锟斤拷锟斤拷锟叫憋拷锟斤拷锟斤拷锟斤拷 */
 //	private class MyListAdapter extends BaseAdapter {
 //		LayoutInflater mInflater;
 //

@@ -70,6 +70,8 @@ import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -1008,8 +1010,7 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 //				       Log.v("4","bengkui");
 //				       addContentView(menu, params);
 //		Log.v("5","bengkui");
-		Log.v("849","bengkui");
-		
+
 		//menu = (SatelliteMenu)findViewById(R.id.menu);
 		if(menu == null){
 			menu = new SatelliteMenu(this);
@@ -1019,11 +1020,10 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 	        items.add(new SatelliteMenuItem(7, R.drawable.filter_btn));
 	        items.add(new SatelliteMenuItem(8, R.drawable.throw_btn));
 	        menu.addItems(items); 
-	        Log.v("861","bengkui");
 	        menu.setOnItemClickedListener(new SateliteClickedListener() {
 				public void eventOccured(int id) {
 					Log.v("T",id+"");
-					if(id == 5){//����
+					if(id == 5){
 						isPreview=false;
 						Intent intent = new Intent();
 						intent.setClass(MainActivity.this,PersonActivity.class);
@@ -1033,7 +1033,7 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 						MainActivity.this.finish();
 						
 					}
-					if(id == 6){//��Ϣ
+					if(id == 6){
 						isPreview=false;
 						Intent intent = new Intent();
 						intent.setClass(MainActivity.this,MessageActivity.class);
@@ -1043,7 +1043,7 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 						MainActivity.this.finish();
 						
 					}
-					if(id == 7){//����
+					if(id == 7){
 						isPreview=false;
 						Intent intent = new Intent();
 						intent.setClass(MainActivity.this,FilterPopActivity.class);
@@ -1054,7 +1054,7 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 					   
 						
 					}
-					if(id == 8){//������
+					if(id == 8){
 						isPreview=false;
 						Intent intent = new Intent();
 						intent.setClass(MainActivity.this,NewPopActivity.class);
@@ -1067,18 +1067,14 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 				}
 			});
 		}
-		Log.v("855","bengkui");
-		 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(  
-			      FrameLayout.LayoutParams.FILL_PARENT,  
-			      FrameLayout.LayoutParams.FILL_PARENT); 
-		 Log.v("858","bengkui");
-		//���ò˵����ֵ�λ��(�����ڶ���)  
-	       
-	       params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;  
-	       Log.v("859","bengkui");
+		//修改点
+		 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+			      FrameLayout.LayoutParams.MATCH_PARENT,
+			      FrameLayout.LayoutParams.MATCH_PARENT);
+
+	       params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
 	       addContentView(menu, params);
-	       Log.v("860","bengkui");
-		
+
 	}
 	
 	/**
@@ -1099,7 +1095,7 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 
 		public void surfaceChanged(SurfaceHolder holder, int format, int width,
 				int height) {
-			// Ԥ�������ʽ�ʹ�С�仯ʱ������	
+			// Ԥ�������ʽ�ʹ�С�仯ʱ������
 		}
 
 		
@@ -1129,10 +1125,10 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 					parameters.setPreviewFpsRange(4, 10);
 					//Log.v("yulan2","OK_______________OK");
 					// ͨ��SurfaceView��ʾȡ������
-					camera.setPreviewDisplay(cameraSurfaceHolder); 
+					camera.setPreviewDisplay(cameraSurfaceHolder);
 					//Log.v("yulan4","OK_______________OK");
 					// ��ʼԤ��
-					camera.startPreview();  
+					camera.startPreview();
 					//Log.v("chushihuakaishi","OK_______________OK");
 				}
 				catch (Exception e)

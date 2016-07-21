@@ -9,7 +9,6 @@ import com.pop.R;
 public class MyCollectActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {  
 		Window window = this.getWindow();
-        // »•±ÍÃ‚¿∏
        window.requestFeature(window.FEATURE_NO_TITLE);
 	      super.onCreate(savedInstanceState);  
 	      setContentView(R.layout.mycollect_activity);

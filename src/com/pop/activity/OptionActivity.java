@@ -12,7 +12,6 @@ import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 /**
- * ÉèÖÃ½çÃæ
  * @author xg
  *6.7
  */
@@ -26,11 +25,11 @@ public class OptionActivity extends Activity{
 	
 	public void onCreate(Bundle savedInstanceState){
 		Window window = this.getWindow();
-        // È¥±êÌâÀ¸
+        // È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
        window.requestFeature(window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.option_activity);
-		//·µ»Ø
+		//ï¿½ï¿½ï¿½ï¿½
 		backText =(TextView)findViewById(R.id.back_text);
 		backText.setOnClickListener(new OnClickListener(){
 

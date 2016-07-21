@@ -41,15 +41,14 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.util.Log;
 /**
- * ÏÂÔØÅİÅİÊı¾İ
  */
 public class DownloadMgrImpl implements Runnable,DownloadManager {
 
 
 	private MixContext ctx;
 	private DownloadManagerState state = DownloadManagerState.Confused;
-	//private LinkedBlockingQueue<ManagedDownloadRequest> todoList = new LinkedBlockingQueue<ManagedDownloadRequest>();//Ê¹ÓÃÏß³Ì°²È«µÄ×èÈû¶ÓÁĞ
-	private ConcurrentHashMap<String, DownloadResult> doneList = new ConcurrentHashMap<String, DownloadResult>();//Ïß³Ì°²È«µÄhashMap
+	//private LinkedBlockingQueue<ManagedDownloadRequest> todoList = new LinkedBlockingQueue<ManagedDownloadRequest>();//Ê¹ï¿½ï¿½ï¿½ß³Ì°ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private ConcurrentHashMap<String, DownloadResult> doneList = new ConcurrentHashMap<String, DownloadResult>();//ï¿½ß³Ì°ï¿½È«ï¿½ï¿½hashMap
 	private List<Marker> markers;
 	private boolean tag =true;
 
@@ -161,7 +160,7 @@ public class DownloadMgrImpl implements Runnable,DownloadManager {
 	
 	/*
 	 * (non-Javadoc)
-	 * ÖØÖÃËùÓĞÏÂÔØÇëÇó
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @see org.mixare.mgr.downloader.DownloadManager#purgeLists()
 	 */
 //	public synchronized void resetActivity() {
@@ -171,7 +170,7 @@ public class DownloadMgrImpl implements Runnable,DownloadManager {
 
 	/*
 	 * (non-Javadoc)
-	 *½«URL´«Êäµ½ÕâÀï£¬¿ÉÒÔµÃµ½ÏàÓ¦ĞÅÏ¢¸ÃURLµÄID
+	 *ï¿½ï¿½URLï¿½ï¿½ï¿½äµ½ï¿½ï¿½ï¿½ï£¬ï¿½ï¿½ï¿½ÔµÃµï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ï¢ï¿½ï¿½URLï¿½ï¿½ID
 	 * @see
 	 * org.mixare.mgr.downloader.DownloadManager#submitJob(org.mixare.mgr.downloader
 	 * .DownloadRequest)
@@ -180,7 +179,7 @@ public class DownloadMgrImpl implements Runnable,DownloadManager {
 
 	/*
 	 * (non-Javadoc)
-	 * µÃµ½×îºóÒ»¸öÏÂÔØ½á¹û
+	 * ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½ï¿½
 	 * @see
 	 * org.mixare.mgr.downloader.DownloadManager#getReqResult(java.lang.String)
 	 */
@@ -192,7 +191,7 @@ public class DownloadMgrImpl implements Runnable,DownloadManager {
 
 	/*
 	 * (non-Javadoc)
-	 * µÃµ½ÏÂÒ»¸öÏÂÔØ½á¹û
+	 * ï¿½Ãµï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½ï¿½
 	 * @see org.mixare.mgr.downloader.DownloadManager#getNextResult()
 	 */
 	public synchronized DownloadResult getNextResult() {

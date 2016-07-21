@@ -22,13 +22,11 @@ public class NewPopActivity extends Activity{
 	private ImageView voicepop_image =null;
 	public void onCreate(Bundle savedInstanceState){
 		Window window = this.getWindow();
-        // 去标题栏
        window.requestFeature(window.FEATURE_NO_TITLE);
-       //后方模糊
-      window.setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,   
+      window.setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,
     		  WindowManager.LayoutParams.FLAG_BLUR_BEHIND);  
 
-       //设置透明度
+
        WindowManager.LayoutParams lp = window.getAttributes(); 
        lp.alpha = 0.9f; 
        window.setAttributes(lp);  
@@ -36,7 +34,6 @@ public class NewPopActivity extends Activity{
 
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.newpop_activity);
-		//返回
 		closeImage =(ImageView)findViewById(R.id.close_imageView);
 		closeImage.setOnClickListener(new OnClickListener(){
 
@@ -50,7 +47,6 @@ public class NewPopActivity extends Activity{
 					}
 					
 				});
-		//图文泡泡
 		imagepop_imageView = (ImageView)findViewById(R.id.imagepop_imageView);
 		imagepop_imageView.setOnClickListener(new OnClickListener(){
 

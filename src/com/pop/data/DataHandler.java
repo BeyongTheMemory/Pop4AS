@@ -14,18 +14,10 @@ import com.pop.lib.marker.Marker;
 import android.location.Location;
 import android.util.Log;
 
-/**
- * DataHandler is the model which provides the Marker Objects with its data.
- * 模型提供的标记的对象数据。
- * DataHandler is also the Factory for new Marker objects.
- * 也是新的标记的对象工厂。
- */
 public class DataHandler {
 	
 	// complete marker list
-	//完成标记
 	private List<Marker> markerList = new ArrayList<Marker>();
-	/**所有mark存入dataHandler的变量markList中*/
 	public void addMarkers(List<Marker> markers) {
 
 		Log.v(MainActivity.TAG, "Marker before: "+markerList.size());
@@ -40,8 +32,7 @@ public class DataHandler {
 	public void sortMarkerList() {
 		Collections.sort(markerList); 
 	}
-	/**计算每个标志物与用户的距离,结果保存在markList中每一个Mark的distance变量里*/
-	public void updateDistances(Location location) {//计算每个标志物与用户的距离
+	public void updateDistances(Location location) {//锟斤拷锟斤拷每锟斤拷锟斤拷志锟斤拷锟斤拷锟矫伙拷锟侥撅拷锟斤拷
 		for(Marker ma: markerList) {
 			float[] dist=new float[3];
 			Location.distanceBetween(ma.getLatitude(), ma.getLongitude(), location.getLatitude(), location.getLongitude(), dist);
@@ -49,7 +40,6 @@ public class DataHandler {
 		}
 	}
 	
-	/**判断该mark是否应该被描绘到屏幕上*/
 	public void updateActivationStatus(MixContext mixContext) {
 		
 		Hashtable<Class, Integer> map = new Hashtable<Class, Integer>();
@@ -66,7 +56,6 @@ public class DataHandler {
 		}
 	}
     
-	/**使用传入的location重新计算每一个Mark相对于location的距离*/
 	public void onLocationChanged(Location location) {
 		updateDistances(location);
 		sortMarkerList();

@@ -10,7 +10,6 @@ import android.os.Bundle;
  * and they will then listen for locations. This class will check for updates for
  * the observer. 
  * Using this method: http://stackoverflow.com/questions/3145089/
- * 每20s对位置信息监听器做一次检测，实现LocationListener接口
  * @author A. Egal
  */
 public class LocationResolver implements LocationListener{

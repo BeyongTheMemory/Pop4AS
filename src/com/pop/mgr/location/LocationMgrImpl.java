@@ -22,7 +22,6 @@ import android.widget.Toast;
 /**
  * This class is repsonsible for finding the location, and sending it back to
  * the mixcontext.
- * ¶¨Î»ÓÃ£¬Ìá¹©ÓÃ»§Î»ÖÃÐÅÏ¢
  * @author A. Egal
  */
 class LocationMgrImpl implements LocationFinder {
@@ -41,7 +40,7 @@ class LocationMgrImpl implements LocationFinder {
 	// see back-off pattern discussion
 	// http://stackoverflow.com/questions/3433875/how-to-force-gps-provider-to-get-speed-in-android
 	// thanks Reto Meier for his presentation at gddde 2010
-	//¸üÐÂµÄÆµÂÊºÍ×îÐ¡µÄ¾àÀë£¬Ê¹ÓÃÕâ¸öÖµ½´ÓÍºÜºÃµÄGPS¶¨Î»
+	//ï¿½ï¿½ï¿½Âµï¿½Æµï¿½Êºï¿½ï¿½ï¿½Ð¡ï¿½Ä¾ï¿½ï¿½ë£¬Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ÍºÜºÃµï¿½GPSï¿½ï¿½Î»
 	private final long freq = 5000; // 5 seconds
 	private final float dist = 20; // 20 meters
 
@@ -52,7 +51,7 @@ class LocationMgrImpl implements LocationFinder {
 		this.locationResolvers = new ArrayList<LocationResolver>();
 	}
 
-	/*Í¨¹ýÏûÏ¢Ìá¹©ÕßËÑÑ°ÐÅÏ¢
+	/*Í¨ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½á¹©ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½Ï¢
 	 * (non-Javadoc)
 	 * 
 	 * @see
@@ -62,11 +61,11 @@ class LocationMgrImpl implements LocationFinder {
 	public void findLocation() {
 
 		// fallback for the case where GPS and network providers are disabled
-		//ÔÚGPSºÍÍøÂç¹©Ó¦ÉÌ±»½ûÓÃµÄÇé¿öÏÂ»ØÍË
-		Location hardFix = new Location("reverseGeocoded");//³õÊ¼»¯µÄlocationÎªgoogleÉÏµÄlocation,¼´×ø±êÓÃÓÚ¹È¸èµØÍ¼ÖÐ
+		//ï¿½ï¿½GPSï¿½ï¿½ï¿½ï¿½ï¿½ç¹©Ó¦ï¿½Ì±ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½Â»ï¿½ï¿½ï¿½
+		Location hardFix = new Location("reverseGeocoded");//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½locationÎªgoogleï¿½Ïµï¿½location,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¹È¸ï¿½ï¿½Í¼ï¿½ï¿½
 
 		// Frangart, Eppan, Bozen, Italy
-		//Ä¬ÈÏ×ø±ê£¿
+		//Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ê£¿
 		hardFix.setLatitude(46.480302);
 		hardFix.setLongitude(11.296005);
 		hardFix.setAltitude(300);
@@ -74,27 +73,27 @@ class LocationMgrImpl implements LocationFinder {
 		try {
 			requestBestLocationUpdates();
 			//temporary set the current location, until a good provider is found 
-			//ÁÙÊ±ÉèÖÃµÄµ±Ç°Î»ÖÃ
+			//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ÃµÄµï¿½Ç°Î»ï¿½ï¿½
 			curLoc = lm.getLastKnownLocation(lm.getBestProvider(new Criteria(), true));
 		} catch (Exception ex2) {
 			// ex2.printStackTrace();
-			//ÕÒ²»µ½Î»ÖÃ·þÎñÊ±ÁÙÊ±ÉèÖÃ£¬²¢µ¯³ö¶Ô»°¿ò
+			//ï¿½Ò²ï¿½ï¿½ï¿½Î»ï¿½Ã·ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
 			curLoc = hardFix;
-			mixContext.doPopUp("Çë¿ªÆôÍøÂç»òGPSÒÔ»ñÈ¡Î»ÖÃÐÅÏ¢£¡");
+			mixContext.doPopUp("ï¿½ë¿ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½GPSï¿½Ô»ï¿½È¡Î»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½");
 
 		}
 	}
 
 	private void requestBestLocationUpdates() {
 		Timer timer = new Timer();
-		for (String p : lm.getAllProviders()) {//È¡µÃËùÓÐProviders
+		for (String p : lm.getAllProviders()) {//È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Providers
 			if(lm.isProviderEnabled(p)){
 				LocationResolver lr = new LocationResolver(lm, p, this);
 				locationResolvers.add(lr);
-				lm.requestLocationUpdates(p, 0, 0, lr);//ÇëÇóÎ»ÖÃÐÅÏ¢µÄ¸üÐÂString provider, long minTime, float minDistance, LocationListener listener
+				lm.requestLocationUpdates(p, 0, 0, lr);//ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ä¸ï¿½ï¿½ï¿½String provider, long minTime, float minDistance, LocationListener listener
 			}
 		}
-		//µÈ´ý20sÔÙ´Î½øÐÐ¶¨Î»
+		//ï¿½È´ï¿½20sï¿½Ù´Î½ï¿½ï¿½Ð¶ï¿½Î»
 		timer.schedule(new LocationTimerTask(),20* 1000); //wait 20 seconds for the location updates to find the location
 	}
 
@@ -104,18 +103,18 @@ class LocationMgrImpl implements LocationFinder {
 	 * @see
 	 * org.mixare.mgr.location.LocationFinder#locationCallback(android.content
 	 * .Context)
-	 *ÕÒµ½Î»ÖÃÐÅÏ¢Ìá¹©ÉÌ²¢ÅÐ¶ÏÆäÊÇ·ñÊÇ×î¼ÑµÄ
+	 *ï¿½Òµï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½á¹©ï¿½Ì²ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ñµï¿½
 	 */
 	public void locationCallback(String provider) {
-		Location foundLocation = lm.getLastKnownLocation(provider);//»ñÈ¡»º´æÖÐµÄÎ»ÖÃÐÅÏ¢
-		if (bestLocationProvider != null) {//ÓÐ×î¼ÑÎ»ÖÃÐÅÏ¢Ìá¹©Õß
+		Location foundLocation = lm.getLastKnownLocation(provider);//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢
+		if (bestLocationProvider != null) {//ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½á¹©ï¿½ï¿½
 			Location bestLocation = lm
 					.getLastKnownLocation(bestLocationProvider);
-			if (foundLocation.getAccuracy() < bestLocation.getAccuracy()) {//Í¨¹ý¶¨Î»Îó²îÅÐ¶Ï×î½üÎ»ÖÃÐÅÏ¢¼°Î»ÖÃÐÅÏ¢Ìá¹©ÕßÊÇ·ñÐèÒª¸Ä±ä
+			if (foundLocation.getAccuracy() < bestLocation.getAccuracy()) {//Í¨ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½á¹©ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Òªï¿½Ä±ï¿½
 				curLoc = foundLocation;
 				bestLocationProvider = provider;
 			}
-		} else {//»ñÈ¡Î»ÖÃÐÅÏ¢Ê§°Ü
+		} else {//ï¿½ï¿½È¡Î»ï¿½ï¿½ï¿½ï¿½Ï¢Ê§ï¿½ï¿½
 			Log.v("Loc","LocError");
 			curLoc = foundLocation;
 			bestLocationProvider = provider;
@@ -127,14 +126,14 @@ class LocationMgrImpl implements LocationFinder {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.mixare.mgr.location.LocationFinder#getCurrentLocation()
-	 * »ñÈ¡µ±Ç°Î»ÖÃ
+	 * ï¿½ï¿½È¡ï¿½ï¿½Ç°Î»ï¿½ï¿½
 	 */
 	public Location getCurrentLocation() {
-		if (curLoc == null) {//ÈôÐÅÏ¢»ñÈ¡Ê§°Ü
+		if (curLoc == null) {//ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½È¡Ê§ï¿½ï¿½
 			MainActivity mixView = mixContext.getActualMixView();
 			Toast.makeText(
 					mixView,
-					"ÎÞ·¨¶¨Î»£¡", Toast.LENGTH_LONG)
+					"ï¿½Þ·ï¿½ï¿½ï¿½Î»ï¿½ï¿½", Toast.LENGTH_LONG)
 					.show();
 			throw new RuntimeException("No GPS Found");
 		}
@@ -179,7 +178,7 @@ class LocationMgrImpl implements LocationFinder {
 	 * 
 	 * @see org.mixare.mgr.location.LocationFinder#getGeomagneticField()
 	 */
-	public GeomagneticField getGeomagneticField() {//»ñÈ¡µØ´ÅÐÅÏ¢ÊµÀý£¬¸ÃÊµÀý¿É½«µØÀí×ø±ê×ª»¯ÎªWGS84×ø±ê
+	public GeomagneticField getGeomagneticField() {//ï¿½ï¿½È¡ï¿½Ø´ï¿½ï¿½ï¿½Ï¢Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½É½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ÎªWGS84ï¿½ï¿½ï¿½ï¿½
 		Location location = getCurrentLocation();
 		GeomagneticField gmf = new GeomagneticField(
 				(float) location.getLatitude(),
@@ -188,7 +187,7 @@ class LocationMgrImpl implements LocationFinder {
 		return gmf;
 	}
 
-	public void setPosition(Location location) {//ÉèÖÃÎ»ÖÃÐÅÏ¢
+	public void setPosition(Location location) {//ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢
 		synchronized (curLoc) {
 			curLoc = location;
 		}
@@ -200,7 +199,7 @@ class LocationMgrImpl implements LocationFinder {
 	}
 
 	@Override
-	public void switchOn() {//¿ªÊ¼¸üÐÂÎ»ÖÃÐÅÏ¢
+	public void switchOn() {//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢
 		if (!LocationFinderState.Active.equals(state)) {
 			lm = (LocationManager) mixContext
 					.getSystemService(Context.LOCATION_SERVICE);
@@ -209,7 +208,7 @@ class LocationMgrImpl implements LocationFinder {
 	}
 
 	@Override
-	public void switchOff() {//Í£Ö¹¸üÐÂÎ»ÖÃÐÅÏ¢
+	public void switchOff() {//Í£Ö¹ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢
 		if (lm != null) {
 			lm.removeUpdates(getObserver());
 			state = LocationFinderState.Inactive;
@@ -230,27 +229,27 @@ class LocationMgrImpl implements LocationFinder {
 		@Override
 		public void run() {
 			//remove all location updates
-			//ÒÆ³ýËùÓÐÎ»ÖÃ¼àÌýÆ÷£¬Í£Ö¹Î»ÖÃ¸üÐÂ
+			//ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£Ö¹Î»ï¿½Ã¸ï¿½ï¿½ï¿½
 			for(LocationResolver locationResolver: locationResolvers){
-				lm.removeUpdates(locationResolver);//ÒÆ³ý¼àÌý
+				lm.removeUpdates(locationResolver);//ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½
 			}
-			if(bestLocationProvider != null){//ÓÐ×î¼ÑÎ»ÖÃ¼àÌýÆ÷´æÔÚÊ±
-				lm.removeUpdates(getObserver());//µØÍ¼±ê¼Ç¸üÐÂ
+			if(bestLocationProvider != null){//ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±
+				lm.removeUpdates(getObserver());//ï¿½ï¿½Í¼ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½
 				state=LocationFinderState.Confused;
 				mixContext.getActualMixView().runOnUiThread(new Runnable() {					
 					@Override
 					public void run() {
-						lm.requestLocationUpdates(bestLocationProvider, freq, dist, getObserver());	//¿ªÊ¼Î»ÖÃ¼àÌý	
+						lm.requestLocationUpdates(bestLocationProvider, freq, dist, getObserver());	//ï¿½ï¿½Ê¼Î»ï¿½Ã¼ï¿½ï¿½ï¿½	
 					}
 				});
 				state=LocationFinderState.Active;
 			}
-			else{ //no location foundÃ»ÓÐÎ»ÖÃ¼àÌýÆ÷¿ÉÒÔ±»Ê¹ÓÃ£¬²»Í£µ¯³öÌáÊ¾¿ò
+			else{ //no location foundÃ»ï¿½ï¿½Î»ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½Ê¹ï¿½Ã£ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½
 				mixContext.getActualMixView().runOnUiThread(new Runnable() {					
 					@Override
 					public void run() {
 						Toast.makeText(mixContext.getActualMixView(), 
-								"ÎÞ·¨¶¨Î»£¡", Toast.LENGTH_LONG);
+								"ï¿½Þ·ï¿½ï¿½ï¿½Î»ï¿½ï¿½", Toast.LENGTH_LONG);
 					}
 				});
 				
