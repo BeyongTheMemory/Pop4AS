@@ -52,10 +52,7 @@ import android.widget.Toast;
 
 /**
  * This class is able to update the markers and the radar. It also handles some
- * user events
- *ÕâÀàÄÜ¹»¸üĞÂ±ê¼ÇºÍÀ×´ï¡£ËüÒ²´¦ÀíÒ»Ğ©
- *ÓÃ»§ÊÂ¼ş
- *¸ÃÀàÓÃÓÚÀ×´ïµÄÃè»æ
+ * user eventsï¿½
  * @author daniele
  * 
  */
@@ -77,21 +74,21 @@ public class DataView {
 	private MixState state = new MixState();
 
 	/** The view can be "frozen" for debug purposes */
-	/**µ÷ÊÔÓÃ£¬½«ÊÓÍ¼¶³½á*/
+	/**ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½*/
 	private boolean frozen;
-	boolean sureF = true;//È·±£Ö»´ò¿ªÒ»¸öÒ³Ãæ
+	boolean sureF = true;//È·ï¿½ï¿½Ö»ï¿½ï¿½Ò»ï¿½ï¿½Ò³ï¿½ï¿½
 	/** how many times to re-attempt download */
-	/**³¢ÊÔÖØĞÂÏÂÔØµÄ´ÎÊı*/
+	/**ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ØµÄ´ï¿½ï¿½ï¿½*/
 	private int retry;
 
 	private Location curFix;
 	private DataHandler dataHandler = new DataHandler();
-	private float radius = 1;//ËÑË÷°ë¾¶£¬µ¥Î»Îªkm,Í¨¹ı¸ü¸Ä¸ÃÊı¾İ¼´¿É¸Ä±äËÑË÷°ë¾¶
+	private float radius = 1;//ï¿½ï¿½ï¿½ï¿½ï¿½ë¾¶ï¿½ï¿½ï¿½ï¿½Î»Îªkm,Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½İ¼ï¿½ï¿½É¸Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¾¶
 
 	/** timer to refresh the browser */
-	/**Ë¢ĞÂä¯ÀÀÆ÷µÄ¶¨Ê±Æ÷*/
+	/**Ë¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½Ê±ï¿½ï¿½*/
 	private Timer refresh = null;
-	private final long refreshDelay = 300 * 1000; // ¸ü¸ÄÎªÃ¿5·ÖÖÓË¢ĞÂÒ»´Î
+	private final long refreshDelay = 300 * 1000; // ï¿½ï¿½ï¿½ï¿½ÎªÃ¿5ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½Ò»ï¿½ï¿½
 
 	private boolean isLauncherStarted;
 
@@ -101,7 +98,7 @@ public class DataView {
 	private ScreenLine lrl = new ScreenLine();
 	private ScreenLine rrl = new ScreenLine();
 	//private float rx = 10, ry = 20;
-	private float rx = 0, ry = 20;//rx=width - 100;Îª³öÏÖÔÚÓÒÉÏ½Ç
+	private float rx = 0, ry = 20;//rx=width - 100;Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï½ï¿½
 	private float addX = 0, addY = 0;
 	
 	private List<Marker> markers;
@@ -163,10 +160,10 @@ public class DataView {
 		return isInit;
 	}
     
-	/**AR½çÃæ³õÊ¼»¯*/
+	/**ARï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½*/
 	public void init(int widthInit, int heightInit) {
 		try {
-			//½çÃæ³õÊ¼»¯
+			//ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
 			width = widthInit;
 			height = heightInit;
             rx = width - 100;
@@ -198,28 +195,24 @@ public class DataView {
 //		state.nextLStatus = MixState.PROCESSING;
 //	}
     
-	/**ÏÔÊ¾Mark,°üÀ¨Ë¢ĞÂµÄ´úÂëÒ²ÔÚÕâÀï*/
 	public void draw(PaintScreen dw) {
 		mixContext.getRM(cam.transform);
-		curFix = mixContext.getLocationFinder().getCurrentLocation();//µÃµ½µ±Ç°µØÀíÎ»ÖÃĞÅÏ¢
+		curFix = mixContext.getLocationFinder().getCurrentLocation();//ï¿½Ãµï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢
 		//AppContext appContext = (AppContext) getApplicationContext();
-		state.calcPitchBearing(cam.transform);//¼ÆËãĞı×ªÖµ£¬½«±£´æÔÚstateµÄcurBearingºÍcurpitchÖĞ
+		state.calcPitchBearing(cam.transform);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªÖµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½stateï¿½ï¿½curBearingï¿½ï¿½curpitchï¿½ï¿½
 
 		// Load Layer
-		//ÈôÊ×´ÎÔËĞĞ¸Ã·½·¨Ôò·¢ËÍHTTPÇëÇó¼ì²âÖÜÎ§ĞËÈ¤µã
 		if (state.nextLStatus == MixState.NOT_STARTED && !frozen) {
 			//loadDrawLayer();
 			markers = new ArrayList<Marker>();
 		}
-		//ĞËÈ¤µãÒÑ¾­´«ÊäÍê±Ï
 		else if (state.nextLStatus == MixState.PROCESSING) {
 			
 		if(markers.size() == 0 ||tag){
 			tag = false;
-			DownloadMgrImpl dm = (DownloadMgrImpl) mixContext.getDownloadManager();//µÃµ½ÏÂÔØµÄÊı¾İ
+			DownloadMgrImpl dm = (DownloadMgrImpl) mixContext.getDownloadManager();
 			 executor.execute(dm);
-			Log.v("xiancheng226", "xiancheng226");
-			while(dm.isTag()){//µÈ´ı½ÓÊÕÍê³É
+			while(dm.isTag()){
 			}
 		
 				retry = 0;
@@ -228,16 +221,14 @@ public class DataView {
 				markers.addAll(dm.getMarkers());
 				dataHandler.addMarkers(markers);
 				dataHandler.onLocationChanged(curFix);
-				//this.getContext().getDownloadManager().switchOff();//¹Ø±Õ½ÓÊÜ
-					//Ë¢ĞÂº¯Êı×¢ÊÍ	Ö®Ç°×¢ÊÍÁËÏÖÔÚ´ò¿ª 20160716		
-				if (refresh == null) { //Ë¢ĞÂÏß³ÌÉĞÎ´¿ªÊ¼µÄ»°¿ªÊ¼Ïß³Ì
-					refresh = new Timer(false);//·ÇÊØ»¤Ïß³Ì£¬ÔÚÖ÷Ïß³Ì½áÊøºó²»»áÍË³ö
+				if (refresh == null) {
+					refresh = new Timer(false);
 					Date date = new Date(System.currentTimeMillis()
-							+ refreshDelay);//µ±Ç°Ê±¼äµÄ45sºó
+							+ refreshDelay);
 					refresh.schedule(new TimerTask() {
 						@Override
 						public void run() {
-							callRefreshToast();//µ¯³öĞÅÏ¢ÌáÊ¾¿òtoast
+							callRefreshToast();
 							refresh();
 						}
 					}, date, refreshDelay);
@@ -246,21 +237,19 @@ public class DataView {
 		}
 
 		// Update markers
-		//¸üĞÂmark
 		dataHandler.updateActivationStatus(mixContext);
 		for (int i = dataHandler.getMarkerCount() - 1; i >= 0; i--) {
 			Marker ma = dataHandler.getMarker(i);
 			// if (ma.isActive() && (ma.getDistance() / 1000f < radius || ma
 			// instanceof NavigationMarker || ma instanceof SocialMarker)) {
-			if (ma.isActive() && (ma.getDistance() / 1000f < radius)) {//¿É¼ûÇÒ¾àÀëÔÚÉèÖÃÄÚ²ÅÖØ»æ
+			if (ma.isActive() && (ma.getDistance() / 1000f < radius)) {
 
 				// To increase performance don't recalculate position vector
 				// for every marker on every draw call, instead do this only
 				// after onLocationChanged and after downloading new marker
 				// if (!frozen)
 				// ma.update(curFix);
-				//ÎªÁËÌá¸ßĞÔÄÜ²»ÖØĞÂ¼ÆËãÎ»ÖÃĞÅÏ¢ÏòÁ¿
-				//Ö»ÔÚÓÃ»§Î»ÖÃ±ä»»»òÏÂÔØĞÂµÄmarkerµÄÊ±ºò²ÅÖØĞÂ¼ÆËã 
+
 				if (!frozen)
 					ma.calcPaint(cam, addX, addY);
 				ma.draw(dw);
@@ -268,7 +257,6 @@ public class DataView {
 		}
 
 		// Draw Radar
-		//»æÖÆÀ×´ï
 		drawRadar(dw);
 
 		// Get next event
@@ -287,7 +275,7 @@ public class DataView {
 
 	/**
 	 * Part of draw function, loads the layer.
-	 * ½«µ±Ç°Î»ÖÃĞÅÏ¢·¢ËÍÖÁhttp£¬ËÑË÷¸½½üµÄmark
+	 * ï¿½ï¿½ï¿½ï¿½Ç°Î»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½httpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½mark
 	 */
 	
 	
@@ -296,7 +284,7 @@ public class DataView {
 	/**
 	 * Handles drawing radar and direction.
 	 * @param PaintScreen screen that radar will be drawn to
-	 * ´¦Àí»æÖÆÀ×´ïºÍ·½Ïò¡£
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´ï¿½Í·ï¿½ï¿½ï¿½
 	 */
 	private void drawRadar(PaintScreen dw) {
 		String dirTxt = "";
@@ -320,24 +308,20 @@ public class DataView {
 		else if (range == 13 || range == 14)
 			dirTxt = "NW";
 
-		radarPoints.view = this;//ÔÚ¸ÃÒ³ÃæÉÏ»æÖÆÀ×´ïRadarPoints¿É»æÖÆÀ×´ïµÄÔ²ºÍÉÏÃæµÄµã
+		radarPoints.view = this;
 		dw.paintObj(radarPoints, rx, ry, -state.getCurBearing(), 1);
-		dw.setFill(false);//ÉèÖÃ»­±ÊÎª¿ÕĞÄ
-		//dw.setColor(Color.argb(150, 0, 0, 220));//À¶É«
-		dw.setColor(Color.argb(255, 166, 202, 240));//À¶É«
+		dw.setFill(false);
+		dw.setColor(Color.argb(255, 166, 202, 240));
 		
-		//Á½ÌõÓÉÔ²ĞÄ·¢³öµÄÏß£¬±íÊ¾µ±Ç°µÄÊÓ¾õ½Ç¶È
 		dw.paintLine(lrl.x, lrl.y, rx + RadarPoints.RADIUS, ry
 				+ RadarPoints.RADIUS);
 		dw.paintLine(rrl.x, rrl.y, rx + RadarPoints.RADIUS, ry
 				+ RadarPoints.RADIUS);
 		dw.setColor(Color.rgb(255, 255, 255));
 		dw.setFontSize(12);
-        //»æÖÆËÑË÷¾àÀë
 		radarText(dw, MixUtils.formatDist(radius * 1000), rx
 				+ RadarPoints.RADIUS, ry + RadarPoints.RADIUS * 2 - 10, false);
 		
-		//»æÖÆÂŞÅÌ½Ç¶È
 		radarText(dw, "" + bearing + ((char) 176) + " " + dirTxt, rx
 				+ RadarPoints.RADIUS, ry - 5, true);
 	}
@@ -353,14 +337,9 @@ public class DataView {
 			// distance) the first marker that
 			// matches triggers the event.
 			//TODO handle collection of markers. (what if user wants the one at the back)
-			//±éÀúÉıĞòË³ĞòµÄ±ê¼Çµã£¨Í¨¹ı¾àÀëÅÅĞò£©£¬Æ¥Åä´¥·¢ÊÂ¼ş
-		    //--------------------------------------------------------------------------
-		    //ÊÂ¼ş´¦ÀíÓÉÕâÀï´«Èë£¬¿ÉÒÔÊ¹ÓÃmixcontextÖĞµÄhandleº¯ÊıÀ´ÏìÓ¦ÊÂ¼ş£¨ÔØÈë½çÃæ£©
-		    //-----------------------------------------------------------------------------
-			for (int i = 0; i < dataHandler.getMarkerCount() && !evtHandled; i++) {
+			for (int i = 0; i < dataHandler.getMarkerCount() && !evtHandled; i++) {//éå†æŸ¥çœ‹è¢«ç‚¹å‡»çš„æ³¡æ³¡
 				Marker pm = dataHandler.getMarker(i);
 				evtHandled = pm.fClick(evt.x, evt.y, mixContext, state);
-				Log.v("eve:","xgeve:"+ evtHandled);
 				if(evtHandled){
 					if(pm.getType().equals(ImageMarker.geren)){
 						if(sureF){
@@ -379,7 +358,7 @@ public class DataView {
 						}
 					}
 					else{
-						//TODO£ºÉÌÒµÅİÅİ
+
 //						 Intent intent = new Intent();
 //		   			     intent.setClass(this.getContext(),BusnisePopActivity.class);
 //		   			      this.getContext().startActivity(intent);
@@ -390,7 +369,6 @@ public class DataView {
 		return evtHandled;
 	}
     
-	/**À×´ïÉÏ·½ÏÔÊ¾µÄ×Ö*/
 	private void radarText(PaintScreen dw, String txt, float x, float y, boolean bg) {
 		float padw = 4, padh = 2;
 		float w = dw.getTextWidth(txt) + padw * 2;
@@ -407,7 +385,6 @@ public class DataView {
 				false);
 	}
     
-	/**½«Ôİ´æµã»÷²Ù×÷ÔÚÊı×éÖĞ£¬ÉÔºóÔÙ½øĞĞÏìÓ¦*/
 	public void clickEvent(float x, float y) {
 		synchronized (uiEvents) {
 			uiEvents.add(new ClickEvent(x, y));
@@ -432,10 +409,7 @@ public class DataView {
 		}
 	}
 	
-	/**
-	 * Re-downloads the markers, and draw them on the map.
-	 * ÖØĞÂÏÂÔØ±ê¼Ç£¬²¢»æÖÆ¡£
-	 */
+
 	public void refresh(){
 		state.nextLStatus = MixState.NOT_STARTED;
 	}
@@ -447,7 +421,7 @@ public class DataView {
 			public void run() {
 				Toast.makeText(
 						mixContext,
-						"Ë¢ĞÂÅİÅİÖĞ",
+						"dataview425è¡Œ",
 						Toast.LENGTH_SHORT).show();
 			}
 		});

@@ -47,7 +47,8 @@ public class ImageMarker extends PluginMarker{
 		DrawCommand[] dCommands = new DrawCommand[2];
 		//dCommands[0] = new DrawImage(isVisible, signMarker, image);
 		dCommands[0] = new DrawImage(isVisible, signMarker, image);
-		dCommands[1] = new DrawTextBox(isVisible, distance, title, underline, textBlock, txtLab, signMarker);
+		//ä¸å†ç»˜åˆ¶ä¸‹é¢çš„æ¡†äº†
+		//dCommands[1] = new DrawTextBox(isVisible, distance, title, underline, textBlock, txtLab, signMarker);
 		return dCommands;
 	}
 
@@ -62,17 +63,14 @@ public class ImageMarker extends PluginMarker{
 		return image;
 	}
 	
-	/**°ó¶¨Í¼Æ¬²¢¸ù¾İ¾àÀë½øĞĞËõ·Å´¦Àí*/
 	public void setBitmap(Bitmap image){
 		double scale = this.getDistance();
-		Log.v("dis","xgDis:"+scale);
-		
-		
+		//æ ¹æ®è·ç¦»ç¼©æ”¾,å®é™…å›¾ç‰‡ä¼šé™¤ä»¥è¿™ä¸ªå€¼
 	
-		if(scale < 100){//¾àÀëÔÚ100Ã×ÒÔÄÚ£¬Ëõ·ÅÖÁ80%
+		if(scale < 100){
 			scale =1.25;
      	}
-		else if(scale < 200){//100ÖÁ200Ã×,Ô­Í¼75%
+		else if(scale < 200){
 			scale = 1.33;
 		}
 		else if(scale < 300){
@@ -106,21 +104,17 @@ public class ImageMarker extends PluginMarker{
 
 	@Override
 	public void draw(PaintScreen dw) {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
 		DrawCommand[] drs = remoteDraw();
 		drs[0].draw(dw);
-		//²»»æÖÆ·½¿ò
+		//è¿™æ˜¯ä¸‹é¢çš„çŸ¿
 		//drs[1].draw(dw);
 	}
 
 	@Override
 	public boolean fClick(float x, float y, MixContextInterface ctx,
 			MixStateInterface state) {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
 		boolean evtHandled = false;
-		Log.v("fclick","xgtouch:" + this.getID());
 		if (isClickValid(x, y)) {
-			Log.v("SUCESS","SUCESS" + this.getID());
 			evtHandled = true;
 		}
 		
@@ -130,7 +124,6 @@ public class ImageMarker extends PluginMarker{
 
 	@Override
 	public String getType() {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
 		return this.type;
 	}
 
@@ -142,9 +135,9 @@ public class ImageMarker extends PluginMarker{
 		return Double.compare(leftPm.getDistance(), rightPm.getDistance());
 	}
 //	private boolean isClickValid(float x, float y) {
-//        //µã»÷ÊÇ·ñÓĞĞ§
+//        //ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ğ§
 //		
-//		//Èç¹û±ê¼Ç²»»îÔ¾£¨¼´²»ÏÔÊ¾ARÊÓÍ¼£©ÎÒÃÇ²»ĞèÒª¼ì²éËüµÄµã»÷
+//		//ï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ARï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½
 //
 //		if (!isActive() && !this.isVisible)
 //			return false;
@@ -171,12 +164,12 @@ public class ImageMarker extends PluginMarker{
 //			return false;
 //		}
 //	}
-	/**µã»÷ÊÇ·ñÓĞĞ§,Ä¿Ç°°ÑÍ¼Æ¬µ±×öÕı·½ĞÎ´¦Àí£¬Ã÷ÌìÓÅ»¯*/
+	//æ£€æŸ¥ç‚¹å‡»äº‹ä»¶çš„æœ‰æ•ˆæ€§,ç¢°æ’å¯ä»¥æ ¹æ®è¿™ä¸ªæ¥åš
 	private boolean isClickValid(float x, float y) {
-//		if(!isVisible&&!isActive()){//²»¿É¼ûÊ±
+//		if(!isVisible&&!isActive()){
 //			return false;
 //		}
-		if(!isVisible){//²»¿É¼ûÊ±
+		if(!isVisible){
 			return false;
 		}
 		float left = signMarker.x - (getBitmap().getWidth()/2);

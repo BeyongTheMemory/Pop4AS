@@ -12,7 +12,7 @@ import android.os.Parcelable;
 
 /**
  * This class has the ability to set up the main view and it paints objects on the screen 
- * ½¨ÒéÖ÷ÊÓÍ¼£¬Ãè»æÆÁÄ»ÎïÌå
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½
  */
 
 public class PaintScreen implements Parcelable{
@@ -93,7 +93,7 @@ public class PaintScreen implements Parcelable{
 		canvas.drawRect(x, y, x + width, y + height, paint);
 	}
 
-	public void paintRoundedRect(float x, float y, float width, float height) {//Ô²½Ç±ß¾ØÐÎ
+	public void paintRoundedRect(float x, float y, float width, float height) {//Ô²ï¿½Ç±ß¾ï¿½ï¿½ï¿½
 		//rounded edges. patch by Ignacio Avellino
 		RectF rect = new RectF(x, y, x + width, y + height);
 		canvas.drawRoundRect(rect, 15F, 15F, paint);
@@ -103,11 +103,10 @@ public class PaintScreen implements Parcelable{
 		canvas.drawBitmap(bitmap, left, top, paint);
 	}
 	
-	/**»æÍ¼´øÍ¸Ã÷¶ÈµÄ*/
 	public void paintBitmap(Bitmap bitmap, float left, float top,int a) {
 		 	            
-		          paint .setStyle( Paint.Style.STROKE );   //¿ÕÐÄ  
-	              paint .setAlpha( a );   // BitmapÍ¸Ã÷¶È(0 ~ 100)  
+		          paint .setStyle( Paint.Style.STROKE );
+	              paint .setAlpha( a );
 		          canvas.drawBitmap(bitmap, left, top, paint);
 	}
 
@@ -132,10 +131,10 @@ public class PaintScreen implements Parcelable{
 
 	public void paintObj(ScreenObj obj, float x, float y, float rotation,
 			float scale) {
-		canvas.save();//Ëø»­²¼
-		canvas.translate(x + obj.getWidth() / 2, y + obj.getHeight() / 2);//Ô­µãÒÆ¶¯µ½Ö¸¶¨µØµã
-		canvas.rotate(rotation);//Ðý×ª
-		canvas.scale(scale, scale);//·Å´ó£¬µÚÒ»ºÍµÚ¶þ¸ö²ÎÊý·Ö±ðÎªË®Æ½ºÍÊúÖ±·½ÏòµÄ·Å´ó±¶Êý
+		canvas.save();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		canvas.translate(x + obj.getWidth() / 2, y + obj.getHeight() / 2);//Ô­ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Øµï¿½
+		canvas.rotate(rotation);//ï¿½ï¿½×ª
+		canvas.scale(scale, scale);//ï¿½Å´ó£¬µï¿½Ò»ï¿½ÍµÚ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ÎªË®Æ½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ä·Å´ï¿½ï¿½ï¿½
 		canvas.translate(-(obj.getWidth() / 2), -(obj.getHeight() / 2));
 		obj.paint(this);
 		canvas.restore();

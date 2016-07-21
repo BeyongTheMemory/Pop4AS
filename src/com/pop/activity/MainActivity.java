@@ -1161,7 +1161,7 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 
 
 
-class AugmentedView extends View {//AR��ʾ����
+class AugmentedView extends View {
 	MainActivity app;
 //	int xSearch = 200;
 //	int ySearch = 10;

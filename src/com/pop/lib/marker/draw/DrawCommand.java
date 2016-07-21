@@ -20,11 +20,6 @@ import android.os.Parcelable;
  * - storing values in the properties attribute, 
  * - converting it and send to the "core" (through the aidl structure and parcelable interface)
  * - reverting the original (implentation) class in the "core" that can draw items on the screen *
- * 通过该类的子类，可以在屏幕上绘制图像
- * 该类的主要任务是
- * -成员属性存储变量
- * -转换并发送（通过AIDL结构和Parcelable接口） 
- * -还原，以便在屏幕上绘制
  * @author A.Egal
  *
  */

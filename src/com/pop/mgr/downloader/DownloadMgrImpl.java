@@ -3,6 +3,7 @@ package com.pop.mgr.downloader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,6 +14,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.pop.enume.PopModelEnume;
 import com.pop.show.MixContext;
 import com.pop.R;
 import com.pop.activity.MainActivity;
@@ -68,8 +70,7 @@ public class DownloadMgrImpl implements Runnable,DownloadManager {
 	public void run() {
 		if(tag){
 			state=DownloadManagerState.OnLine;
-		Log.v("aaccxg", "aaccshuaxin");
-		double olatitude = ctx.getActualMixView().getDataView().getCurFix().getLatitude();	
+		double olatitude = ctx.getActualMixView().getDataView().getCurFix().getLatitude();
 		  double olongitude = ctx.getActualMixView().getDataView().getCurFix().getLongitude();
 		  double altitude = ctx.getActualMixView().getDataView().getCurFix().getAltitude();
 		  SharedPreferences mySharedPreferences = ctx.getActualMixView().getSharedPreferences("loacation", 
@@ -79,13 +80,12 @@ public class DownloadMgrImpl implements Runnable,DownloadManager {
 		  editor.putString("longitude", olongitude+""); 
 		  editor.putString("altitude", altitude+""); 
 		  editor.commit(); 
-		  Log.v("aaccxg", "aaccshuaxin:"+olatitude);
-		  Log.v("aaccxg", "aaccshuaxin:"+olongitude);
 		  markers = new ArrayList<Marker>();
-		  for(int i =0;i<10;i++){
-			ImageMarker imge = new ImageMarker(i,null,olatitude,olongitude,altitude,null,1,-1);
+			Random random = new Random();
+		  for(int i =1;i<13;i++){
+			ImageMarker imge = new ImageMarker(i,null,olatitude+ random.nextFloat()/100000,olongitude+random.nextFloat()/100000,random.nextDouble(),null,1,-1);
 			imge.setDistance(PhysicalPlace.distanceBetween(olatitude, olongitude, imge.getLatitude(),imge.getLongitude()));
-			imge.setBitmap(BitmapFactory.decodeResource(ctx.getActualMixView().getResources(),R.drawable.shangye));
+			imge.setBitmap(BitmapFactory.decodeResource(ctx.getActualMixView().getResources(), PopModelEnume.getImg(i)));
 			imge.setType(ImageMarker.shangye);
 			imge.setPopid(i);
 			markers.add(imge);
@@ -149,10 +149,8 @@ public class DownloadMgrImpl implements Runnable,DownloadManager {
 //				}
 //				
 //			}
-			Log.v("aaccxg","caonima"+markers.size());
 			//new
-			Log.v("aaccxg", "aaccshuaxin"+markers.size());
-		
+
 			tag=false;
 		}
 	}

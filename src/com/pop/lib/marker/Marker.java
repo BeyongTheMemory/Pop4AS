@@ -18,7 +18,7 @@ import android.location.Location;
  */
 public interface Marker extends Comparable<Marker>{
 
-	String getTitle();//标志物关键词
+	String getTitle();
 
 	String getURL();
 

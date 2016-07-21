@@ -13,10 +13,6 @@ import android.util.Log;
 /**
  * A draw command that can be send by a plugin marker to draw an image on the client.
  * This class extends the DrawCommand, that stores the properties, so that it can be
- * transfered to the client.
- * 用于在绘制插件标记中的image
- * 继承自DrawCommand
- * 有更好的性能
  * @author A. Egal
  */
 public class DrawImage extends DrawCommand{
@@ -56,19 +52,16 @@ public class DrawImage extends DrawCommand{
 	public void draw(PaintScreen dw){
 		
 		if (getBooleanProperty(PROPERTY_NAME_VISIBLE)) {
-//			double distance = getDoubleProperty(PROPERTY_NAME_DISTANCE);
-//			Log.v("dis","XDIS" + distance);
+
 			MixVector signMarker = getMixVectorProperty(PROPERTY_NAME_SIGNMARKER);
 			Bitmap bitmap = getBitmapProperty(PROPERTY_NAME_IMAGE);
 			
 			dw.setColor(Color.argb(155, 255, 255, 255));
 			if(bitmap == null){
-				Log.e("mixare-lib", "bitmap = null");
 				return;
 			}
 			
-			//透明度80%，越低越透明
-			dw.paintBitmap(bitmap, signMarker.x - (bitmap.getWidth()/2), signMarker.y - (bitmap.getHeight() / 2),80);
+			dw.paintBitmap(bitmap, signMarker.x - (bitmap.getWidth()/2), signMarker.y - (bitmap.getHeight() / 2),50);
 		
 		}
 	}	

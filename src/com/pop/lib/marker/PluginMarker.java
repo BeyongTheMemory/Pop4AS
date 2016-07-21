@@ -18,7 +18,6 @@ import android.util.Log;
 
 /**
  * A plugin marker that should be extended by marker plugins.
- * ÁíÒ»ÖÖÀàĞÍµÄ±êÖ¾µã
  * @author A. Egal
  *
  */
@@ -29,20 +28,18 @@ public abstract class PluginMarker implements Marker{
 	protected boolean underline = false;
 	private String URL;
 	protected PhysicalPlace mGeoLoc;
-    //Ä¿±êºÍ¹Û²âÕß¾àÀë
 	protected double distance;
 	// The marker color
 	private int colour;
 
 	private boolean active;
 	// Draw properties
-	//¿É¼ûĞÔ
 	protected boolean isVisible;
 
 	public MixVector cMarker = new MixVector();
 	protected MixVector signMarker = new MixVector();
 
-	protected MixVector locationVector = new MixVector();//±£´æµÄÊÇÄ¿±êµãÏà¶ÔÓÚÓÃ»§Î»ÖÃµÄÏòÁ¿ĞÅÏ¢
+	protected MixVector locationVector = new MixVector();
 	private MixVector origin = new MixVector(0, 0, 0);
 	private MixVector upV = new MixVector(0, 1, 0);
 	public Label txtLab = new Label();
@@ -141,19 +138,16 @@ public abstract class PluginMarker implements Marker{
 	public abstract DrawCommand[] remoteDraw();
 	
 	public void update(Location curGPSFix) {
-		//µ±Ç°Î»ÖÃĞÅÏ¢×ª»»ÎªÏòÁ¿
-		
+
 		// An elevation of 0.0 probably means that the elevation of the
 		// POI is not known and should be set to the users GPS height
 		// Note: this could be improved with calls to
 		// http://www.geonames.org/export/web-services.html#astergdem
 		// to estimate the correct height with DEM models like SRTM, AGDEM or
 		// GTOPO30
-		//º£°Î¸ß¶ÈÎª0ÒâÎ¶×ÅPOIÉĞ²»Ã÷È·£¬ÒòÉèÖÃÎªÓÃ»§GPS¸ß¶È
 		if (mGeoLoc.getAltitude() == 0.0)
 			mGeoLoc.setAltitude(curGPSFix.getAltitude());
 
-		//¼ÆËãÓÃ»§Ïà¶ÔÓÚPOIµÄÏòÁ¿
 		PhysicalPlace.convLocToVec(curGPSFix, mGeoLoc, locationVector);
 	}
 
@@ -164,26 +158,24 @@ public abstract class PluginMarker implements Marker{
 	
 	private void cCMarker(MixVector originalPoint, Camera viewCam, float addX, float addY) {
 		// Temp properties
-		//×ø±ê×ª»»µ½ÆÁÄ»
-		MixVector tmpa = new MixVector(originalPoint);//Ô­µã×ø±ê(0,0,0)
-		MixVector tmpc = new MixVector(upV);//ÏòÉÏ×ø±êÖá(0,1,0)
-		tmpa.add(locationVector); //3 ¼ÓÉÏÎ»ÖÃÏòÁ¿
-		tmpc.add(locationVector); //3¼ÓÉÏÎ»ÖÃÏòÁ¿
-		tmpa.sub(viewCam.lco); //4¼õÈ¥£¨0,0,0£©
-		tmpc.sub(viewCam.lco); //4¼õÈ¥£¨0,0,0£©
-		tmpa.prod(viewCam.transform); //5£¬Ïà»ú¾ØÕó³ËÒÔ±ê×¼»ùÏòÁ¿£¨1,0,0,0,1,0,0,0,1£©
-		tmpc.prod(viewCam.transform); //5  Ïà»ú¾ØÕó³ËÒÔ±ê×¼»ùÏòÁ¿£¨1,0,0,0,1,0,0,0,1£©
-         //ÖÁ´Ëa,c×ª»»µ½Ïà»ú×ø±êÏµ
+		MixVector tmpa = new MixVector(originalPoint);
+		MixVector tmpc = new MixVector(upV);
+		tmpa.add(locationVector);
+		tmpc.add(locationVector);
+		tmpa.sub(viewCam.lco);
+		tmpc.sub(viewCam.lco);
+		tmpa.prod(viewCam.transform);
+		tmpc.prod(viewCam.transform);
 		MixVector tmpb = new MixVector();
-		viewCam.projectPoint(tmpa, tmpb, addX, addY); //6,×ª»»µ½ÆÁÄ»ÉÏ
-		cMarker.set(tmpb); //7
-		viewCam.projectPoint(tmpc, tmpb, addX, addY); //6,×ª»»µ½ÆÁÄ»ÉÏ
-		signMarker.set(tmpb); //7
+		viewCam.projectPoint(tmpa, tmpb, addX, addY);
+		cMarker.set(tmpb);
+		viewCam.projectPoint(tmpc, tmpb, addX, addY);
+		signMarker.set(tmpb);
 	}
 
 	private void calcV(Camera viewCam) {
-		//Ğì¸Õ×¢ÊÍ20160716£¬Ö®Ç°»á½øĞĞÏÂÃæĞ¡ÓÚ-1µÄÅĞ¶ÏÇÒisVisibleÄ¬ÈÏÎªfalse£¬Ôİ²»Çå³şÕâÑù×öµÄÀíÓÉ
-		//×¢ÊÍÇ°ÅİÅİ²»»æÖÆ£¬×¢ÊÍºóĞŞ¸´
+		//
+		//åŸæ¥è¿™é‡Œæ˜¯false,è¿˜åˆ¤æ–­äº†zè½´åœ¨ç¡®å®šå€¼
 //		isVisible = false;
 //	
 //		if (cMarker.z < -1f) {

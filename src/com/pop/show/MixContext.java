@@ -22,12 +22,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
-/**
- * Cares about location management and about the data (source, inputstream) 
- * Î»ÖÃĞÅÏ¢¹ÜÀíºÍÊı¾İÊä³ö
- * ½«µ±Ç°Î»ÖÃĞÅÏ¢·¢ËÍµ½ÕâÀïºó¸ÃÀà½«¸ºÔğËÑË÷ÖÜÎ§µÄĞËÈ¤µã
- * ¹ıÂËÉèÖÃÒ²´æÔÚ´Ë´¦
- */
+
 public class MixContext extends ContextWrapper implements MixContextInterface{
 
 	// TAG for logging
@@ -35,22 +30,18 @@ public class MixContext extends ContextWrapper implements MixContextInterface{
 
 	private MainActivity mixView;
 
-	private Matrix rotationM = new Matrix();//Ğı×ª¾ØÕó£¿
+	private Matrix rotationM = new Matrix();//ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
 
 	/** Responsible for all download */
-	/**¸ºÔğËùÓĞÏÂÔØ*/
 	private DownloadManager downloadManager;
 
 	/** Responsible for all location tasks */
-	/**¸ºÔğËùÓĞÎ»ÖÃµÄ·şÎñ*/
 	private LocationFinder locationFinder;
 
 	/** Responsible for data Source Management */
-	/**¸ºÔğÊı¾İÔ´¹ÜÀí */
 	//private DataSourceManager dataSourceManager;
 
 	/** Responsible for Web Content */
-	/**¸ºÔğÍøÕ¾ÄÚÈİ */
 	//private WebContentManager webContentManager;
   
 	
@@ -59,38 +50,28 @@ public class MixContext extends ContextWrapper implements MixContextInterface{
 		mixView = appCtx;
 
 		// TODO: RE-ORDER THIS SEQUENCE... IS NECESSARY?
-		//getDataSourceManager().refreshDataSources();//¼ì²éËùÓĞÊı¾İÔ´
 
-		//-------------------------------------------------------------ÕâÀï¿ÉÄÜ²»¶Ô
-//		if (!getDataSourceManager().isAtLeastOneDatasourceSelected()) {
-//			rotationM.toIdentity();//ÈôÎ´Ñ¡ÔñÊı¾İÔ´£¬×ª»¯Îªµ¥Î»¾ØÕó
-//		}
-		getLocationFinder().switchOn();//´ò¿ª¶¨Î»
-		getLocationFinder().findLocation();//¿ªÊ¼¶¨Î»,½ö½öµÃµ½×îºóÒ»´Î¶¨Î»Ê±µÄÎ»ÖÃĞÅÏ¢
+		getLocationFinder().switchOn();//ï¿½ò¿ª¶ï¿½Î»
+		getLocationFinder().findLocation();//ï¿½ï¿½Ê¼ï¿½ï¿½Î»,ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ò»ï¿½Î¶ï¿½Î»Ê±ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢
 	}
 
-	public String getStartUrl() {//ÒòÊÇ»ñÈ¡µã»÷±ê¼ÇµÄ¶ÔÓ¦ÍøÒ³
+	public String getStartUrl() {
 		Intent intent = ((Activity) getActualMixView()).getIntent();
 		if (intent.getAction() != null
 				&& intent.getAction().equals(Intent.ACTION_VIEW)) {
-			Log.v("intent.getData().toString","xgtest"+intent.getData().toString());
 			return intent.getData().toString();
 		} else {
 			return "";
 		}
 	}
     
-	/**ÉèÖÃÎªrotationM*/
 	public void getRM(Matrix dest) {
 		synchronized (rotationM) {
 			dest.set(rotationM);
 		}
 	}
 
-	/**
-	 * Shows a webpage with the given url when clicked on a marker.
-	 * µã»÷±ê¼ÇÊ±ÏÔÊ¾ÍøÒ³
-	 */
+
 
 
 	public void doResume(MainActivity mixView) {
@@ -99,7 +80,7 @@ public class MixContext extends ContextWrapper implements MixContextInterface{
 
 	public void updateSmoothRotation(Matrix smoothR) {
 		synchronized (rotationM) {
-			rotationM.set(smoothR);//¸üĞÂÆ½ÒÆ¾ØÕó
+			rotationM.set(smoothR);
 		}
 	}
 
@@ -138,7 +119,6 @@ public class MixContext extends ContextWrapper implements MixContextInterface{
 			this.mixView = mv;
 		}
 	}
-    /**»ñÈ¡ContentResolverµÄÊµÀı£¬¸ÃÊµÀıÓÃÓÚ¹²ÏíÊı¾İ*/
 	public ContentResolver getContentResolver() {
 		ContentResolver out = super.getContentResolver();
 		if (super.getContentResolver() == null) {
@@ -149,7 +129,6 @@ public class MixContext extends ContextWrapper implements MixContextInterface{
 	
 	/**
 	 * Toast POPUP notification
-	 * µ¯³öÏÂ·½Í¨Öª
 	 * @param string message
 	 */
 	public void doPopUp(final String string){
@@ -167,7 +146,6 @@ public class MixContext extends ContextWrapper implements MixContextInterface{
 
 	@Override
 	public void loadMixViewWebPage(String url) throws Exception {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-		
+
 	}
 }

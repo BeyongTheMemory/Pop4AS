@@ -1,7 +1,6 @@
 /*
  * @auther:xg
  * 5.31.
- * µÇÂ½ÑéÖ¤
  */
 
 package com.pop.servlet;
@@ -42,7 +41,7 @@ public class LoginAsyncServlet extends AsyncTask<String, Void,String>{
 	String result = null;
 	JSONArray jArray;
 	TextView informationText;
-	  private ProgressDialog progressDialog = null; //½ø¶ÈÌõ
+	  private ProgressDialog progressDialog = null; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public LoginAsyncServlet(){
 		super();
 	}
@@ -56,12 +55,12 @@ public class LoginAsyncServlet extends AsyncTask<String, Void,String>{
 	
 	protected void onPreExecute(){
 		super.onPreExecute();
-		progressDialog = ProgressDialog.show(loginActivity, "ÇëÉÔµÈ...", "µÇÂ½ÖÐ...", true);
+		progressDialog = ProgressDialog.show(loginActivity, "ï¿½ï¿½ï¿½Ôµï¿½...", "ï¿½ï¿½Â½ï¿½ï¿½...", true);
 	}
 	
 	protected String doInBackground(String...params){
 		ArrayList nameValuePairs = new ArrayList();
-		//´«µÝ²ÎÊý
+		//ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½
 		
 		//Log.v("username", username);
 		//Log.v("password", password);
@@ -73,7 +72,7 @@ public class LoginAsyncServlet extends AsyncTask<String, Void,String>{
 	    try {
 	    	HttpClient httpclient = new DefaultHttpClient();
 	        HttpPost httppost = new HttpPost(
-	        		params[0]);//params[0]ÊÇ´«½øµÄurl;
+	        		params[0]);//params[0]ï¿½Ç´ï¿½ï¿½ï¿½ï¿½ï¿½url;
 	        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	        HttpResponse response = httpclient.execute(httppost);
 	        HttpEntity entity = response.getEntity();
@@ -99,9 +98,9 @@ public class LoginAsyncServlet extends AsyncTask<String, Void,String>{
 	    return result;
 	}
 	
-	/*Õâ¸öº¯ÊýÔÚdoInBackgroundºó·¢Éú
-	 * ÔËÐÐÔÚuiÏß³ÌÖÐ£¬¿ÉÒÔ¸ü¸Äui½çÃæ
-	 * ²ÎÊýresultÊÇdoInBackgroud·µ»ØµÄÖµ
+	/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½doInBackgroundï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½uiï¿½ß³ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½uiï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½resultï¿½ï¿½doInBackgroudï¿½ï¿½ï¿½Øµï¿½Öµ
 	 */
 	protected void onPostExecute(String result){
 		String ct_username;
@@ -114,8 +113,8 @@ public class LoginAsyncServlet extends AsyncTask<String, Void,String>{
 	    		ct_username = json_data.getString("username");
 	    		ct_password = json_data.getString("password");
 	    	}
-	        //µÇÂ½³É¹¦Ò³ÃæÌø×ª
-	        informationText.setText("³É¹¦£¡");
+	        //ï¿½ï¿½Â½ï¿½É¹ï¿½Ò³ï¿½ï¿½ï¿½ï¿½×ª
+	        informationText.setText("ï¿½É¹ï¿½ï¿½ï¿½");
 	        progressDialog.dismiss();
 	        Intent intent = new Intent();
 		     intent.setClass(loginActivity,MainActivity.class);
@@ -124,7 +123,7 @@ public class LoginAsyncServlet extends AsyncTask<String, Void,String>{
 	        
 	    } catch (JSONException e1) {
                //tv.append("No result" + "\n");
-	    	informationText.setText("ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
+	    	informationText.setText("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 	    	 progressDialog.dismiss();
 	    } catch (ParseException e1) {
 	    	   e1.printStackTrace();

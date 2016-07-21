@@ -2,9 +2,6 @@
 package com.pop.mgr.downloader;
 
 import com.pop.data.DataSource;
-/**成员变量有DataSouce souce和String params
- * souce中保存数据源类型和相应的网站
- * params保存发送请求到网站时的后缀*/
 public class DownloadRequest {
 	private DataSource source;
 	private String params;
