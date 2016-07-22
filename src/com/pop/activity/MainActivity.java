@@ -1186,15 +1186,16 @@ class AugmentedView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		try {
-			Log.v("draw","suc_______________0");
 
+			//TODO:每次调用的时候清空存储的泡泡数组,然后在draw方法中判定是否需要调整绘画位置
+			//这里是否可以优化?
 			app.killOnError();
 
-			MainActivity.getdWindow().setWidth(canvas.getWidth());//��Ļ��
-			MainActivity.getdWindow().setHeight(canvas.getHeight());//��Ļ��
-			MainActivity.getdWindow().setCanvas(canvas);//��û���
+			MainActivity.getdWindow().setWidth(canvas.getWidth());
+			MainActivity.getdWindow().setHeight(canvas.getHeight());
+			MainActivity.getdWindow().setCanvas(canvas);
 
-			if (!MainActivity.getDataView().isInited()) {//��ar����δ��ʼ����������г�ʼ��
+			if (!MainActivity.getDataView().isInited()) {
 				MainActivity.getDataView().init(MainActivity.getdWindow().getWidth(),
 						MainActivity.getdWindow().getHeight());
 			}
@@ -1221,8 +1222,7 @@ class AugmentedView extends View {
 ////						* zoomProgress + 20, height, zoomPaint);
 //			}
 
-			MainActivity.getDataView().draw(MainActivity.getdWindow());//mark����
-			Log.v("ok","sec_______________0");
+			MainActivity.getDataView().draw(MainActivity.getdWindow());
 		} catch (Exception ex) {
 			app.doError(ex);
 		}

@@ -60,7 +60,7 @@ public class DrawImage extends DrawCommand{
 			if(bitmap == null){
 				return;
 			}
-			
+			//在这里判断是否需要调整位置
 			dw.paintBitmap(bitmap, signMarker.x - (bitmap.getWidth()/2), signMarker.y - (bitmap.getHeight() / 2),50);
 		
 		}

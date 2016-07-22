@@ -160,10 +160,8 @@ public class DataView {
 		return isInit;
 	}
     
-	/**AR�����ʼ��*/
 	public void init(int widthInit, int heightInit) {
 		try {
-			//�����ʼ��
 			width = widthInit;
 			height = heightInit;
             rx = width - 100;
@@ -208,11 +206,11 @@ public class DataView {
 		}
 		else if (state.nextLStatus == MixState.PROCESSING) {
 			
-		if(markers.size() == 0 ||tag){
+		if(markers.size() == 0 ||tag){//重新获取泡泡
 			tag = false;
 			DownloadMgrImpl dm = (DownloadMgrImpl) mixContext.getDownloadManager();
 			 executor.execute(dm);
-			while(dm.isTag()){
+			while(dm.isTag()){//监测线程完成 这里可以用信号量或者其他东西改写,这样忙等没意义
 			}
 		
 				retry = 0;
@@ -273,10 +271,7 @@ public class DataView {
 		state.nextLStatus = MixState.PROCESSING;
 	}
 
-	/**
-	 * Part of draw function, loads the layer.
-	 * ����ǰλ����Ϣ������http������������mark
-	 */
+
 	
 	
 
@@ -284,7 +279,7 @@ public class DataView {
 	/**
 	 * Handles drawing radar and direction.
 	 * @param PaintScreen screen that radar will be drawn to
-	 * ��������״�ͷ���
+	 *  绘制了雷达但是没有绘制点
 	 */
 	private void drawRadar(PaintScreen dw) {
 		String dirTxt = "";
