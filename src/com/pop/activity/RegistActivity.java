@@ -1,10 +1,10 @@
 /**
- * ×¢²á½çÃæ
+ * ×¢ï¿½ï¿½ï¿½ï¿½ï¿½
+ *
  * @author xg
- *6.1
+ * 6.1
  */
 package com.pop.activity;
-
 
 
 import com.pop.R;
@@ -22,118 +22,109 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class RegistActivity extends Activity{
-	private  MyEditText usernameText= null;
-	private  MyEditText passwordText= null;
-	private  MyEditText surepasswordText= null;
-	private  TextView backText= null;
-	private TextView informationText = null;
-	private Button registButton = null;
-	String url = "http://1.utifpop.sinaapp.com/newAccount.php";
-	  public void onCreate(Bundle savedInstanceState) {  
-		  Window window = this.getWindow();
-	        // È¥±êÌâÀ¸
-	       window.requestFeature(window.FEATURE_NO_TITLE);
-	   super.onCreate(savedInstanceState);
-	   super.requestWindowFeature(Window.FEATURE_NO_TITLE);
-      setContentView(R.layout.regist_activity); 
-      
-      //ÓÃ»§ÃûÊäÈë¿ò
-      usernameText = (MyEditText)findViewById(R.id.username_text);
-      usernameText.setShowWords("ÊäÈëÓÃ»§Ãû");
-      usernameText.invalidate();
-      //Ê§È¥½¹µãÊ±ÖØ»æ
-      usernameText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-    		public void onFocusChange(View v, boolean hasFocus) {
-    			// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-    			if(hasFocus){
-    					usernameText.setJudge(false);
-    					usernameText.invalidate();
-    			}
-    			else{
-    				if(usernameText.getText().toString().equals("")){
-    				usernameText.setJudge(true);
-    				usernameText.invalidate();
-    				}
-    			}
-    		}
-    	});
-      //ÃÜÂëÊäÈë¿ò
-      passwordText = (MyEditText)findViewById(R.id.password_text);
-      passwordText.setShowWords("ÊäÈëÃÜÂë£º");
-      passwordText.invalidate();
-      passwordText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-    		public void onFocusChange(View v, boolean hasFocus) {
-    			// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-    			if(hasFocus){
-    				 passwordText.setJudge(false);
-    				 passwordText.invalidate();
-    			}
-    			else{
-    				if(passwordText.getText().toString().equals("")){
-    				 passwordText.setJudge(true);
-    				 passwordText.invalidate();
-    				}
-    			}
-    		}
-    	});
-      //È·ÈÏÊäÈë¿ò
-      surepasswordText = (MyEditText)findViewById(R.id.sure_password_text);
-      surepasswordText.setShowWords("ÔÙ´ÎÊäÈëÃÜÂë£º");
-      surepasswordText.invalidate();
-      surepasswordText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-    		public void onFocusChange(View v, boolean hasFocus) {
-    			// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-    			if(hasFocus){
-    				 surepasswordText.setJudge(false);
-    				 surepasswordText.invalidate();
-    			}
-    			else{
-    				if(surepasswordText.getText().toString().equals("")){
-    					surepasswordText.setJudge(true);
-    					surepasswordText.invalidate();
-    				}
-    			}
-    		}
-    	});
-      
-      //·µ»Ø
-      backText = (TextView)findViewById(R.id.back_text);
-      backText.setOnClickListener(new OnClickListener(){
+public class RegistActivity extends Activity {
+    private MyEditText usernameText = null;
+    private MyEditText passwordText = null;
+    private MyEditText surepasswordText = null;
+    private TextView backText = null;
+    private TextView informationText = null;
+    private Button registButton = null;
+    String url = "http://1.utifpop.sinaapp.com/newAccount.php";
 
-		@Override
-		public void onClick(View v) {
-			// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-			RegistActivity.this.finish();
-		}
-    	  
-      });
-      
-      
-      
-      //ÌáÊ¾ÐÅÏ¢
-      informationText = (TextView)findViewById(R.id.information_textView);
-      
-      //×¢²á°´Å¥
-      registButton = (Button)findViewById(R.id.regist_button);
-      registButton.setOnClickListener(new OnClickListener(){
+    public void onCreate(Bundle savedInstanceState) {
+        Window window = this.getWindow();
+        window.requestFeature(window.FEATURE_NO_TITLE);
+        super.onCreate(savedInstanceState);
+        super.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.regist_activity);
 
-		@Override
-		public void onClick(View v) {
-			if(passwordText.getText().toString().equals(surepasswordText.getText().toString())){
-			RegistAsyncServlet registAsyncServlet = new RegistAsyncServlet(usernameText.getText().toString(),passwordText.getText().toString(),informationText);
-			//Log.v("information","sc");
-			registAsyncServlet.execute(url);
-			//Log.v("information","sc2");
-			}
-			else{
-				informationText.setText("Á½´ÎÊäÈëµÄÃÜÂë²»Ò»ÖÂ£¡");
-			}
-			
-		}
-    	  
-      });
-       
-	  }
+        usernameText = (MyEditText) findViewById(R.id.username_text);
+        usernameText.setShowWords("ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½");
+        usernameText.invalidate();
+        usernameText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                // TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ÉµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                if (hasFocus) {
+                    usernameText.setJudge(false);
+                    usernameText.invalidate();
+                } else {
+                    if (usernameText.getText().toString().equals("")) {
+                        usernameText.setJudge(true);
+                        usernameText.invalidate();
+                    }
+                }
+            }
+        });
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        passwordText = (MyEditText) findViewById(R.id.password_text);
+        passwordText.setShowWords("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£º");
+        passwordText.invalidate();
+        passwordText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                // TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ÉµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                if (hasFocus) {
+                    passwordText.setJudge(false);
+                    passwordText.invalidate();
+                } else {
+                    if (passwordText.getText().toString().equals("")) {
+                        passwordText.setJudge(true);
+                        passwordText.invalidate();
+                    }
+                }
+            }
+        });
+        //È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        surepasswordText = (MyEditText) findViewById(R.id.sure_password_text);
+        surepasswordText.setShowWords("ï¿½Ù´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£º");
+        surepasswordText.invalidate();
+        surepasswordText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                // TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ÉµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                if (hasFocus) {
+                    surepasswordText.setJudge(false);
+                    surepasswordText.invalidate();
+                } else {
+                    if (surepasswordText.getText().toString().equals("")) {
+                        surepasswordText.setJudge(true);
+                        surepasswordText.invalidate();
+                    }
+                }
+            }
+        });
+
+        //ï¿½ï¿½ï¿½ï¿½
+        backText = (TextView) findViewById(R.id.back_text);
+        backText.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ÉµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                RegistActivity.this.finish();
+            }
+
+        });
+
+
+        //informationText = (TextView) findViewById(R.id.information_textView);
+
+        registButton = (Button) findViewById(R.id.regist_button);
+        registButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (passwordText.getText().toString().equals(surepasswordText.getText().toString())) {
+                    RegistAsyncServlet registAsyncServlet = new RegistAsyncServlet(usernameText.getText().toString(), passwordText.getText().toString(), informationText);
+                    //Log.v("information","sc");
+                    registAsyncServlet.execute(url);
+                    //Log.v("information","sc2");
+                } else {
+                    informationText.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²»Ò»ï¿½Â£ï¿½");
+                }
+
+            }
+
+        });
+
+    }
 
 }

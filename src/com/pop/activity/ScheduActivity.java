@@ -46,7 +46,7 @@ public class ScheduActivity extends Activity {
                         @Override
                         public void onAnimationEnd(Animation animation) {
                                 // TODO Auto-generated method stub
-                                Intent mIntent = new Intent(ScheduActivity.this, LoginActivity.class);
+                                Intent mIntent = new Intent(ScheduActivity.this, MainActivity.class);//直接进主界面
                                 startActivity(mIntent);       
                                 ScheduActivity.this.finish();
                         }

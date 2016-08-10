@@ -8,21 +8,18 @@ import android.util.AttributeSet;
 import android.widget.EditText;
 
 public class MyEditText extends EditText {
-	private boolean judge = true;//判断
-	private String showWords = "";//默认显示的内容
+	private boolean judge = true;
+	private String showWords = "";
 	public MyEditText(Context context) {
 		super(context);
-		// TODO 自动生成的构造函数存根
 	}
 	
 	public MyEditText(Context context,AttributeSet attrs,int defStyle) {
 		super(context,attrs,defStyle);
-		// TODO 自动生成的构造函数存根
 	}
 	
 	public MyEditText(Context context,AttributeSet attrs) {
 		super(context,attrs);
-		// TODO 自动生成的构造函数存根
 	}
 	
 	protected void onDraw(Canvas canvas){

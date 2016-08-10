@@ -92,17 +92,12 @@ public class AlertImageDialog {
 			String imageName = httpTools.sendPostResult(nameURL, param);
 			//System.out.println(imageName);
 			Bitmap tmpBitmap = imageCache.getBitmapFromCache(imageName);
-			System.out.println("内存缓存" + tmpBitmap);
-			
+
 			if (tmpBitmap == null){
-				//从文件缓存中获取
 				tmpBitmap = imageFileCache.getImage(imageName);
-				System.out.println("缓存" + tmpBitmap);
 				if (tmpBitmap == null){
-					//下载图片
 					tmpBitmap = httpTools.downLoadPic(picURl, param);
 					if (tmpBitmap != null){
-						//添加到文件、内存缓存中
 						//imageFileCache.saveBitmap(tmpBitmap, imageName);
 						imageCache.addBitmapToCache(imageName, tmpBitmap);
 					}else{
@@ -110,7 +105,6 @@ public class AlertImageDialog {
 						return "error";
 					}
 				}else{
-					//添加到内存缓存中
 					imageCache.addBitmapToCache(imageName, tmpBitmap);
 				}
 			}
@@ -120,15 +114,12 @@ public class AlertImageDialog {
 			return "success";
 		}
 		
-		/*这个函数在doInBackground后发生
-		 * 运行在ui线程中，可以更改ui界面
-		 * 参数result是doInBackgroud返回的值
-		 */
+
 		protected void onPostExecute(String result){
 			if (result.equals("success")){
 				imageView.setImageBitmap(bitmap);	
 			}else{
-				Toast.makeText(context, "下载失败!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "alterImage122", Toast.LENGTH_SHORT).show();
 			}
 		}
 		

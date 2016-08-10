@@ -27,14 +27,15 @@ public class ImageMarker extends PluginMarker{
 	private ScreenLine pPt = new ScreenLine();
 	public static final int OSM_URL_MAX_OBJECTS = 5;
     public String type;
-    public static final String geren = "geren";
-    public static final String gonggong = "gonggong";
-    public static final String jindian = "jindian";
-    public static final String shangye = "shangye";
-    public int popid;
+//    public static final String geren = "geren";
+//    public static final String gonggong = "gonggong";
+//    public static final String jindian = "jindian";
+//    public static final String shangye = "shangye";
+    private long popid;
 	public ImageMarker(int id, String title, double latitude, double longitude,
 			double altitude, String URL, int type, int color) {
 		super(id, title, latitude, longitude, altitude, URL, type, color);
+		this.popid = id;
 	}
 
 	@Override
@@ -184,11 +185,11 @@ public class ImageMarker extends PluginMarker{
 		}
 	}
 
-	public int getPopid() {
+	public long getPopid() {
 		return popid;
 	}
 
-	public void setPopid(int popid) {
+	public void setPopid(long popid) {
 		this.popid = popid;
 	}
 

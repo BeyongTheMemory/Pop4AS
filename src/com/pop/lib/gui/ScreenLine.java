@@ -8,8 +8,6 @@ import android.util.FloatMath;
 /**
  * The class stores a point of a two-dimensional coordinate system.
  * (values of the x and y axis)
- * 存储点的二维坐标系统。
- * x和y的值
  */
 
 public class ScreenLine implements Parcelable{
@@ -42,7 +40,7 @@ public class ScreenLine implements Parcelable{
 		this.y = y;
 	}
 
-	public void rotate(float t) {//旋转t度
+	public void rotate(float t) {//锟斤拷转t锟斤拷
 		float xp = (float) FloatMath.cos(t) * x - (float) FloatMath.sin(t) * y;
 		float yp = (float) FloatMath.sin(t) * x + (float) FloatMath.cos(t) * y;
 

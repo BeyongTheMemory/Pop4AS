@@ -10,9 +10,13 @@ import static android.view.KeyEvent.KEYCODE_DPAD_UP;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -30,13 +34,16 @@ import com.pop.activity.getPopActivity;
 import com.pop.context.AppContext;
 import com.pop.data.DataHandler;
 import com.pop.data.DataSource;
+import com.pop.enume.PopTypeEnum;
 import com.pop.gui.RadarPoints;
 import com.pop.lib.MixUtils;
 import com.pop.lib.gui.PaintScreen;
 import com.pop.lib.gui.ScreenLine;
 import com.pop.lib.marker.ImageMarker;
 import com.pop.lib.marker.Marker;
+import com.pop.lib.marker.PluginMarker;
 import com.pop.lib.render.Camera;
+import com.pop.lib.render.MixVector;
 import com.pop.mgr.downloader.DownloadManager;
 import com.pop.mgr.downloader.DownloadMgrImpl;
 import com.pop.mgr.downloader.DownloadRequest;
@@ -45,9 +52,11 @@ import com.pop.mgr.downloader.DownloadResult;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Location;
 import android.util.Log;
+import android.view.Display;
 import android.widget.Toast;
 
 /**
@@ -74,21 +83,18 @@ public class DataView {
 	private MixState state = new MixState();
 
 	/** The view can be "frozen" for debug purposes */
-	/**�����ã�����ͼ����*/
 	private boolean frozen;
-	boolean sureF = true;//ȷ��ֻ��һ��ҳ��
+	boolean sureF = true;//避免重复点击
 	/** how many times to re-attempt download */
-	/**�����������صĴ���*/
 	private int retry;
 
 	private Location curFix;
 	private DataHandler dataHandler = new DataHandler();
-	private float radius = 1;//�����뾶����λΪkm,ͨ�����ĸ����ݼ��ɸı������뾶
+	private float radius = 1;//显示的距离,默认1KM
 
 	/** timer to refresh the browser */
-	/**ˢ��������Ķ�ʱ��*/
 	private Timer refresh = null;
-	private final long refreshDelay = 300 * 1000; // ����Ϊÿ5����ˢ��һ��
+	private final long refreshDelay = 300 * 1000; //
 
 	private boolean isLauncherStarted;
 
@@ -98,12 +104,15 @@ public class DataView {
 	private ScreenLine lrl = new ScreenLine();
 	private ScreenLine rrl = new ScreenLine();
 	//private float rx = 10, ry = 20;
-	private float rx = 0, ry = 20;//rx=width - 100;Ϊ���������Ͻ�
+	private float rx = 0, ry = 20;
 	private float addX = 0, addY = 0;
 	
 	private List<Marker> markers;
 	private Executor executor = Executors.newSingleThreadExecutor();
 	boolean tag =true;
+	//保存要显示的泡泡的队列,避免同屏显示过多和重叠
+	private Map<Long,ImageMarker> showMarkers = new HashMap<>();
+	private static int MAXSHOW = 5;//最大显示的泡泡数目
 	/**
 	 * Constructor
 	 */
@@ -195,18 +204,17 @@ public class DataView {
     
 	public void draw(PaintScreen dw) {
 		mixContext.getRM(cam.transform);
-		curFix = mixContext.getLocationFinder().getCurrentLocation();//�õ���ǰ����λ����Ϣ
+		curFix = mixContext.getLocationFinder().getCurrentLocation();
 		//AppContext appContext = (AppContext) getApplicationContext();
-		state.calcPitchBearing(cam.transform);//������תֵ����������state��curBearing��curpitch��
+		state.calcPitchBearing(cam.transform);
 
 		// Load Layer
 		if (state.nextLStatus == MixState.NOT_STARTED && !frozen) {
 			//loadDrawLayer();
 			markers = new ArrayList<Marker>();
 		}
-		else if (state.nextLStatus == MixState.PROCESSING) {
-			
-		if(markers.size() == 0 ||tag){//重新获取泡泡
+		else if (state.nextLStatus == MixState.PROCESSING) {//刷新泡泡
+		if(markers.size() == 0 ||tag){//没有新泡泡,只重绘
 			tag = false;
 			DownloadMgrImpl dm = (DownloadMgrImpl) mixContext.getDownloadManager();
 			 executor.execute(dm);
@@ -236,8 +244,8 @@ public class DataView {
 
 		// Update markers
 		dataHandler.updateActivationStatus(mixContext);
-		for (int i = dataHandler.getMarkerCount() - 1; i >= 0; i--) {
-			Marker ma = dataHandler.getMarker(i);
+		for (int i = dataHandler.getMarkerCount() - 1; i >= 0; i--) {//重绘制
+			ImageMarker ma = (ImageMarker)dataHandler.getMarker(i);
 			// if (ma.isActive() && (ma.getDistance() / 1000f < radius || ma
 			// instanceof NavigationMarker || ma instanceof SocialMarker)) {
 			if (ma.isActive() && (ma.getDistance() / 1000f < radius)) {
@@ -248,12 +256,24 @@ public class DataView {
 				// if (!frozen)
 				// ma.update(curFix);
 
-				if (!frozen)
+				if (!frozen) {
 					ma.calcPaint(cam, addX, addY);
-				ma.draw(dw);
+				}
+
+				if(showMarkers.get(ma.getPopid()) == null) {
+					tryAddShowPop(ma);
+				}
+				//ma.draw(dw);//此时已确定了点坐标和图片大小
+			}else {
+				showMarkers.remove(ma.getPopid());
 			}
 		}
-
+		Iterator iter = showMarkers.entrySet().iterator();
+		while (iter.hasNext()) {
+			Map.Entry entry = (Map.Entry) iter.next();
+			ImageMarker pop = (ImageMarker) entry.getValue();
+			pop.draw(dw);
+		}
 		// Draw Radar
 		drawRadar(dw);
 
@@ -272,13 +292,98 @@ public class DataView {
 	}
 
 
-	
-	
+	private void tryAddShowPop(ImageMarker ma){
+		if(adjust(ma)){
+			showMarkers.put(ma.getPopid(),ma);
+		}
+	}
+
+	private boolean adjust(ImageMarker pop){
+		MixVector popSignMarker = pop.getSignMarker();
+		if(popSignMarker.getRealX() > width || popSignMarker.getRealY() > height || popSignMarker.getRealX() < 0 || popSignMarker.offsetY <0){
+			return false;
+		}
+		Iterator iter = showMarkers.entrySet().iterator();
+		while (iter.hasNext()) {
+			Map.Entry entry = (Map.Entry) iter.next();
+			ImageMarker cptPop = (ImageMarker) entry.getValue();
+			MixVector cptSignMarker = cptPop.getSignMarker();
+			Bitmap popBitmap = pop.getBitmap();
+			Bitmap cptPopBitmap = cptPop.getBitmap();
+			if(isCrash(popSignMarker.getRealX(),popSignMarker.getRealY(),cptSignMarker.getRealX(),cptSignMarker.getRealY(),popBitmap.getWidth(),popBitmap.getHeight(),cptPopBitmap.getWidth(),cptPopBitmap.getHeight())){//会碰撞，需调整
+				if((popBitmap.getWidth()+cptPopBitmap.getWidth())/2 - Math.abs(popSignMarker.getRealX() - cptSignMarker.getRealX()) > 1 ){//水平碰撞
+					popSignMarker.offsetX = (popBitmap.getWidth()+cptPopBitmap.getWidth())/2 + cptSignMarker.getRealX() - popSignMarker.x;//右移
+					if(popSignMarker.offsetX < 0){
+						return false;
+					}
+				}
+				if((popBitmap.getHeight()+cptPopBitmap.getHeight())/2 - Math.abs(popSignMarker.getRealY() - cptSignMarker.getRealY()) > 1){//竖直碰撞
+					popSignMarker.offsetY = (popBitmap.getHeight()+cptPopBitmap.getHeight())/2 + cptSignMarker.getRealY() - popSignMarker.y;//下移
+					if(popSignMarker.offsetY < 0){
+						return false;
+					}
+				}
+				//重新比较
+				return adjust(pop);
+			}
+		}
+		return true;
+	}
+
+	private boolean isCrash(float x1,float y1,float x2,float y2,double width1,double height1,double width2,double height2){
+		return Math.sqrt(Math.pow((width1+width2)/2,2)+Math.pow((height1+height2)/2,2)) - Math.sqrt(Math.pow((x1 - x2),2) + Math.pow((y1 - y2),2)) > 1  ;
+	}
+
+//	private boolean adjustLocation(ImageMarker ma){//这种方式有bug,会导致已经存在的泡泡突然消失,移除的判断也有问题
+//		MixVector signMarker = ma.getSignMarker();
+//		if(signMarker.x+signMarker.offsetX > width || signMarker.y+signMarker.offsetY > height){//超出范围
+//			return false;
+//		}else {
+//			Bitmap bitmap = ma.getBitmap();
+//			for (ImageMarker imageMarker : showMarkers) {
+//				boolean isAdjust = false;
+//				//判断是否会碰撞
+//				MixVector anotherMarker = imageMarker.getSignMarker();
+//				Bitmap anotherBitmap = imageMarker.getBitmap();
+//				//水平方向
+//				float xDistance = (signMarker.x+signMarker.offsetX)-(anotherMarker.x+anotherMarker.offsetX);
+//				float xBitmapDistance = bitmap.getWidth()/2 +anotherBitmap.getWidth()/2;
+//				if(xBitmapDistance < Math.abs(xDistance)){//水平距离不够,右移.
+//					if(xDistance < 0){//碰撞且在已有图形的左边,不加入到屏幕显示
+//						return false;
+//					}
+//					float offsetX = xBitmapDistance +(anotherMarker.x+anotherMarker.offsetX) - signMarker.x;
+//					signMarker.offsetX = offsetX;
+//					isAdjust = true;
+//				}
+//				//垂直方向
+//				float yDistance = (signMarker.y+signMarker.offsetY)-(anotherMarker.y+anotherMarker.offsetY);
+//				float yBitmapDistance = bitmap.getHeight()/2 +anotherBitmap.getHeight()/2;
+//				if(yBitmapDistance< Math.abs(yDistance)){//垂直距离不够,下移.
+//					if(yDistance < 0){//碰撞且在已有图形的上边,不加入到屏幕显示
+//						return false;
+//					}
+//
+//					float offsetY = yBitmapDistance +(anotherMarker.y+anotherMarker.offsetY) - signMarker.y;
+//					signMarker.offsetY = offsetY;
+//					isAdjust = true;
+//				}
+//				if(isAdjust){
+//					boolean adjustresult = adjustLocation(ma);//在次遍历
+//					if(!adjustresult){
+//						return false;
+//					}
+//				}
+//			}
+//
+//			return true;
+//		}
+//	}
 
 
 	/**
 	 * Handles drawing radar and direction.
-	 * @param PaintScreen screen that radar will be drawn to
+	 * @param dw screen that radar will be drawn to
 	 *  绘制了雷达但是没有绘制点
 	 */
 	private void drawRadar(PaintScreen dw) {
@@ -333,16 +438,16 @@ public class DataView {
 			// matches triggers the event.
 			//TODO handle collection of markers. (what if user wants the one at the back)
 			for (int i = 0; i < dataHandler.getMarkerCount() && !evtHandled; i++) {//遍历查看被点击的泡泡
-				Marker pm = dataHandler.getMarker(i);
+				ImageMarker pm = (ImageMarker) dataHandler.getMarker(i);
 				evtHandled = pm.fClick(evt.x, evt.y, mixContext, state);
 				if(evtHandled){
-					if(pm.getType().equals(ImageMarker.geren)){
+					if(pm.getType().equals(PopTypeEnum.WORDS)){
 						if(sureF){
 							sureF = false;
 						 SharedPreferences mySharedPreferences = this.getContext().getSharedPreferences("pop", 
 								  Activity.MODE_PRIVATE); 
 						  SharedPreferences.Editor editor = mySharedPreferences.edit(); 
-						  editor.putInt("id",pm.getPopid()); 	 
+						  editor.putLong("id",pm.getPopid());
 						  editor.commit(); 
 //					 Intent intent = new Intent();
 //	   			     intent.setClass(this.getContext(),getPopActivity.class);

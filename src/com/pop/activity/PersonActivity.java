@@ -44,19 +44,18 @@ public class PersonActivity extends Activity{
 					}
 					
 				});
-		//����
-		      optionText = (TextView)findViewById(R.id.option_text);
-		      optionText.setOnClickListener(new OnClickListener(){
-
-					
-					public void onClick(View v) {
-						Intent intent = new Intent();
-						intent.setClass(PersonActivity.this,OptionActivity.class);
-						PersonActivity.this.startActivity(intent);
-						
-					}
-					
-				});
+//		      optionText = (TextView)findViewById(R.id.option_text);
+//		      optionText.setOnClickListener(new OnClickListener(){
+//
+//
+//					public void onClick(View v) {
+//						Intent intent = new Intent();
+//						intent.setClass(PersonActivity.this,OptionActivity.class);
+//						PersonActivity.this.startActivity(intent);
+//
+//					}
+//
+//				});
 		      personLayout = (RelativeLayout)findViewById(R.id.personLayout);
 		      personLayout.setOnClickListener(new OnClickListener(){
 		  	

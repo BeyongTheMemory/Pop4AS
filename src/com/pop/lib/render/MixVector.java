@@ -11,7 +11,6 @@ import android.util.FloatMath;
  * through several methods. (for example adding and subtracting points) The
  * distance from the origin of the coordinate system to the point represents the
  * vector. The application uses vectors to describe distances on the map.
- * 三维坐标点信息，程序使用该向量描述其在地图上的距离
  * @author daniele
  * 
  */
@@ -19,6 +18,8 @@ public class MixVector implements Parcelable{
 	public float x;
 	public float y;
 	public float z;
+	public float offsetX = 0;
+	public float offsetY = 0;
 
 	public MixVector() {
 		this(0, 0, 0);
@@ -82,13 +83,11 @@ public class MixVector implements Parcelable{
 		this.y = y;
 		this.z = z;
 	}
-	 /**向量相加*/
 	public void add(float x, float y, float z) {
 		this.x += x;
 		this.y += y;
 		this.z += z;
 	}
-    /**向量相加*/
 	public void add(MixVector v) {
 		add(v.x, v.y, v.z);
 	}
@@ -114,7 +113,6 @@ public class MixVector implements Parcelable{
 	}
 
 	public float length() {
-		//长度
 		return (float) FloatMath.sqrt(x * x + y * y + z * z);
 	}
 
@@ -123,7 +121,6 @@ public class MixVector implements Parcelable{
 	}
 
 	public void norm() {
-		//标准化
 		divide(length());
 	}
 
@@ -132,7 +129,6 @@ public class MixVector implements Parcelable{
 	}
 
 	public void cross(MixVector u, MixVector v) {
-		//叉积，得正交向量
 		float x = u.y * v.z - u.z * v.y;
 		float y = u.z * v.x - u.x * v.z;
 		float z = u.x * v.y - u.y * v.x;
@@ -141,9 +137,7 @@ public class MixVector implements Parcelable{
 		this.z = z;
 	}
     
-	/**矩阵乘以向量*/
 	public void prod(Matrix m) {
-		//矩阵乘以向量
 		float xTemp = m.a1 * x + m.a2 * y + m.a3 * z;
 		float yTemp = m.b1 * x + m.b2 * y + m.b3 * z;
 		float zTemp = m.c1 * x + m.c2 * y + m.c3 * z;
@@ -169,5 +163,14 @@ public class MixVector implements Parcelable{
 		x = in.readFloat();
 		y = in.readFloat();
 		z = in.readFloat();
+	}
+
+
+	public float getRealX(){
+		return x+offsetX;
+	}
+
+	public float getRealY(){
+		return y+offsetY;
 	}
 }

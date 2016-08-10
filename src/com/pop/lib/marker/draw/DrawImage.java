@@ -4,6 +4,7 @@ package com.pop.lib.marker.draw;
 import com.pop.lib.gui.PaintScreen;
 import com.pop.lib.render.MixVector;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -60,8 +61,8 @@ public class DrawImage extends DrawCommand{
 			if(bitmap == null){
 				return;
 			}
-			//在这里判断是否需要调整位置
-			dw.paintBitmap(bitmap, signMarker.x - (bitmap.getWidth()/2), signMarker.y - (bitmap.getHeight() / 2),50);
+
+			dw.paintBitmap(bitmap, signMarker.getRealX() - (bitmap.getWidth()/2), signMarker.getRealY() - (bitmap.getHeight() / 2),90);
 		
 		}
 	}	

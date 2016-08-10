@@ -15,6 +15,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.pop.enume.PopModelEnume;
+import com.pop.enume.PopTypeEnum;
 import com.pop.show.MixContext;
 import com.pop.R;
 import com.pop.activity.MainActivity;
@@ -86,7 +87,7 @@ public class DownloadMgrImpl implements Runnable,DownloadManager {
 			ImageMarker imge = new ImageMarker(i,null,olatitude+ random.nextFloat()/100000,olongitude+random.nextFloat()/100000,random.nextDouble(),null,1,-1);
 			imge.setDistance(PhysicalPlace.distanceBetween(olatitude, olongitude, imge.getLatitude(),imge.getLongitude()));
 			imge.setBitmap(BitmapFactory.decodeResource(ctx.getActualMixView().getResources(), PopModelEnume.getImg(i)));
-			imge.setType(ImageMarker.shangye);
+			imge.setType(PopTypeEnum.WORDS+"");
 			imge.setPopid(i);
 			markers.add(imge);
 		  }

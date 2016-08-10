@@ -72,10 +72,9 @@ public class DataSourceStorage {
 		}
 	}
 	
-	/**发送请求的起点*/
 	public void fillDefaultDataSources(){
 		Log.v("DATASOUCESTOREGE-92","XGFIND");
-		String[] datasources = ctx.getResources().getStringArray(R.array.defaultdatasources);//获取数据源网址
+		String[] datasources = ctx.getResources().getStringArray(R.array.defaultdatasources);//锟斤拷取锟斤拷锟斤拷源锟斤拷址
 		if(datasources.length > getSize()){
 			for(int i = 0; i < datasources.length; i++){
 				int id = getSize();

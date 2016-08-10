@@ -20,8 +20,6 @@ import android.widget.TextView;
 /**
  * The DataSource class is able to create the URL where the information about a
  * place can be found.
- * 该页面进行数据源来源的选择,即资源包选择页面
- * 该类保存数据源类型，类型相应的网站信息
  * @author hannes
  * 
  */
@@ -31,7 +29,7 @@ public class DataSource{
 	private String name;
 	private String url;
     
-	/**数据源类型：WIKIPEDIA, BUZZ, TWITTER, OSM, MIXARE, ARENA*/
+	/**WIKIPEDIA, BUZZ, TWITTER, OSM, MIXARE, ARENA*/
 	public enum TYPE {
 		WIKIPEDIA, BUZZ, TWITTER, OSM, MIXARE, ARENA
 	};
@@ -83,7 +81,7 @@ public class DataSource{
 		this.display = displayEnum;
 		this.enabled = enabledBool;
 	}
-    /**创建发送请求的URL后缀*/
+    /**锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟経RL锟斤拷缀*/
 	public String createRequestParams(double lat, double lon, double alt,
 			float radius, String locale) {
 		String ret = "";

@@ -1,172 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#f0f0f0"
-    >
-    
-     <!--
-    **
-    ***
-              头部信息
-    ***          
-    **
-    -->
+    android:background="#f0f0f0">
 
+    <!--
+   **
+   ***
+             头部信息
+   ***
+   **
+   -->
     <RelativeLayout
-        android:id="@+id/topLayout"
+        android:id="@+id/topAllLayout"
         android:layout_width="fill_parent"
-        android:layout_height="50dip"
-        android:background="#ffffff" >
+        android:layout_height="150dp"
+        android:background="@drawable/background">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="个人"
-            android:textColor="#000000"
-            android:textSize="25sp" />
+        <RelativeLayout
+            android:id="@+id/topLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp">
 
-        <TextView
-            android:id="@+id/back_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:text="返回"
-            android:textColor="#1ad9d7"
-            android:textSize="20sp" />
+            <!--<TextView-->
+            <!--android:id="@+id/textView3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:text="个人"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textSize="25sp" />-->
 
-        <TextView
-            android:id="@+id/option_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textView3"
-            android:layout_alignParentRight="true"
-            android:text="设置" 
-            android:textSize="20sp"
-            android:textColor="#efe714"/>
+            <Button
+                android:id="@+id/back_button"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/ic_back" />
+
+            <Button
+                android:id="@+id/option_button"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/ic_option" />
+
+        </RelativeLayout>
+
+
+        <!--
+      **
+      ***
+               第二部分，用户名，简介等
+      ***
+      **
+      -->
+        <RelativeLayout
+            android:id="@+id/personLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:layout_below="@+id/topLayout">
+
+
+            <com.pop.activity.widget.CircleImageView
+                android:id="@+id/headPhoto_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/default_head"
+                app:border_width="2dp"
+                app:border_color="#ffffff"
+                />
+
+            <TextView
+                android:id="@+id/username_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/headPhoto_image"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/headPhoto_image"
+                android:layout_marginTop="10dp"
+                android:text="用户名"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+
+            <ImageView
+                android:id="@+id/signature_imageView"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignBottom="@+id/headPhoto_image"
+                android:layout_alignLeft="@+id/username_textView"
+                android:src="@drawable/ic_edit"
+                 />
+
+
+
+
+            <TextView
+                android:id="@+id/signature_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/signature_imageView"
+                android:layout_alignBottom="@id/signature_imageView"
+                android:text="Ta很懒,什么都没留下"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/miao_bian1"
-        android:layout_width="fill_parent"
-        android:layout_height="2dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/topLayout"
-        android:background="#afb3b2"
-        android:text="" />
-    
-      <!--
-    **
-    ***
-             第二部分，用户名，简介等
-    ***          
-    **
-    -->
-    <RelativeLayout
-        android:id="@+id/personLayout"
-         android:layout_below="@+id/miao_bian1"
-        android:layout_width="fill_parent"
-        android:layout_height="80dip"
-        android:background="#ffffff" >
-
-        <ImageView
-            android:id="@+id/headPhoto_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="29dp"
-            android:src="@drawable/psb" />
-
-        <TextView
-            android:id="@+id/username_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/username_textView"
-            android:layout_alignBottom="@+id/username_textView"
-            android:layout_marginLeft="14dip"
-            android:layout_toRightOf="@+id/username_textView"
-             android:textSize="20sp"
-            android:text="小樱桃" />
-
-        <TextView
-            android:id="@+id/signature_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/headPhoto_image"
-            android:layout_alignLeft="@+id/username_textView"
-            android:text="简介:"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/username_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/headPhoto_image"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/headPhoto_image"
-            android:text="用户名:"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:id="@+id/person_extends_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/extends_icon" />
-
-        <TextView
-            android:id="@+id/signature_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/signature_textView"
-            android:layout_alignBottom="@+id/signature_textView"
-            android:layout_toRightOf="@+id/username_textView"
-            android:text="萌萌的小丸子"
-            android:textSize="16sp" />
-
-        </RelativeLayout>
-        
-        <TextView
         android:id="@+id/miao_bian2"
         android:layout_width="fill_parent"
         android:layout_height="2dip"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/personLayout"
+        android:layout_below="@+id/topAllLayout"
         android:background="#afb3b2"
         android:text="" />
-        
-        
-    <!--
-    **
-    ***
-              我的相册
-    ***          
-    **
-    -->
-    <TextView
-        android:id="@+id/miao_bian3"
+
+    <RelativeLayout
+        android:id="@+id/topBelowLayout"
         android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/personLayout"
-        android:background="#afb3b2"
-        android:layout_marginTop="30dp"
-        android:text="" />
-        <RelativeLayout android:id="@+id/myPhotoLayout"
-             android:layout_below="@+id/miao_bian3"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:background="#ffffff" 
-            >
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topAllLayout"
+        android:background="#ffffff">
+
+        <!--
+        **
+        ***
+                  我的泡泡
+        ***
+        **
+        -->
+        <TextView
+            android:id="@+id/miao_bian3"
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="30dp"
+            android:background="#afb3b2"
+            android:text="" />
+
+        <RelativeLayout
+            android:id="@+id/myPhotoLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_below="@+id/miao_bian3"
+            android:background="#ffffff">
 
             <ImageView
-                android:id="@+id/myPhoto_imageView"
+                android:id="@+id/myPop_imageView"
                 android:layout_width="60dip"
                 android:layout_height="60dip"
                 android:layout_alignParentLeft="true"
@@ -174,16 +165,16 @@
                 android:src="@drawable/my_photo" />
 
             <TextView
-                android:id="@+id/myphoto_textView"
+                android:id="@+id/myPop_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/myPhoto_imageView"
-                android:textSize="20sp"
-                android:text="我的相册" />
+                android:layout_toRightOf="@+id/myPop_imageView"
+                android:text="我的泡泡"
+                android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/myphoto_extends_image"
+                android:id="@+id/myPop_extends_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -191,37 +182,39 @@
                 android:layout_marginRight="18dip"
                 android:src="@drawable/extends_icon" />
         </RelativeLayout>
+
         <TextView
-        android:id="@+id/miao_bian4"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/myPhotoLayout"
-        android:background="#afb3b2"
-        android:text="" />
-        
-    <!--
-    **
-    ***
-           我的收藏
-    ***          
-    **
-    -->
-      <TextView
-        android:id="@+id/miao_bian5"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/miao_bian4"
-        android:background="#afb3b2"
-        android:layout_marginTop="20dip"
-        android:text="" />
-        <RelativeLayout android:id="@+id/myCollectLayout"
-             android:layout_below="@+id/miao_bian5"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:background="#ffffff" 
-            >
+            android:id="@+id/miao_bian4"
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/myPhotoLayout"
+            android:background="#afb3b2"
+            android:text="" />
+
+        <!--
+        **
+        ***
+               我的收藏
+        ***
+        **
+        -->
+        <TextView
+            android:id="@+id/miao_bian5"
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/miao_bian4"
+            android:layout_marginTop="20dip"
+            android:background="#afb3b2"
+            android:text="" />
+
+        <RelativeLayout
+            android:id="@+id/myCollectLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_below="@+id/miao_bian5"
+            android:background="#ffffff">
 
             <ImageView
                 android:id="@+id/mycollect_imageView"
@@ -237,8 +230,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/mycollect_imageView"
-                android:textSize="20sp"
-                android:text="我的收藏" />
+                android:text="我的收藏"
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/mycollect_extends_image"
@@ -249,36 +242,38 @@
                 android:layout_marginRight="18dip"
                 android:src="@drawable/extends_icon" />
         </RelativeLayout>
+
         <TextView
-        android:id="@+id/miao_bian6"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/myCollectLayout"
-        android:background="#afb3b2"
-        android:text="" />
-   <!--
-    **
-    ***
-          顶过的泡泡
-    ***          
-    **
-    -->
-      <TextView
-        android:id="@+id/miao_bian7"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/miao_bian6"
-        android:background="#afb3b2"
-        android:layout_marginTop="20dip"
-        android:text="" />
-        <RelativeLayout android:id="@+id/goodPopLayout"
-             android:layout_below="@+id/miao_bian7"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:background="#ffffff" 
-            >
+            android:id="@+id/miao_bian6"
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/myCollectLayout"
+            android:background="#afb3b2"
+            android:text="" />
+        <!--
+         **
+         ***
+               顶过的泡泡
+         ***
+         **
+         -->
+        <TextView
+            android:id="@+id/miao_bian7"
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/miao_bian6"
+            android:layout_marginTop="20dip"
+            android:background="#afb3b2"
+            android:text="" />
+
+        <RelativeLayout
+            android:id="@+id/goodPopLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_below="@+id/miao_bian7"
+            android:background="#ffffff">
 
             <ImageView
                 android:id="@+id/goodpop_imageView"
@@ -294,8 +289,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/goodpop_imageView"
-                android:textSize="20sp"
-                android:text="顶过的泡泡" />
+                android:text="顶过的泡泡"
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/goodpop_extends_image"
@@ -306,36 +301,38 @@
                 android:layout_marginRight="18dip"
                 android:src="@drawable/extends_icon" />
         </RelativeLayout>
+
         <TextView
-        android:id="@+id/miao_bian8"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/goodPopLayout"
-        android:background="#afb3b2"
-        android:text="" />
-    <!--
-    **
-    ***
-         个性化
-    ***          
-    **
-    -->
-      <TextView
-        android:id="@+id/miao_bian9"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/miao_bian8"
-        android:background="#afb3b2"
-        android:layout_marginTop="20dip"
-        android:text="" />
-        <RelativeLayout android:id="@+id/individuationLayout"
-             android:layout_below="@+id/miao_bian9"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:background="#ffffff" 
-            >
+            android:id="@+id/miao_bian8"
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/goodPopLayout"
+            android:background="#afb3b2"
+            android:text="" />
+        <!--
+        **
+        ***
+             个性化
+        ***
+        **
+        -->
+        <TextView
+            android:id="@+id/miao_bian9"
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/miao_bian8"
+            android:layout_marginTop="20dip"
+            android:background="#afb3b2"
+            android:text="" />
+
+        <RelativeLayout
+            android:id="@+id/individuationLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_below="@+id/miao_bian9"
+            android:background="#ffffff">
 
             <ImageView
                 android:id="@+id/individuation_imageView"
@@ -351,8 +348,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/individuation_imageView"
-                android:textSize="20sp"
-                android:text="个性化" />
+                android:text="个性化"
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/individuation_extends_image"
@@ -363,15 +360,16 @@
                 android:layout_marginRight="18dip"
                 android:src="@drawable/extends_icon" />
         </RelativeLayout>
+
         <TextView
-        android:id="@+id/miao_bian10"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/individuationLayout"
-        android:background="#afb3b2"
-        android:text="" />
-        
+            android:id="@+id/miao_bian10"
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/individuationLayout"
+            android:background="#afb3b2"
+            android:text="" />
+
     <!--
     **
     ***
@@ -379,22 +377,23 @@
     ***          
     **
     -->
-<RelativeLayout
+    <RelativeLayout
         android:id="@+id/exitLayout"
         android:layout_width="fill_parent"
         android:layout_height="40dip"
-        android:background="#ff6347" 
-         android:layout_alignParentBottom="true">
-             <TextView
+        android:layout_alignParentBottom="true"
+        android:background="#9897BD">
+
+        <TextView
             android:id="@+id/exit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="退出当前账号"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:textSize="25sp" />
-            
-            </RelativeLayout>
-       
+
+    </RelativeLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

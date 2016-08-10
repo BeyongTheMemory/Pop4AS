@@ -65,8 +65,6 @@ public interface Marker extends Comparable<Marker>{
 	String toString();
 	
 	public String getType();
-	
-	public int getPopid();
-	public void setPopid(int id);
+
 
 }
