@@ -108,7 +108,7 @@ public class MyAdapter extends BaseAdapter {
 			holder1.date.setText(dataList.get(position).get("date"));
 		} else {
 			holder2.messageText.setText(dataList.get(position).get("username") + ":  " + dataList.get(position).get("message"));
-			holder2.replyText.setText("»Ø¸´£º" + dataList.get(position).get("r_words"));
+			holder2.replyText.setText("myadapter111" + dataList.get(position).get("r_words"));
 			holder2.date.setText(dataList.get(position).get("date"));
 		}
 		return convertView;

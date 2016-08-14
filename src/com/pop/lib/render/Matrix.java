@@ -6,8 +6,6 @@ import android.os.Parcelable;
 import android.util.FloatMath;
 
 /**
- * 可存储小数的3*3矩阵
- * 可进行矩阵运算
  */
 
 public class Matrix implements Parcelable{
@@ -60,38 +58,32 @@ public class Matrix implements Parcelable{
 		this.c2 = m.c2;
 		this.c3 = m.c3;
 	}
-    /**标准基矩阵*/
 	public void toIdentity() {
 		set(1, 0, 0, 0, 1, 0, 0, 0, 1);
 	}
 
 	public void toXRot(float angleX) {
-		//以X轴为轴进行旋转
-		set(1f, 0f, 0f, 0f, (float) FloatMath.cos(angleX), (float) -FloatMath
-				.sin(angleX), 0f, (float) FloatMath.sin(angleX), (float) FloatMath
+		set(1f, 0f, 0f, 0f, (float) Math.cos(angleX), (float) -Math
+				.sin(angleX), 0f, (float) Math.sin(angleX), (float) Math
 				.cos(angleX));
 	}
 
 	public void toYRot(float angleY) {
-		//以Y轴为轴进行旋转
-		set((float) FloatMath.cos(angleY), 0f, (float) FloatMath.sin(angleY), 0f, 1f,
-				0f, (float) -FloatMath.sin(angleY), 0f, (float) FloatMath.cos(angleY));
+		set((float) Math.cos(angleY), 0f, (float) Math.sin(angleY), 0f, 1f,
+				0f, (float) -Math.sin(angleY), 0f, (float) Math.cos(angleY));
 	}
 
 	public void toZRot(float angleZ) {
-		//以Z轴为轴进行旋转
-		set((float) FloatMath.cos(angleZ), (float) -FloatMath.sin(angleZ), 0f,
-				(float) FloatMath.sin(angleZ), (float) FloatMath.cos(angleZ), 0f, 0f, 0f,
+		set((float) Math.cos(angleZ), (float) -Math.sin(angleZ), 0f,
+				(float) Math.sin(angleZ), (float) Math.cos(angleZ), 0f, 0f, 0f,
 				1f);
 	}
 
 	public void toScale(float scale) {
-		//缩放？
 		set(scale, 0, 0, 0, scale, 0, 0, 0, scale);
 	}
 
 	public void toAt(MixVector cam, MixVector obj) {
-		//得到UVN坐标系
 		MixVector worldUp = new MixVector(0, 1, 0);
 
 		MixVector dir = new MixVector();
@@ -138,14 +130,11 @@ public class Matrix implements Parcelable{
 	}
 
 	public void invert() {
-		//得到标准矩阵
 		float det = this.det();
 		adj();
 		mult(1 / det);
 	}
-    /**矩阵转置*/
 	public void transpose() {
-		//矩阵转置
 		float a11 = a1;
 		float a12 = a2;
 		float a13 = a3;
@@ -181,7 +170,6 @@ public class Matrix implements Parcelable{
 	}
 
 	public void mult(float c) {
-		//矩阵乘以常数
 		a1 = a1 * c;
 		a2 = a2 * c;
 		a3 = a3 * c;
@@ -196,7 +184,6 @@ public class Matrix implements Parcelable{
 	}
 
 	public void add(Matrix n) {
-		//矩阵相加
 		a1 += n.a1;
 		a2 += n.a2;
 		a3 += n.a3;
@@ -211,7 +198,6 @@ public class Matrix implements Parcelable{
 	}
 
 	public void prod(Matrix n) {
-		//矩阵相乘
 		Matrix m = new Matrix();
 		m.set(this);
 

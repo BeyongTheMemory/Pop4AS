@@ -7,7 +7,6 @@ import java.util.List;
 import com.pop.data.DataSource;
 import com.pop.lib.marker.Marker;
 
-/**保存有存储Mark的List，以及该Result的ID*/
 
 public class DownloadResult {
 	

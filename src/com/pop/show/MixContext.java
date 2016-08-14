@@ -138,7 +138,7 @@ public class MixContext extends ContextWrapper implements MixContextInterface{
 	/**
 	 * Toast POPUP notification
 	 * 
-	 * @param connectionGpsDialogText
+	 * @param
 	 */
 	public void doPopUp(int RidOfString) {
         doPopUp(this.getString(RidOfString));

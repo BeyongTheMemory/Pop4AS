@@ -13,24 +13,16 @@ import java.util.Map;
 
 public class Communication {
 	
-	 /** 
-     * @param Ö»·¢ËÍÆÕÍ¨Êý¾Ý,µ÷ÓÃ´Ë·½·¨ 
-     * @param urlString ¶ÔÓ¦µÄurl
-     * @param params ÐèÒª·¢ËÍµÄÏà¹ØÊý¾Ý °üÀ¨µ÷ÓÃµÄ·½·¨ 
-     * @param imageuri Í¼Æ¬»òÎÄ¼þÊÖ»úÉÏµÄµØÖ· Èç:sdcard/photo/123.jpg 
-     * @param img Í¼Æ¬Ãû³Æ 
-     * @return Json 
-     */  
+
     public String communication02(String urlString,Map<String, Object> params,String  imageuri ,String img){  
         String result="";  
           
         String end = "\r\n";          
-       // String uploadUrl=new BingoApp().URLIN+"/";//new BingoApp().URLIN ÊÇÎÒ¶¨ÒåµÄÉÏ´«URL  
-        String MULTIPART_FORM_DATA = "multipart/form-data";   
-        String BOUNDARY = "---------7d4a6d158c9"; //Êý¾Ý·Ö¸ôÏß  
+        String MULTIPART_FORM_DATA = "multipart/form-data";
+        String BOUNDARY = "---------7d4a6d158c9"; //
         String imguri ="";  
         if (!imageuri.equals("")) {  
-            imguri = imageuri.substring(imageuri.lastIndexOf("/") + 1);//»ñµÃÍ¼Æ¬»òÎÄ¼þÃû³Æ  
+            imguri = imageuri.substring(imageuri.lastIndexOf("/") + 1);//ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½  
             //System.out.println(imguri);
         }  
           
@@ -44,11 +36,11 @@ public class Communication {
         	try {  
         		URL url = new URL(urlString);    
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();    
-                conn.setDoInput(true);//ÔÊÐíÊäÈë    
-                conn.setDoOutput(true);//ÔÊÐíÊä³ö    
-                conn.setUseCaches(false);//²»Ê¹ÓÃCache    
-                conn.setConnectTimeout(6000);// 6ÃëÖÓÁ¬½Ó³¬Ê±  
-                conn.setReadTimeout(6000);// 6ÃëÖÓ¶ÁÊý¾Ý³¬Ê±  
+                conn.setDoInput(true);
+                conn.setDoOutput(true);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½    
+                conn.setUseCaches(false);//ï¿½ï¿½Ê¹ï¿½ï¿½Cache    
+                conn.setConnectTimeout(6000);// 6ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½Ê±  
+                conn.setReadTimeout(6000);// 6ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½Ý³ï¿½Ê±  
                 conn.setRequestMethod("POST");              
                 conn.setRequestProperty("Connection", "Keep-Alive");    
                 conn.setRequestProperty("Charset", "UTF-8");    
@@ -56,8 +48,8 @@ public class Communication {
               
                 StringBuilder sb = new StringBuilder();    
                 
-                //ÉÏ´«µÄ±íµ¥²ÎÊý²¿·Ö£¬¸ñÊ½Çë²Î¿¼ÎÄÕÂ    
-                for (Map.Entry<String, Object> entry : params.entrySet()) {//¹¹½¨±íµ¥×Ö¶ÎÄÚÈÝ    
+                //ï¿½Ï´ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½Ê½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ï¿½ï¿½    
+                for (Map.Entry<String, Object> entry : params.entrySet()) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½    
                 	sb.append("--");    
                     sb.append(BOUNDARY);    
                     sb.append("\r\n");    
@@ -108,9 +100,8 @@ public class Communication {
     }  
     
     /**  
-     * Í¨¹ýÆ´½ÓµÄ·½Ê½¹¹ÔìÇëÇóÄÚÈÝ£¬ÊµÏÖ²ÎÊý´«ÊäÒÔ¼°ÎÄ¼þ´«Êä  
-     * @param acti.nUrl  
-     * @param params  
+     * Í¨ï¿½ï¿½Æ´ï¿½ÓµÄ·ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½Êµï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½  
+     * @param params
      * @param files  
      * @return  
      * @throws IOException  
@@ -127,17 +118,17 @@ public class Communication {
             URL uri = new URL ( actionUrl ) ;  
             HttpURLConnection conn = ( HttpURLConnection ) uri  
                     .openConnection ( ) ;  
-            conn.setReadTimeout ( 5 * 1000 ) ; // »º´æµÄ×î³¤Ê±¼ä  
-            conn.setDoInput ( true ) ;// ÔÊÐíÊäÈë  
-            conn.setDoOutput ( true ) ;// ÔÊÐíÊä³ö  
-            conn.setUseCaches ( false ) ; // ²»ÔÊÐíÊ¹ÓÃ»º´æ  
+            conn.setReadTimeout ( 5 * 1000 ) ; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î³¤Ê±ï¿½ï¿½  
+            conn.setDoInput ( true ) ;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
+            conn.setDoOutput ( true ) ;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
+            conn.setUseCaches ( false ) ; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã»ï¿½ï¿½ï¿½  
             conn.setRequestMethod ( "POST" ) ;  
             conn.setRequestProperty ( "connection" , "keep-alive" ) ;  
             conn.setRequestProperty ( "Charsert" , "UTF-8" ) ;  
             conn.setRequestProperty ( "Content-Type" , MULTIPART_FROM_DATA  
                     + ";boundary=" + BOUNDARY ) ;  
 
-            // Ê×ÏÈ×éÆ´ÎÄ±¾ÀàÐÍµÄ²ÎÊý  
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ´ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ÍµÄ²ï¿½ï¿½ï¿½  
             StringBuilder sb = new StringBuilder ( ) ;  
             for ( Map.Entry < String , String > entry : params.entrySet ( ) )  
                 {  
@@ -157,7 +148,7 @@ public class Communication {
             DataOutputStream outStream = new DataOutputStream (  
                     conn.getOutputStream ( ) ) ;  
             outStream.write ( sb.toString ( ).getBytes ( ) ) ;  
-            // ·¢ËÍÎÄ¼þÊý¾Ý  
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½  
             if ( files != null )  
                 for ( Map.Entry < String , File > file : files.entrySet ( ) )  
                     {  
@@ -185,12 +176,12 @@ public class Communication {
                         outStream.write ( LINEND.getBytes ( ) ) ;  
                     }  
 
-            // ÇëÇó½áÊø±êÖ¾  
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾  
             byte [ ] end_data = ( PREFIX + BOUNDARY + PREFIX + LINEND )  
                     .getBytes ( ) ;  
             outStream.write ( end_data ) ;  
             outStream.flush ( ) ;  
-            // µÃµ½ÏìÓ¦Âë  
+            // ï¿½Ãµï¿½ï¿½ï¿½Ó¦ï¿½ï¿½  
             int res = conn.getResponseCode ( ) ;  
             InputStream in = conn.getInputStream ( ) ;  
             if ( res == 200 )  

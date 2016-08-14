@@ -40,9 +40,9 @@ public class ScreenLine implements Parcelable{
 		this.y = y;
 	}
 
-	public void rotate(float t) {//��תt��
-		float xp = (float) FloatMath.cos(t) * x - (float) FloatMath.sin(t) * y;
-		float yp = (float) FloatMath.sin(t) * x + (float) FloatMath.cos(t) * y;
+	public void rotate(float t) {
+		float xp = (float) Math.cos(t) * x - (float) Math.sin(t) * y;
+		float yp = (float) Math.sin(t) * x + (float) Math.cos(t) * y;
 
 		x = xp;
 		y = yp;

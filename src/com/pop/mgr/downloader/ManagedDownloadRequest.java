@@ -1,8 +1,6 @@
 
 package com.pop.mgr.downloader;
-/**类属性有DownloadRequest content和String uniqueKey,uniquekey由hash函数生成
- *该类用于给DownloadRequest分配唯一的码值 
- */
+
 class ManagedDownloadRequest {
 	
 	private DownloadRequest content;
@@ -14,9 +12,7 @@ class ManagedDownloadRequest {
 		this.uniqueKey = "" + System.currentTimeMillis()+"_"+hashCode();
 	}
     
-	/*
-	 * 得到该ManagerdDownloadRequest对应的downloadrequest
-	 */
+
 	public DownloadRequest getOriginalRequest() {
 		return content;
 	}

@@ -7,7 +7,6 @@ import android.util.FloatMath;
  * This class has the ability to calculate the declination of a line between two
  * points. It is able to check if a point is in a given rectangle and it also can
  * make a String out of a given distance-value which contains number and unit.
- * 用来检查点是否在视锥体之中
  */
 public class MixUtils {
 	public static String parseAction(String action) {
@@ -38,12 +37,11 @@ public class MixUtils {
 		float r_y, float r_w, float r_h) {
 		return (P_x > r_x && P_x < r_x + r_w && P_y > r_y && P_y < r_y + r_h);
 	}
-     /**得到偏转角度*/
 	public static float getAngle(float center_x, float center_y, float post_x,
 			float post_y) {
 		float tmpv_x = post_x - center_x;
 		float tmpv_y = post_y - center_y;
-		float d = (float) FloatMath.sqrt(tmpv_x * tmpv_x + tmpv_y * tmpv_y);
+		float d = (float) Math.sqrt(tmpv_x * tmpv_x + tmpv_y * tmpv_y);
 		float cos = tmpv_x / d;
 		float angle = (float) Math.toDegrees(Math.acos(cos));
 

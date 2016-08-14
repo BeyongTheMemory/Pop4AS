@@ -190,7 +190,6 @@ public class DownloadMgrImpl implements Runnable,DownloadManager {
 
 	/*
 	 * (non-Javadoc)
-	 * �õ���һ�����ؽ��
 	 * @see org.mixare.mgr.downloader.DownloadManager#getNextResult()
 	 */
 	public synchronized DownloadResult getNextResult() {

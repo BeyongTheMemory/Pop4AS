@@ -10,16 +10,14 @@ import android.app.ActivityManager;
 
 public class ImageMemoryCache {
 
-	/**
-	 * ´ÓÄÚ´æ¶ÁÈ¡Êı¾İËÙ¶ÈÊÇ×î¿ìµÄ£¬ÎªÁË¸ü´óÏŞ¶ÈÊ¹ÓÃÄÚ´æ£¬ÕâÀïÊ¹ÓÃÁËÁ½²ã»º´æ¡£ Ó²ÒıÓÃ»º´æ²»»áÇáÒ×±»»ØÊÕ£¬ÓÃÀ´±£´æ³£ÓÃÊı¾İ£¬²»³£ÓÃµÄ×ªÈëÈíÒıÓÃ»º´æ¡£
-	 */
-	private static final int SOFT_CACHE_SIZE = 15; // ÈíÒıÓÃ»º´æÈİÁ¿
-	private static LruCache<String, Bitmap> mLruCache; // Ó²ÒıÓÃ»º´æ
-	private static LinkedHashMap<String, SoftReference<Bitmap>> mSoftCache; // ÈíÒıÓÃ»º´æ
+
+	private static final int SOFT_CACHE_SIZE = 15;
+	private static LruCache<String, Bitmap> mLruCache;
+	private static LinkedHashMap<String, SoftReference<Bitmap>> mSoftCache;
 
 	public ImageMemoryCache(Context context) {
         int memClass = ((ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();  
-		int cacheSize = 1024 * 1024 * memClass / 4; // Ó²ÒıÓÃ»º´æÈİÁ¿£¬ÎªÏµÍ³¿ÉÓÃÄÚ´æµÄ1/4
+		int cacheSize = 1024 * 1024 * memClass / 4;
 		mLruCache = new LruCache<String, Bitmap>(cacheSize) {
 			@Override
 			protected int sizeOf(String key, Bitmap value) {
@@ -33,7 +31,7 @@ public class ImageMemoryCache {
 			protected void entryRemoved(boolean evicted, String key,
 					Bitmap oldValue, Bitmap newValue) {
 				if (oldValue != null)
-					// Ó²ÒıÓÃ»º´æÈİÁ¿ÂúµÄÊ±ºò£¬»á¸ù¾İLRUËã·¨°Ñ×î½üÃ»ÓĞ±»Ê¹ÓÃµÄÍ¼Æ¬×ªÈë´ËÈíÒıÓÃ»º´æ
+					// Ó²ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ò£¬»ï¿½ï¿½ï¿½ï¿½LRUï¿½ã·¨ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ğ±ï¿½Ê¹ï¿½Ãµï¿½Í¼Æ¬×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
 					mSoftCache.put(key, new SoftReference<Bitmap>(oldValue));
 			}
 		};
@@ -53,28 +51,28 @@ public class ImageMemoryCache {
 	}
 
 	/**
-	 * ´Ó»º´æÖĞ»ñÈ¡Í¼Æ¬
+	 * ï¿½Ó»ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½È¡Í¼Æ¬
 	 */
 	public Bitmap getBitmapFromCache(String imageName) {
 		Bitmap bitmap;
-		// ÏÈ´ÓÓ²ÒıÓÃ»º´æÖĞ»ñÈ¡
+		// ï¿½È´ï¿½Ó²ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½È¡
 		synchronized (mLruCache) {
 			bitmap = mLruCache.get(imageName);
 			if (bitmap != null) {
-				// Èç¹ûÕÒµ½µÄ»°£¬°ÑÔªËØÒÆµ½LinkedHashMapµÄ×îÇ°Ãæ£¬´Ó¶ø±£Ö¤ÔÚLRUËã·¨ÖĞÊÇ×îºó±»É¾³ı
+				// ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½Æµï¿½LinkedHashMapï¿½ï¿½ï¿½ï¿½Ç°ï¿½æ£¬ï¿½Ó¶ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½LRUï¿½ã·¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
 				mLruCache.remove(imageName);
 				mLruCache.put(imageName, bitmap);
 				return bitmap;
 			}
 		}
 		
-		// Èç¹ûÓ²ÒıÓÃ»º´æÖĞÕÒ²»µ½£¬µ½ÈíÒıÓÃ»º´æÖĞÕÒ
+		// ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		synchronized (mSoftCache) {
 			SoftReference<Bitmap> bitmapReference = mSoftCache.get(imageName);
 			if (bitmapReference != null) {
 				bitmap = bitmapReference.get();
 				if (bitmap != null) {
-					// ½«Í¼Æ¬ÒÆ»ØÓ²»º´æ
+					// ï¿½ï¿½Í¼Æ¬ï¿½Æ»ï¿½Ó²ï¿½ï¿½ï¿½ï¿½
 					mLruCache.put(imageName, bitmap);
 					mSoftCache.remove(imageName);
 					return bitmap;
@@ -87,7 +85,7 @@ public class ImageMemoryCache {
 	}
 
 	/**
-	 * Ìí¼ÓÍ¼Æ¬µ½»º´æ
+	 * ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void addBitmapToCache(String imageName, Bitmap bitmap) {
 		if (bitmap != null) {

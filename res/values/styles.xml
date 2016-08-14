@@ -16,11 +16,13 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-<style name="Dialog_Fullscreen"> 
-       <item name="android:windowFullscreen">true</item> 
-       <item name="android:windowNoTitle">true</item>  
-    </style>  
-     <style name="Theme_Dialog"  parent="@android:style/Theme.Dialog">
+
+    <style name="Dialog_Fullscreen">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme_Dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowTitleStyle">@android:string/dialog_alert_title</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -28,18 +30,20 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
-</style>
-<style name="MyDialogTopRight">
+    </style>
+
+    <style name="MyDialogTopRight">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowAnimationStyle">@style/Anim_scale</item>
     </style>
-    
-        <style name="Anim_scale" parent="@android:style/Animation.Activity">
+
+    <style name="Anim_scale" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/scale_in</item>
         <item name="android:activityOpenExitAnimation">@anim/scale_out</item>
-         <item name="android:activityCloseEnterAnimation">@anim/scale_in</item>
+        <item name="android:activityCloseEnterAnimation">@anim/scale_in</item>
         <item name="android:activityCloseExitAnimation">@anim/scale_out</item>
     </style>
+
 </resources>

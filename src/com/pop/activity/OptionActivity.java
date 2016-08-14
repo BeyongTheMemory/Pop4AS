@@ -77,7 +77,7 @@ public class OptionActivity extends Activity{
 	});
 	
 	
-	 noticeAndRemindLayout = (RelativeLayout)findViewById(R.id. noticeAndRemindLayout);
+	 //noticeAndRemindLayout = (RelativeLayout)findViewById(R.id. noticeAndRemindLayout);
 	 noticeAndRemindLayout.setOnClickListener(new OnClickListener(){
 
 		

@@ -12,7 +12,6 @@ import android.os.Parcelable;
 
 /**
  * This class has the ability to set up the main view and it paints objects on the screen 
- * ��������ͼ�������Ļ����
  */
 
 public class PaintScreen implements Parcelable{
