@@ -9,11 +9,7 @@ import android.os.Parcelable;
  * be loaded. This class should be used, when a plugin wants to send a 'unknown'
  * primitive to the core This is needed because the classname of a parcel should
  * be known before the core can convert that into an object.
- * 
- *绘制属性包含一个原始值与它的类名，所以它可以
- *被加载。这个类应该被使用，当一个插件要发送一个“未知”
- *原始的核心是因为包裹的类名应该
- *在核心可以转换成一个对象。
+ *
  * @author A. Egal
  */
 public class PrimitiveProperty implements Parcelable {

@@ -22,6 +22,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'me.xiaopan:switchbutton:1.2.0'
     compile 'com.android.support:support-v4:24.0.0'
+    compile 'com.android.support:support-v13:24.0.0'
 }
 
 android {

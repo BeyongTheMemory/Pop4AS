@@ -21,12 +21,6 @@ import android.os.Parcelable;
  * The main function of this class is to be a container of objects, sending
  * them to the core, and use them to check for clicks and handle it.
  * @author A. Egal
- * ¹ÜÀíµ¥»÷ÊÂ¼şµÄÀà
- * ²å¼ş½«´´½¨Ò»¸öµã»÷ÑéÖ¤Æ÷·¢ËÍµ½ºËĞÄ
- * ºËĞÄ½«ÑéÖ¤µã»÷ÔÙµã»÷¡£
- * ÕâÊÇÒòÎªÎÒÃÇÎŞ·¨·¢ËÍmixcontextºÍmixstateµ½²å¼ş£¬ÒòÆäÎ´ÊµÏÖparcelable½Ó¿Ú
- * º¯ÊıµÄÖ÷Òª¹¦ÄÜÊÇ½«Ò»¸ö¶ÔÏóµÄÈİÆ÷£¬·¢ËÍ
- * ËûÃÇµÄºËĞÄ£¬²¢ÀûÓÃËüÃÇÀ´¼ì²éµã»÷ºÍ´¦Àí¡£
  */
 public class ClickHandler implements Parcelable{
 
@@ -51,13 +45,13 @@ public class ClickHandler implements Parcelable{
 	
 	/**
 	 * A click handler without a click valid check.
-	 * Ã»ÓĞ×öÓĞĞ§ĞÔ¼ì²âµÄµã»÷´¦Àíº¯Êı
+	 * Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½Ô¼ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public boolean fakeClick(MixContextInterface ctx, MixStateInterface state){
 		return state.handleEvent(ctx, url);
 	}
 	
-	/**½øĞĞÁËÓĞĞ§ĞÔ¼ì²âµÄµã»÷´¦Àíº¯Êı*/
+	/**ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½Ô¼ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	public boolean handleClick(float x, float y, MixContextInterface ctx, MixStateInterface state){
 		if(isClickValid(x, y)){
 			return state.handleEvent(ctx, url);
@@ -65,19 +59,19 @@ public class ClickHandler implements Parcelable{
 		return false;
 	}
 	
-	/**ÅĞ¶ÏÊÇ·ñÔÚµã»÷·¶Î§ÄÚ*/
+	/**ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½*/
 	private boolean isClickValid(float x, float y) {
 	
 		float currentAngle = MixUtils.getAngle(cMarker.x, cMarker.y,
 				signMarker.x, signMarker.y);
 		//if the marker is not active (i.e. not shown in AR view) we don't have to check it for clicks
-		//ARÎ´ÏÔÊ¾Ê±²»Ğè¼ì²âµã»÷
+		//ARÎ´ï¿½ï¿½Ê¾Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (!active)
 			return false;
 
 		//TODO adapt the following to the variable radius!
-		//×ÔÊÊÓ¦ºóµÄ¿É±ä°ë¾¶
-		//¸ù¾İ·½¿ò×ø±ê½øĞĞÅĞ¶¨µã»÷ÊÇ·ñÓĞĞ§
+		//ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ä¿É±ï¿½ë¾¶
+		//ï¿½ï¿½ï¿½İ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ğ§
 		pPt.x = x - signMarker.x;
 		pPt.y = y - signMarker.y;
 		pPt.rotate((float) Math.toRadians(-(currentAngle + 90)));
