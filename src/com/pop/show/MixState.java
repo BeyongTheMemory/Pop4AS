@@ -10,7 +10,6 @@ import com.pop.lib.render.MixVector;
 
 /**
  * This class calculates the bearing and pitch out of the angles
- * ¼ÆËãÖá³ÐºÍ¸©Ñö½Ç¶È
  */
 public class MixState implements MixStateInterface{
 
@@ -18,7 +17,6 @@ public class MixState implements MixStateInterface{
 	public static int PROCESSING = 1; 
 	public static int READY = 2; 
 	public static int DONE = 3; 
-    /**´æ´¢×´Ì¬£¬ËÄÖÖ×´Ì¬·Ö±ðÊÇNOT_STARTED£¬PROCESSING£¬READY£¬DONE*/
 	int nextLStatus = MixState.NOT_STARTED;
 	String downloadId;
 
@@ -28,7 +26,6 @@ public class MixState implements MixStateInterface{
 	private boolean detailsView;
     
 
-    /**µ±Ç°Ðý×ªÖµ*/
 	public float getCurBearing() {
 		return curBearing;
 	}
@@ -45,13 +42,12 @@ public class MixState implements MixStateInterface{
 		this.detailsView = detailsView;
 	}
     
-	/**¿ÉÒÔ¼ÆËãÐý×ªÖµ*/
 	public void calcPitchBearing(Matrix rotationM) {
 		MixVector looking = new MixVector();
 		rotationM.transpose();
 		looking.set(1, 0, 0);
 		looking.prod(rotationM);
-		this.curBearing = (int) (MixUtils.getAngle(0, 0, looking.x, looking.z)  + 360 ) % 360 ;//¼ÆËãµ±Ç°Ðý×ªÖáÖµ
+		this.curBearing = (int) (MixUtils.getAngle(0, 0, looking.x, looking.z)  + 360 ) % 360 ;//ï¿½ï¿½ï¿½ãµ±Ç°ï¿½ï¿½×ªï¿½ï¿½Öµ
 		rotationM.transpose();
 		looking.set(0, 1, 0);
 		looking.prod(rotationM);
@@ -60,7 +56,7 @@ public class MixState implements MixStateInterface{
 
 	@Override
 	public boolean handleEvent(MixContextInterface ctx, String onPress) {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ÉµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		return false;
 	}
 }

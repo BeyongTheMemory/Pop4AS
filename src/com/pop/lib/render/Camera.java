@@ -4,18 +4,13 @@ package com.pop.lib.render;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * 相机类，使用Matrix 和 MixVector存储信息 
- * 根据相机性能和视角计算投影点坐标
- */
+
 public class Camera implements Parcelable {
 
-	public static final float DEFAULT_VIEW_ANGLE = (float) Math.toRadians(45);//默认视角
+	public static final float DEFAULT_VIEW_ANGLE = (float) Math.toRadians(45);//默锟斤拷锟接斤拷
 
-	public int width, height;//屏幕宽度和高度
-    /**标准基矩阵(1, 0, 0, 0, 1, 0, 0, 0, 1)*/
+	public int width, height;
 	public Matrix transform = new Matrix();
-	/**初始化为（0,0,0）*/
 	public MixVector lco = new MixVector();
 
 	float viewAngle;
@@ -78,7 +73,6 @@ public class Camera implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int arg1) {
-		//传输
 		dest.writeInt(width);
 		dest.writeInt(height);
 		dest.writeParcelable(transform, 0);
@@ -88,7 +82,6 @@ public class Camera implements Parcelable {
 	}
 
 	public void readFromParcel(Parcel in) {
-		//接受
 		width = in.readInt();
 		height = in.readInt();
 		transform = in.readParcelable(Matrix.class.getClassLoader());

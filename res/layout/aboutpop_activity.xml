@@ -3,32 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f0f0f0"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/relativeLayout_title"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#39BEB4" >
+        android:id="@+id/topLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="35dip"
+        android:background="#9897BD">
 
-        <ImageView
-            android:id="@+id/imageview_aboutpopback"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/abs__ic_ab_back_holo_light" />
-
-        <Button
-            android:id="@+id/button_city"
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:background="#39BEB4"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="关于Pop"
             android:textColor="#ffffff"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
+
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/ic_back" />
 
     </RelativeLayout>
 
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="PopV1.0"
+        android:text="beta V1.0"
         android:textColor="@color/textgray"
         android:textSize="13sp" />
 
@@ -51,85 +51,83 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="40dp"
-        android:background="@color/green" >
-    </LinearLayout>
- <LinearLayout
+        android:background="@color/green"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button_useragreement"
+            android:id="@+id/button_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_more"
             android:gravity="left"
             android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
             android:paddingTop="10dp"
-            android:text="用户协议"
-            android:textColor="@color/textgray"
-            android:paddingLeft="10dp" />
+            android:text="联系电话:18258467176"
+            android:textColor="@color/textgray" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_arrow" />
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:src="@drawable/ic_arrow" />-->
     </LinearLayout>
-
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/shallowgray" >
-    </LinearLayout>
+        android:background="@color/shallowgray"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button_popphone"
+            android:id="@+id/button_popemail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/button_more"
             android:gravity="left"
             android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
             android:paddingTop="10dp"
-            android:text="联系电话：15386422422"
-            android:background="@drawable/button_more"
-            android:textColor="@color/textgray"
-            android:paddingLeft="10dp" />
+            android:text="联系邮箱：496512727@qq.com"
+            android:textColor="@color/textgray" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_arrow" />
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:src="@drawable/ic_arrow" />-->
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/shallowgray" >
-    </LinearLayout>
+        android:background="@color/shallowgray"></LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center_horizontal"
-        android:text="冒泡一下，发现精彩"
+        android:text="Pop一下，发现精彩"
         android:textSize="15sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Pop.com"
-        android:textSize="15sp" />
+    <!--    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Pop.com"
+            android:textSize="15sp" />-->
 
 </LinearLayout>

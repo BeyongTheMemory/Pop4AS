@@ -7,33 +7,38 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/white"
+        android:layout_height="35dip"
+        android:background="#9897BD"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal" >
 
-            <ImageView
-                android:id="@+id/imageview_back"
+            <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/abs__ic_ab_back_holo_light" />
+                android:layout_centerInParent="true"
+                android:text="帐号"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="200dip"
-                android:layout_height="wrap_content"
-                android:text="                          我的账户"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-          
-        </LinearLayout>
-       
+
+            <Button
+                android:id="@+id/back_button"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/ic_back" />
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 
@@ -68,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="13dp"
-                    android:src="@drawable/ic_user_lv0_big" />
+                    android:src="@drawable/ic_user_lv0" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -110,79 +115,12 @@
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/button_more"
                         android:text="如何升级？"
-                        android:textColor="@color/green" />
+                        android:textColor="#9897bd" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp" >
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:src="@drawable/ic_user_lv0" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:background="@color/shallowgray" >
-                    </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:src="@drawable/ic_user_lv1" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="left"
-                        android:text="0" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="75" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="150" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="225" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="right"
-                        android:text="300" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -254,7 +192,49 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="修改"
-                        android:textColor="@color/green" />
+                        android:textColor="#9897bd" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/shallowgray" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_sign"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/selector_more"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/user_admin_sign" />
+
+                    <TextView
+                        android:id="@+id/textview_sign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="Ta很懒,什么都没留下"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="修改"
+                        android:textColor="#9897bd" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -326,7 +306,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="更改"
-                        android:textColor="@color/green" />
+                        android:textColor="#9897bd" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -334,12 +314,50 @@
                     android:layout_height="1dp"
                     android:background="@color/shallowgray" >
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearlayout_emial"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/selector_more"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" >
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/user_admin_email" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="55dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="已绑定邮箱 4965***@qq.com"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="更改"
+                        android:textColor="#9897bd" />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/shallowgray" >
+                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/linearlayout_address"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:layout_weight="1"
                     android:background="@drawable/selector_more"
                     android:orientation="horizontal"
                     android:paddingLeft="10dp"
@@ -353,15 +371,21 @@
                         android:src="@drawable/user_admin_address" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="55dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
                         android:gravity="left|center_vertical"
-                        android:text="隐私管理"
+                        android:text="浙江省杭州市"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
-                </LinearLayout>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="更改"
+                        android:textColor="#9897bd" />
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -369,15 +393,23 @@
                     android:background="@color/shallowgray" >
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/button_exit"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
-                    android:background="#ff0000"
-                    android:text="退   出"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
+                <RelativeLayout
+                    android:id="@+id/exitLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="35dip"
+                    android:layout_alignParentBottom="true"
+                    android:background="#9897BD">
+
+                    <TextView
+                        android:id="@+id/exit_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="退出当前账号"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

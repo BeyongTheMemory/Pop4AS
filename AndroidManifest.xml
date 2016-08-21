@@ -133,6 +133,11 @@
             android:label="@string/app_name"
             android:theme="@style/MyDialogTopRight"></activity>
 
+        <activity
+            android:name="com.pop.activity.PopChoseActivity"
+            android:label="@string/app_name"
+            android:theme="@style/MyDialogTopRight"></activity>
+
 
     </application>
 

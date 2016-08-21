@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.pop.R;
+import com.pop.enume.PopModelLayoutEnume;
 import com.pop.http.Communication;
 
 import android.app.Activity;
@@ -19,8 +20,10 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -28,19 +31,40 @@ import android.widget.TextView;
  *         6.7
  */
 public class NewPop_photo_Activity extends Activity {
-    private TextView cancelText = null;
     private ImageView addImageView;
     private static int RESULT_LOAD_IMAGE = 1;
+    private static int RESULT_LOAD_POPCHOSE =2;
     private String imageURL;
+    private TextView popText;
 
     private EditText editText;
-    private TextView writePrivacy;
+
 
     public void onCreate(Bundle savedInstanceState) {
         Window window = this.getWindow();
         window.requestFeature(window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.newpop_photo_activity);
+        popText = (TextView) findViewById(R.id.pop_text);
+        addImageView = (ImageView) findViewById(R.id.appPhpto_imageView);
+        addImageView.setOnClickListener(new SelectListener());
+        Button backButton = (Button)findViewById(R.id.back_button);
+        backButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewPop_photo_Activity.this.finish();
+            }
+        });
+        RelativeLayout popLayout = (RelativeLayout)findViewById(R.id.pop_layout);
+        popLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(NewPop_photo_Activity.this,PopChoseActivity.class);
+                startActivityForResult(intent, RESULT_LOAD_POPCHOSE);
+            }
+        });
+    }
 //        cancelText = (TextView) findViewById(R.id.cancel_text);
 //        cancelText.setOnClickListener(new OnClickListener() {
 //
@@ -61,40 +85,43 @@ public class NewPop_photo_Activity extends Activity {
 //        writePrivacy.setOnClickListener(new UploadListener());
 //        //selectBtn.setOnClickListener(new SelectListener());
 //        //uploadBtn.setOnClickListener(new UploadListener());
-    }
+//   }
 
-//    private class SelectListener implements OnClickListener {
+    private class SelectListener implements OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            // TODO Auto-generated method stub
+            Intent i = new Intent(
+                    Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, RESULT_LOAD_IMAGE);
+        }
+
+    }
 //
-//        @Override
-//        public void onClick(View v) {
-//            // TODO Auto-generated method stub
-//            Intent i = new Intent(
-//                    Intent.ACTION_PICK,
-//                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//            startActivityForResult(i, RESULT_LOAD_IMAGE);
-//        }
-//
-//    }
-//
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-//            Uri selectedImage = data.getData();
-//            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-//
-//            Cursor cursor = getContentResolver().query(selectedImage,
-//                    filePathColumn, null, null, null);
-//            cursor.moveToFirst();
-//
-//            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//            String picturePath = cursor.getString(columnIndex);
-//            imageURL = picturePath;
-//            System.out.println(imageURL);
-//            cursor.close();
-//
-//            addImageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-//        }
-//    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            imageURL = picturePath;
+            System.out.println(imageURL);
+            cursor.close();
+
+            addImageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+        }else if(requestCode == RESULT_LOAD_POPCHOSE && resultCode == RESULT_OK && null != data){
+            PopModelLayoutEnume popModelLayoutEnume = (PopModelLayoutEnume) data.getSerializableExtra("popModelLayoutEnume");
+            popText.setText(popModelLayoutEnume.getName());
+        }
+    }
 //
 //    private class UploadListener implements OnClickListener {
 //

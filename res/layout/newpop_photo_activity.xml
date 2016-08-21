@@ -16,7 +16,7 @@
     <RelativeLayout
         android:id="@+id/topLayout"
         android:layout_width="fill_parent"
-        android:layout_height="50dip"
+        android:layout_height="35dip"
         android:background="#9897BD">
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_centerInParent="true"
             android:text="发泡泡"
             android:textColor="#ffffff"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
 
         <Button
@@ -46,7 +46,7 @@
             android:layout_alignParentRight="true"
             android:text="投放"
             android:textColor="#dadcdc"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
     </RelativeLayout>
 
     <ScrollView
@@ -76,7 +76,7 @@
                 <EditText
                     android:id="@+id/words_edit"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="150dp"
                     android:layout_alignParentLeft="true"
                     android:ems="10"
                     android:hint="说点儿什么呗~"
@@ -118,7 +118,7 @@
                 <RelativeLayout
                     android:id="@+id/model1Layout"
                     android:layout_width="fill_parent"
-                    android:layout_height="50dip"
+                    android:layout_height="40dip"
                     android:layout_below="@+id/photoLayout"
                     android:layout_marginTop="10dip"
                     android:background="#ffffff">
@@ -128,11 +128,11 @@
                         android:id="@+id/move_switch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="50dp"
+                        android:minHeight="40dp"
                         android:paddingLeft="30dp"
                         android:paddingRight="30dp"
                         android:text="随机漂浮"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         app:frameDrawable="@drawable/switch_frame"
                         app:sliderDrawable="@drawable/selector_switch_slider"
                         app:stateDrawable="@drawable/selector_switch_state"
@@ -152,7 +152,7 @@
                 <RelativeLayout
                     android:id="@+id/model2Layout"
                     android:layout_width="fill_parent"
-                    android:layout_height="50dip"
+                    android:layout_height="40dip"
                     android:layout_below="@+id/model1Layout"
                     android:layout_marginTop="10dip"
                     android:background="#ffffff">
@@ -162,11 +162,11 @@
                         android:id="@+id/anonymous_switch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="50dp"
+                        android:minHeight="40dp"
                         android:paddingLeft="30dp"
                         android:paddingRight="30dp"
                         android:text="匿名"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         app:frameDrawable="@drawable/switch_frame"
                         app:sliderDrawable="@drawable/selector_switch_slider"
                         app:stateDrawable="@drawable/selector_switch_state"
@@ -179,7 +179,7 @@
                 <RelativeLayout
                     android:id="@+id/model3Layout"
                     android:layout_width="fill_parent"
-                    android:layout_height="50dip"
+                    android:layout_height="40dip"
                     android:layout_below="@+id/model2Layout"
                     android:layout_marginTop="10dip"
                     android:background="#ffffff">
@@ -189,11 +189,11 @@
                         android:id="@+id/onlyOnce_switch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="50dp"
+                        android:minHeight="40dp"
                         android:paddingLeft="30dp"
                         android:paddingRight="30dp"
                         android:text="阅后即焚"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         app:frameDrawable="@drawable/switch_frame"
                         app:sliderDrawable="@drawable/selector_switch_slider"
                         app:stateDrawable="@drawable/selector_switch_state"
@@ -207,7 +207,7 @@
                 <RelativeLayout
                     android:id="@+id/pop_layout"
                     android:layout_width="fill_parent"
-                    android:layout_height="50dip"
+                    android:layout_height="40dip"
                     android:layout_below="@+id/model3Layout"
                     android:layout_marginTop="10dip"
                     android:background="#ffffff">
@@ -219,7 +219,7 @@
                         android:paddingLeft="30dp"
                         android:paddingRight="30dp"
                         android:text="泡泡"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/pop_text"
@@ -231,7 +231,7 @@
                         android:paddingLeft="30dp"
                         android:paddingRight="30dp"
                         android:text="默认"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="italic" />
 
 

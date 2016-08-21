@@ -16,7 +16,7 @@
     <RelativeLayout
         android:id="@+id/topLayout"
         android:layout_width="fill_parent"
-        android:layout_height="50dip"
+        android:layout_height="35dip"
         android:background="#9897BD">
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_centerInParent="true"
             android:text="过滤"
             android:textColor="#ffffff"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
 
         <Button

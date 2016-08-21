@@ -16,7 +16,7 @@
     <RelativeLayout
         android:id="@+id/topLayout"
         android:layout_width="fill_parent"
-        android:layout_height="50dip"
+        android:layout_height="35dip"
         android:background="#9897BD">
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_centerInParent="true"
             android:text="泡泡商店"
             android:textColor="#ffffff"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
 
         <Button
@@ -80,7 +80,9 @@
                         android:layout_below="@+id/color_pop_img"
                         android:layout_centerHorizontal="true"
                         android:text="默认"
-                        android:textSize="20sp" />
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -102,8 +104,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/bule_pop_img"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
                         android:text="梦幻蓝"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -126,8 +130,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/purple_pop_img"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
                         android:text="高贵紫"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -160,8 +166,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rdylw_pop_img"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
                         android:text="迷醉红"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -183,8 +191,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/pink_pop_img"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
                         android:text="诱惑粉"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -207,8 +217,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/yellow_pop_img"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
                         android:text="淡雅黄"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -241,8 +253,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/green_pop_img"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
                         android:text="清新绿"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -264,8 +278,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/light_blue_pop_img"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
                         android:text="明亮蓝"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -288,8 +304,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/purple_old_pop_img"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
                         android:text="深沉紫"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
                 </RelativeLayout>
             </RelativeLayout>
             <!--第四行-->
@@ -321,8 +339,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/red_old_pop_img"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
                         android:text="烈焰红"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -344,8 +364,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/green_old_pop_img"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
                         android:text="翡翠绿"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -368,8 +390,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/dark_green_old_pop_img"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
                         android:text="迷幻蓝"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
                 </RelativeLayout>
             </RelativeLayout>
 

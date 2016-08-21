@@ -7,11 +7,7 @@ import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * ´æ´¢µØÀíÐÅÏ¢£¨¾­¶ÈºÍÎ³¶È£¬¸ß¶È£©
- *ÒÑÖªÁ½µØ¾àÀëµÃµ½Ä¿±ê¾­Î³¶È£¬´óÔ²¶¨Àí
- * ½«µØÀíÎ»ÖÃ×ª»¯ÎªÏòÁ¿£¬ÒÔ¼°ÆäÄæÔËËã
- */
+
 
 public class PhysicalPlace implements Parcelable {
 
@@ -88,7 +84,6 @@ public class PhysicalPlace implements Parcelable {
 	}
     
     
-    //ÒÑÖªÁ½µØ¾àÀëµÃµ½Ä¿±ê¾­Î³¶È£¬´óÔ²¶¨Àí
 	public static void calcDestination(double lat1Deg, double lon1Deg,
 			double bear, double d, PhysicalPlace dest) {
 	
@@ -108,7 +103,6 @@ public class PhysicalPlace implements Parcelable {
 		dest.setLongitude(Math.toDegrees(lon2));
 	}
     
-    //½«µØÀíÎ»ÖÃ×ª»¯ÎªÏòÁ¿
 	public static void convLocToVec(Location org, PhysicalPlace gp, MixVector v) {
 		float[] z = new float[1];
 		z[0] = 0;
@@ -126,7 +120,7 @@ public class PhysicalPlace implements Parcelable {
 		v.set(x[0], (float) y, z[0]);
 	}
     
-    //½«ÏòÁ¿×ª»»³ÉµØÀíÎ»ÖÃÐÅÏ¢
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢
 	public static void convertVecToLoc(MixVector v, Location org, Location gp) {
 		double brngNS = 0, brngEW = 90;
 		if (v.z > 0)
@@ -164,7 +158,7 @@ public class PhysicalPlace implements Parcelable {
 		altitude = in.readDouble();
 	}
 	
-	/**¼ÆËãÁ½µã¾àÀë*/
+	/**ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	public static double distanceBetween(double startLatitude,double startLongitude,double endLatitude,double endLongitude){
 		float r[] = new float[1];
 		r[0] = 0;

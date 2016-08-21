@@ -135,7 +135,7 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 
 			maintainCamera();
 			maintainAugmentR();
-			creatMenu();
+
 			
 			if (!isInited) {
 				//getMixViewData().setMixContext(new MixContext(this));
@@ -208,14 +208,10 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 	 * Mixare - Receives results from other launched activities
 	 * Base on the result returned, it either refreshes screen or not.
 	 * Default value for refreshing is false
-	 * ��������activity�Ľ�������ݽ���ж�ҳ���Ƿ�ˢ��,Ĭ�ϲ�ˢ��
 	 */
 	protected void onActivityResult(final int requestCode,
 			final int resultCode, Intent data) {
-		Log.d(TAG + " WorkFlow", "MixView - onActivityResult Called");
-		// check if the returned is request to refresh screen (setting might be
-		// changed)
-		//��鷵��ֵ�Ƿ���Ҫ��Ļˢ��
+
 		try {
 			if (data.getBooleanExtra("RefreshScreen", false)) {
 				Log.d(TAG + " WorkFlow",
@@ -232,21 +228,14 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.v("ss","resuml");
-//����ƽ�ƺ���ת�Ĵ�������ڴ�
+		creatMenu();
 		try {
-			//Log.v("ss","resuml226");
-			this.getMixViewData().getmWakeLock().acquire();//��ָ��  ��������֤ϵͳ����������
-			//Log.v("ss","resuml228"); 
+			this.getMixViewData().getmWakeLock().acquire();
 			killOnError();
-			//Log.v("ss","resuml229");
 			getMixViewData().getMixContext().doResume(this);
-			//Log.v("ss","resuml230");
 			repaint();
 			getDataView().doStart();
 			getDataView().clearEvents();
-			//Log.v("ss","resuml236");
-			//getMixViewData().getMixContext().getDataSourceManager().refreshDataSources();
 
 			float angleX, angleY;
 
@@ -254,26 +243,24 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 
 			int rotation = Compatibility.getRotation(this);
 
-			// display text from left to right and keep it horizontal
-			//��������ʾ�ı��ͱ���ˮƽ
 			angleX = (float) Math.toRadians(marker_orientation);
 			getMixViewData().getM1().set(1f, 0f, 0f, 0f,
 					(float) Math.cos(angleX),
 					(float) -Math.sin(angleX), 0f,
 					(float) Math.sin(angleX),
-					(float) Math.cos(angleX));//��x��Ϊ����ת
+					(float) Math.cos(angleX));
 			angleX = (float) Math.toRadians(marker_orientation);
 			angleY = (float) Math.toRadians(marker_orientation);
-			if (rotation == 1) {//��ͬ��ת��ʽ�õ���ͬ����
+			if (rotation == 1) {
 				getMixViewData().getM2().set(1f, 0f, 0f, 0f,
 						(float) Math.cos(angleX),
 						(float) -Math.sin(angleX), 0f,
 						(float) Math.sin(angleX),
-						(float) Math.cos(angleX));//��xΪ��
+						(float) Math.cos(angleX));
 				getMixViewData().getM3().set((float) Math.cos(angleY), 0f,
 						(float) Math.sin(angleY), 0f, 1f, 0f,
 						(float) -Math.sin(angleY), 0f,
-						(float) Math.cos(angleY));//��YΪ��
+						(float) Math.cos(angleY));
 			} else {
 				getMixViewData().getM2().set((float) Math.cos(angleX), 0f,
 						(float) Math.sin(angleX), 0f, 1f, 0f,
@@ -287,7 +274,7 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 
 			}
 
-			getMixViewData().getM4().toIdentity();//��׼�����
+			getMixViewData().getM4().toIdentity();
 
 			for (int i = 0; i < getMixViewData().getHistR().length; i++) {
 				getMixViewData().getHistR()[i] = new Matrix();
@@ -387,19 +374,16 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 	/* ********* Operators ***********/ 
 
 	public void repaint() {
-		//clear stored data
-		//����洢����
 		getDataView().clearEvents();
 		setDataView(null); //It's smelly code, but enforce garbage collector 
 							//to release data.
 		setDataView(new DataView(mixViewData.getMixContext()));
 		setdWindow(new PaintScreen());
-		//setZoomLevel(); //@TODO Caller has to set the zoom. This function repaints only.ִ�����ţ�ֻ���ػ�ʱ��Ҫ
+		//TODO Caller has to set the zoom. This function repaints only.ִ
 	}
 	
 	/**
 	 *  Checks camScreen, if it does not exist, it creates one.
-	 *  ����Ƿ���Ҫ����cameraScereen
 	 */
 	private void maintainCamera() {
 		if (cameraSurfaceView == null){
@@ -421,7 +405,7 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 	
 	/**
 	 * Creates a zoom bar and adds it to view.
-	 * ����С��ͼ
+	 * ����С��
 	 */
 
 	/**
@@ -447,7 +431,6 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 	
 	public void refresh(){
 		dataView.refresh();
-		//ˢ��
 	}
 
 //	public void setErrorDialog(){
@@ -735,8 +718,7 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 //
 //	};
 
-    /*���������ݼ���*/
-	public void onSensorChanged(SensorEvent evt) {//���������ݼ���
+	public void onSensorChanged(SensorEvent evt) {
 		try {
 
 			if (evt.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -802,7 +784,6 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 	}
 
 	@Override
-	/*������Ӧ����*/
 	public boolean onTouchEvent(MotionEvent me) {
 		try {
 			killOnError();
@@ -813,8 +794,6 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 			Log.v("touch","xgtouch: x:"+xPress+",y:"+yPress);
 			
 			if (me.getAction() == MotionEvent.ACTION_UP) {
-				//ί�и�dataView����dataView�н�����������Ӵ˴ε���¼����Ժ��ٽ��д���
-				//���޵����
 				getDataView().clickEvent(xPress, yPress);
 			}//TODO add gesture events (low)
 
@@ -827,12 +806,11 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 	}
 
 	@Override
-	/*��ť����*/
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		try {
 			killOnError();
 
-			if (keyCode == KeyEvent.KEYCODE_BACK) {//���ؼ�����ʱ
+			if (keyCode == KeyEvent.KEYCODE_BACK) {
 				if (getDataView().isDetailsView()) {
 					getDataView().keyEvent(keyCode);
 					getDataView().setDetailsView(false);
@@ -854,7 +832,6 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 		}
 	}
     
-	/*���ȸı�ʱ*/
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		if (sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD
 				&& accuracy == SensorManager.SENSOR_STATUS_UNRELIABLE
@@ -870,9 +847,8 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 	}
 
 	@Override
-	public boolean onTouch(View v, MotionEvent event) {//���صĴ���������ò��û��
+	public boolean onTouch(View v, MotionEvent event) {
 		getDataView().setFrozen(false);
-		Log.v("touch","xgtouch");
 		if (getMixViewData().getSearchNotificationTxt() != null) {
 			getMixViewData().getSearchNotificationTxt().setVisibility(View.GONE);
 			getMixViewData().setSearchNotificationTxt(null);
@@ -986,33 +962,10 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 		MainActivity.dataView = dataView;
 	}
 
-	
-	//�����˵�
+	/**
+	 * 为了重绘下方的菜单,将该方法在resume中调用,即每次都会新创建menu,暂时未发现问题
+	 */
 	public void creatMenu(){
-//		Log.v("1","bengkui");
-//		if(menu == null){
-//           SatelliteMenu menu = new SatelliteMenu(this);
-//		}
-//		Log.v("2","bengkui");
-////		     FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(  
-////			      FrameLayout.LayoutParams.WRAP_CONTENT,  
-////				        FrameLayout.LayoutParams.WRAP_CONTENT);  
-//		
-//		
-//		
-//		 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(  
-//			      60,  
-//			       60); 
-//		 Log.v("3","bengkui");
-//				       //���ò˵����ֵ�λ��(�����ڶ���)  
-//				        params.topMargin = 0;  
-//				       params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;  
-//				       Log.v("4","bengkui");
-//				       addContentView(menu, params);
-//		Log.v("5","bengkui");
-
-		//menu = (SatelliteMenu)findViewById(R.id.menu);
-		if(menu == null){
 			menu = new SatelliteMenu(this);
 			List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
 			items.add(new SatelliteMenuItem(5, R.drawable.person_btn));
@@ -1022,93 +975,76 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 	        menu.addItems(items); 
 	        menu.setOnItemClickedListener(new SateliteClickedListener() {
 				public void eventOccured(int id) {
-					Log.v("T",id+"");
 					if(id == 5){
 						isPreview=false;
 						Intent intent = new Intent();
 						intent.setClass(MainActivity.this,PersonActivity.class);
-						//MainActivity.this.startActivity(intent);
 						MainActivity.this.startActivity(intent);
-						MainActivity.this.onPause();
-						MainActivity.this.finish();
+//						MainActivity.this.onPause();
+//						MainActivity.this.finish();
 						
 					}
 					if(id == 6){
 						isPreview=false;
 						Intent intent = new Intent();
 						intent.setClass(MainActivity.this,MessageActivity.class);
-						//MainActivity.this.startActivity(intent);
 						MainActivity.this.startActivity(intent);
-						MainActivity.this.onPause();
-						MainActivity.this.finish();
+//						MainActivity.this.onPause();
+//						MainActivity.this.finish();
 						
 					}
 					if(id == 7){
 						isPreview=false;
 						Intent intent = new Intent();
 						intent.setClass(MainActivity.this,FilterPopActivity.class);
-						//MainActivity.this.startActivity(intent);
 						MainActivity.this.startActivity(intent);
-						MainActivity.this.onPause();
-						MainActivity.this.finish();
+//						MainActivity.this.onPause();
+//						MainActivity.this.finish();
 					   
 						
 					}
 					if(id == 8){
 						isPreview=false;
 						Intent intent = new Intent();
-						intent.setClass(MainActivity.this,NewPopActivity.class);
-						//MainActivity.this.startActivity(intent);
+						intent.setClass(MainActivity.this,NewPop_photo_Activity.class);//暂时只有图文泡泡
 						MainActivity.this.startActivity(intent);
-						MainActivity.this.onPause();
-						MainActivity.this.finish();
+//						MainActivity.this.onPause();
+//						MainActivity.this.finish();
 					}
 					
 				}
 			});
-		}
-		//修改点
-		 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-			      FrameLayout.LayoutParams.MATCH_PARENT,
-			      FrameLayout.LayoutParams.MATCH_PARENT);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+				FrameLayout.LayoutParams.MATCH_PARENT,
+				FrameLayout.LayoutParams.MATCH_PARENT);
 
-	       params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
-	       addContentView(menu, params);
+		params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
+		addContentView(menu, params);
 
 	}
 	
 	/**
 	 * @author xg
-	 *���
 	 */
 	private class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback{	
-		private	Camera camera;	// ����ϵͳ���õ������
+		private	Camera camera;
 		
 		public CameraSurfaceView(Context context) {
 			super(context);
-			// ���SurfaceView��SurfaceHolder
 			cameraSurfaceHolder = getHolder();
-	          // ΪsurfaceHolder���һ���ص�������
 			cameraSurfaceHolder.addCallback(this);
-			//Log.v("chushihua","OK_______________OK");
 		}
 
 		public void surfaceChanged(SurfaceHolder holder, int format, int width,
 				int height) {
-			// Ԥ�������ʽ�ʹ�С�仯ʱ������
 		}
 
 		
 	
 	
 		public void surfaceCreated(SurfaceHolder holder) {
-			//����ʵ����Ԥ������ʱ����
-			// ������ͷ
-			Log.v("chuangjian","OK_______________OK");
 			if (!isPreview)
 			{
-				// �˴�Ĭ�ϴ򿪺�������ͷ��
-				// ͨ������������Դ�ǰ������ͷ
 				camera = Camera.open(0);  //��
 				camera.setDisplayOrientation(90);
 			}
@@ -1116,24 +1052,14 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 			{
 				try
 				{
-					//Log.v("yulan","OK_______________OK");
 					Camera.Parameters parameters = camera.getParameters();
-					// ����Ԥ����Ƭ�Ĵ�С
 					parameters.setPreviewSize(screenWidth, screenHeight);
-					//Log.v("yulan1","OK_______________OK");
-					// ����Ԥ����Ƭʱÿ����ʾ����֡����Сֵ�����ֵ
 					parameters.setPreviewFpsRange(4, 10);
-					//Log.v("yulan2","OK_______________OK");
-					// ͨ��SurfaceView��ʾȡ������
 					camera.setPreviewDisplay(cameraSurfaceHolder);
-					//Log.v("yulan4","OK_______________OK");
-					// ��ʼԤ��
 					camera.startPreview();
-					//Log.v("chushihuakaishi","OK_______________OK");
 				}
 				catch (Exception e)
 				{   
-					Log.v("yulancuowu","OK_______________OK");
 					e.printStackTrace();
 				}
 				isPreview = true;
@@ -1143,8 +1069,6 @@ public class MainActivity extends Activity implements SensorEventListener, OnTou
 		}
 
 		public void surfaceDestroyed(SurfaceHolder holder) {
-			//��Ԥ�����汻�ر�ʱ����
-			// ���camera��Ϊnull ,�ͷ�����ͷ
 			if (camera != null)
 			{
 				if (isPreview) camera.stopPreview();

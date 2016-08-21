@@ -165,7 +165,7 @@ public class ImageMarker extends PluginMarker{
 //			return false;
 //		}
 //	}
-	//检查点击事件的有效性,碰撞可以根据这个来做
+	//检查点击事件的有效性
 	private boolean isClickValid(float x, float y) {
 //		if(!isVisible&&!isActive()){
 //			return false;

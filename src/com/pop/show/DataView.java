@@ -104,7 +104,7 @@ public class DataView {
 	private ScreenLine lrl = new ScreenLine();
 	private ScreenLine rrl = new ScreenLine();
 	//private float rx = 10, ry = 20;
-	private float rx = 0, ry = 20;
+	private float rx = 0, ry = 40;//绘制雷达的坐标,rx由宽度计算,这里设置没用
 	private float addX = 0, addY = 0;
 	
 	private List<Marker> markers;
@@ -112,7 +112,6 @@ public class DataView {
 	boolean tag =true;
 	//保存要显示的泡泡的队列,避免同屏显示过多和重叠
 	private Map<Long,ImageMarker> showMarkers = new HashMap<>();
-	private static int MAXSHOW = 5;//最大显示的泡泡数目
 	/**
 	 * Constructor
 	 */
@@ -173,7 +172,7 @@ public class DataView {
 		try {
 			width = widthInit;
 			height = heightInit;
-            rx = width - 100;
+            rx = width - 2*radarPoints.RADIUS;
 			cam = new Camera(width, height, true);
 			cam.setViewAngle(Camera.DEFAULT_VIEW_ANGLE);
 
@@ -275,7 +274,8 @@ public class DataView {
 			pop.draw(dw);
 		}
 		// Draw Radar
-		drawRadar(dw);
+		//因为平移后点坐标难以计算而且只显示1km的内容,暂时不进行地图绘制
+		//drawRadar(dw);
 
 		// Get next event
 		UIEvent evt = null;
@@ -384,7 +384,7 @@ public class DataView {
 	/**
 	 * Handles drawing radar and direction.
 	 * @param dw screen that radar will be drawn to
-	 *  绘制了雷达但是没有绘制点
+	 *  暂时不进行地图的绘制了
 	 */
 	private void drawRadar(PaintScreen dw) {
 		String dirTxt = "";

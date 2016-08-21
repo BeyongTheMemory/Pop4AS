@@ -49,15 +49,13 @@ public class RegistAsyncServlet extends AsyncTask<String, Void,String>{
 	protected String doInBackground(String... params) {
 		Log.v("xxx","xxx");
 		 
-		//´«µÝ²ÎÊý
 		ArrayList nameValuePairs = new ArrayList();
 		 nameValuePairs.add(new BasicNameValuePair("username", username));
 		 nameValuePairs.add(new BasicNameValuePair("password", password));
-		 // http post
 		try {
 	    	HttpClient httpclient = new DefaultHttpClient();
 	        HttpPost httppost = new HttpPost(
-	        		params[0]);//params[0]ÊÇ´«½øµÄurl;
+	        		params[0]);
 	        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	        HttpResponse response = httpclient.execute(httppost);
 	        HttpEntity entity = response.getEntity();
@@ -84,10 +82,7 @@ public class RegistAsyncServlet extends AsyncTask<String, Void,String>{
 	    return result;
 	}
 	
-	/*Õâ¸öº¯ÊýÔÚdoInBackgroundºó·¢Éú
-	 * ÔËÐÐÔÚuiÏß³ÌÖÐ£¬¿ÉÒÔ¸ü¸Äui½çÃæ
-	 * ²ÎÊýresultÊÇdoInBackgroud·µ»ØµÄÖµ
-	 */
+
 	protected void onPostExecute(String result){
 		/*Log.v("xxxz","xxxx");
 		String ct_username = "";
@@ -104,13 +99,11 @@ public class RegistAsyncServlet extends AsyncTask<String, Void,String>{
 	    		ct_password = json_data.getString("password");
 	    	}*/
 		//Log.v("result",result);
-	          //×¢²áÊ§°ÜÓÃ»§Ãû´æÔÚ
 	        if(Integer.parseInt(result.trim()) == 0){
-	        	informationText.setText("×¢²áÊ§°Ü£¬ÓÃ»§ÃûÒÑ´æÔÚ£¡");
+	        	informationText.setText("×¢ï¿½ï¿½Ê§ï¿½Ü£ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½ï¿½Ú£ï¿½");
 	        }
-	        //×¢²á³É¹¦
 	        else{
-	        	informationText.setText("×¢²á³É¹¦£¡");
+	        	informationText.setText("×¢ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
 	        }
 	    }
 	/*catch (JSONException e1) {

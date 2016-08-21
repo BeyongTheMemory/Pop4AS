@@ -10,34 +10,33 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class AboutActivity extends Activity{
-	ImageView back = null;
-	Button phone = null;
+	LinearLayout phone = null;
 	public void onCreate(Bundle savedInstanceState){
 		Window window = this.getWindow();
        window.requestFeature(window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.aboutpop_activity);
-		back = (ImageView)findViewById(R.id.imageview_aboutpopback);
-		back.setOnClickListener(new OnClickListener(){
+		Button backButton =(Button)findViewById(R.id.back_button);
+		backButton.setOnClickListener(new OnClickListener(){
 
-			
+
 			public void onClick(View v) {
-				AboutActivity.this .finish();
-				
+				AboutActivity.this.finish();
+
 			}
-			
+
 		});
-		phone = (Button)findViewById(R.id.button_popphone);
+		phone = (LinearLayout) findViewById(R.id.layout_phone);
         phone.setOnClickListener(new OnClickListener(){
 
 			
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setAction(Intent.ACTION_CALL);
-				intent.setData(Uri.parse("tel:15386422422"));
+				intent.setData(Uri.parse("tel:18258467176"));
 				startActivity(intent);
 			}
 			

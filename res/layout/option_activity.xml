@@ -2,29 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#9897BD">
-
+    android:background="#F0F0F0">
     <!--
-   **
-   ***
-             头部信息
-   ***
-   **
-   -->
+ **
+ ***
+           头部信息
+ ***
+ **
+ -->
+
     <RelativeLayout
         android:id="@+id/topLayout"
         android:layout_width="fill_parent"
-        android:layout_height="50dip"
-        >
+        android:layout_height="35dip"
+        android:background="#9897BD">
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="设置"
+            android:text="其他"
             android:textColor="#ffffff"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
 
         <Button
@@ -35,312 +35,79 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:background="@drawable/ic_back" />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/miao_bian1"
-        android:layout_width="fill_parent"
-        android:layout_height="2dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/topLayout"
-        android:background="#afb3b2"
-        android:text="" />
-    <!--
-  **
-  ***
-           账号管理
-  ***
-  **
-  -->
-    <TextView
-        android:id="@+id/miao_bian2"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/topLayout"
-        android:layout_marginTop="30dip"
-        android:background="#afb3b2"
-        android:text="" />
-
-    <RelativeLayout
-        android:id="@+id/accountManagerLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:layout_below="@+id/miao_bian2"
-        android:background="#ffffff">
-
-        <TextView
-            android:id="@+id/accountManager_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="17dip"
-            android:text="账号管理"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="18dip"
-            android:src="@drawable/extends_icon" />
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/miao_bian3"
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/accountManagerLayout"
-        android:background="#afb3b2"
-        android:text="" />
-    <!--
-    **
-    ***
-            通知和提醒
-    ***          
-    **
-    -->
-  <!--  <TextView
-        android:id="@+id/miao_bian4"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/miao_bian3"
-        android:layout_marginTop="30dip"
-        android:background="#afb3b2"
-        android:text="" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/topLayout">
 
-    <RelativeLayout
-        android:id="@+id/noticeAndRemindLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:layout_below="@+id/miao_bian4"
-        android:background="#ffffff">
-
-        <TextView
-            android:id="@+id/noticeAndRemind_textView"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="17dip"
-            android:text="通知和提醒"
-            android:textSize="20sp" />
-    </RelativeLayout>-->
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/miao_bian5"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="30dip"
-        android:layout_below="@+id/accountManagerLayout"
-        android:background="#afb3b2"
-        android:text="" />
-    <!--
-   **
-   ***
-           字体设置
-   ***
-   **
 
-     <RelativeLayout android:id="@+id/fontOptionLayout"
-            android:layout_below="@+id/miao_bian5"
-       android:layout_width="fill_parent"
-       android:layout_height="40dip"
-       android:background="#ffffff"
-           >
+            <RelativeLayout
+                android:id="@+id/suggust_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:layout_marginTop="20dp"
+                android:background="#ffffff">
 
-           <TextView
-               android:id="@+id/fontOption_textView"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_alignParentLeft="true"
-               android:layout_centerVertical="true"
-               android:textSize="20sp"
-                android:layout_marginLeft="17dip"
-               android:text="字体设置" />
-       </RelativeLayout>
-       <TextView
-       android:id="@+id/miao_bian6"
-       android:layout_width="fill_parent"
-       android:layout_height="1dip"
-       android:layout_alignParentLeft="true"
-       android:layout_below="@+id/fontOptionLayout"
-       android:background="#afb3b2"
-       android:text="" />
-        -->
-    <!--
-    **
-    ***
-            语言设置
-    ***          
-    **
-    
-      <RelativeLayout android:id="@+id/laguageOptionLayout"
-             android:layout_below="@+id/miao_bian5"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:background="#ffffff" 
-            >
 
-            <TextView
-                android:id="@+id/laguageOption_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:textSize="20sp"
-                 android:layout_marginLeft="17dip"
-                android:text="语言设置" />
+                <TextView
+                    android:id="@+id/personMessage_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:text="意见反馈"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/personMessage_extends_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="18dip"
+                    android:src="@drawable/extends_icon" />
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:id="@+id/about_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/suggust_layout"
+                android:background="#ffffff">
+
+
+                <TextView
+                    android:id="@+id/popGetMessage_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:text="关于Pop"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/popGetMessage_extends_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="18dip"
+                    android:src="@drawable/extends_icon" />
+            </RelativeLayout>
+
         </RelativeLayout>
-        <TextView
-        android:id="@+id/miao_bian7"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/laguageOptionLayout"
-        android:background="#afb3b2"
-        android:text="" /> 
-        -->
-    <!--
-   **
-   ***
-         隐私与安全
-   ***
-   **
-   -->
-    <RelativeLayout
-        android:id="@+id/privacyAndSafeLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:layout_below="@+id/miao_bian5"
-        android:background="#ffffff">
-
-        <TextView
-            android:id="@+id/privacyAndSafe_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="17dip"
-            android:text="隐私与安全"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="18dip"
-            android:src="@drawable/extends_icon" />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/miao_bian8"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/privacyAndSafeLayout"
-        android:background="#afb3b2"
-        android:text="" />
-    <!--
-   **
-   ***
-        意见反馈
-   ***
-   **
-   -->
-    <TextView
-        android:id="@+id/miao_bian9"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/miao_bian8"
-        android:layout_marginTop="30dip"
-        android:background="#afb3b2"
-        android:text="" />
-
-    <RelativeLayout
-        android:id="@+id/suggestionLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:layout_below="@+id/miao_bian9"
-        android:background="#ffffff">
-
-        <TextView
-            android:id="@+id/suggestion_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="17dip"
-            android:text="意见与反馈"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="18dip"
-            android:src="@drawable/extends_icon" />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/miao_bian10"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/suggestionLayout"
-        android:background="#afb3b2"
-        android:text="" />
-    <!--
-**
-***
-   关于冒泡
-***
-**
--->
-    <RelativeLayout
-        android:id="@+id/aboutPopLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:layout_below="@+id/miao_bian10"
-        android:background="#ffffff">
-
-        <TextView
-            android:id="@+id/aboutPopLayout_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="17dip"
-            android:text="关于Pop"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="18dip"
-            android:src="@drawable/extends_icon" />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/miao_bian11"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/aboutPopLayout"
-        android:background="#afb3b2"
-        android:text="" />
-
-
+    </ScrollView>
 </RelativeLayout>
