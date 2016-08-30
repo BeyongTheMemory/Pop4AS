@@ -6,6 +6,10 @@ import java.util.Map;
 import com.pop.R;
 import com.pop.enume.PopModelLayoutEnume;
 import com.pop.http.Communication;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.Configuration;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UploadManager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -26,6 +30,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 /**
  * @author xg
  *         6.7
@@ -36,6 +42,7 @@ public class NewPop_photo_Activity extends Activity {
     private static int RESULT_LOAD_POPCHOSE =2;
     private String imageURL;
     private TextView popText;
+    private TextView writePrivacyText;
 
     private EditText editText;
 
@@ -64,6 +71,8 @@ public class NewPop_photo_Activity extends Activity {
                 startActivityForResult(intent, RESULT_LOAD_POPCHOSE);
             }
         });
+        writePrivacyText = (TextView)findViewById(R.id.writePrivacy_text);
+        writePrivacyText.setOnClickListener(new UploadListener());
     }
 //        cancelText = (TextView) findViewById(R.id.cancel_text);
 //        cancelText.setOnClickListener(new OnClickListener() {
@@ -113,7 +122,6 @@ public class NewPop_photo_Activity extends Activity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             imageURL = picturePath;
-            System.out.println(imageURL);
             cursor.close();
 
             addImageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
@@ -123,11 +131,24 @@ public class NewPop_photo_Activity extends Activity {
         }
     }
 //
-//    private class UploadListener implements OnClickListener {
-//
-//        @Override
-//        public void onClick(View arg0) {
-//            // TODO Auto-generated method stub
+    private class UploadListener implements OnClickListener {
+
+        @Override
+        public void onClick(View arg0) {
+            // TODO Auto-generated method stub
+            UploadManager uploadManager = new UploadManager();
+            String data = imageURL;
+            String key = null;
+            String token = "dr56VGibvHi2T2sUs7t_nFI384KvdrPqjI2XeCzv:lwRw2ifXRQ3r3mQEsWzhugB-GT4=:eyJzY29wZSI6ImhlYWRpbWciLCJkZWFkbGluZSI6MTQ3MjA0OTI4Nn0=";
+            uploadManager.put(data, key, token,
+                    new UpCompletionHandler() {
+                        @Override
+                        public void complete(String key, ResponseInfo info, JSONObject res) {
+                            //res包含hash、key等信息，具体字段取决于上传策略的设置。
+                            Log.i("qiniu", key + ",\r\n " + info + ",\r\n " + res);
+                        }
+                    }, null);
+
 //            final Communication com = new Communication();
 //            final Map<String, Object> map = new HashMap<String, Object>();
 //            SharedPreferences sharedPreferences = getSharedPreferences("loacation",
@@ -153,9 +174,9 @@ public class NewPop_photo_Activity extends Activity {
 //                }
 //            }.start();
 //            NewPop_photo_Activity.this.finish();
-//        }
-//
-//    }
+        }
+
+    }
 
 //			@Override
 //			public boolean onCreateOptionsMenu(Menu menu) {

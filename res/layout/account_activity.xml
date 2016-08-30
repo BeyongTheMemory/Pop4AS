@@ -305,7 +305,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="更改"
+                        android:text="修改"
                         android:textColor="#9897bd" />
                 </LinearLayout>
 
@@ -343,7 +343,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="更改"
+                        android:text="修改"
                         android:textColor="#9897bd" />
                 </LinearLayout>
 
@@ -383,7 +383,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="更改"
+                        android:text="修改"
                         android:textColor="#9897bd" />
                 </LinearLayout>
                 <LinearLayout

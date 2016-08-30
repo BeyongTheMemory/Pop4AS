@@ -23,6 +23,16 @@ dependencies {
     compile 'me.xiaopan:switchbutton:1.2.0'
     compile 'com.android.support:support-v4:24.0.0'
     compile 'com.android.support:support-v13:24.0.0'
+    compile 'com.qiniu:qiniu-android-sdk:7.2.+'
+    //七牛
+    //压缩图片
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.6'
+    compile 'top.zibin:Luban:1.0.5'
+    //xutil
+    compile 'org.xutils:xutils:3.3.36'
+    //json
+    compile 'com.alibaba:fastjson:1.2.16'
 }
 
 android {
