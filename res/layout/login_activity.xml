@@ -51,14 +51,14 @@
         <EditText
             android:id="@+id/username_text"
             android:layout_width="wrap_content"
-            android:layout_height="70dip"
+            android:layout_height="50dip"
             android:ems="20"
             android:hint="账号:" />
 
         <EditText
             android:id="@+id/password_text"
             android:layout_width="wrap_content"
-            android:layout_height="70dip"
+            android:layout_height="50dip"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:ems="20"
@@ -96,9 +96,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="忘记密码？"
+        android:layout_marginRight="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/regist_text"
@@ -106,10 +107,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
         android:text="注    册"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/login_button"
@@ -119,9 +121,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100dp"
         android:background="@drawable/border"
-        android:text="登             录 "
+        android:text="登              录 "
         android:textColor="#ffffff"
-        android:textSize="25sp" />
+        android:textSize="15sp" />
 
 
 </RelativeLayout>

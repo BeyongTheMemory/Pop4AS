@@ -174,12 +174,7 @@ public class PersonActivity extends Activity {
     private void uploadImg(){
         //网络传输
         //构建loadui
-        final Dialog progressDialog = new Dialog(PersonActivity.this,R.style.progress_dialog);
-        progressDialog.setContentView(R.layout.dialog);
-        progressDialog.setCancelable(true);
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        TextView msg = (TextView) progressDialog.findViewById(R.id.id_tv_loadingmsg);
-        msg.setText("头像上传中...");
+
         //压缩
         Luban.get(this)
                 .load(imgFile)                     //传人要压缩的图片
@@ -189,7 +184,6 @@ public class PersonActivity extends Activity {
                     @Override
                     public void onStart() {
                         //TODO 压缩开始前调用，可以在方法内启动 loading UI
-                        progressDialog.show();
                     }
                     @Override
                     public void onSuccess(File file) {
@@ -205,7 +199,6 @@ public class PersonActivity extends Activity {
                                     public void complete(String key, ResponseInfo info, JSONObject res) {
                                         //res包含hash、key等信息，具体字段取决于上传策略的设置。
                                         Log.i("qiniu", key + ",\r\n " + info + ",\r\n " + res);
-                                        progressDialog.dismiss();
                                     }
                                 }, null);
 
@@ -215,7 +208,6 @@ public class PersonActivity extends Activity {
                     @Override
                     public void onError(Throwable e) {
                         //TODO 当压缩过去出现问题时调用
-                        progressDialog.dismiss();
                     }
                 }).launch();    //启动压缩
     }

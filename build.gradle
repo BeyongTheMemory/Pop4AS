@@ -12,6 +12,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://jitpack.io" }
+        mavenCentral()
     }
 }
 
@@ -23,6 +25,7 @@ dependencies {
     compile 'me.xiaopan:switchbutton:1.2.0'
     compile 'com.android.support:support-v4:24.0.0'
     compile 'com.android.support:support-v13:24.0.0'
+    compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.qiniu:qiniu-android-sdk:7.2.+'
     //七牛
     //压缩图片
@@ -33,10 +36,12 @@ dependencies {
     compile 'org.xutils:xutils:3.3.36'
     //json
     compile 'com.alibaba:fastjson:1.2.16'
+    //ui
+    compile 'com.github.autume:CircleProgressDialog:1.0.0'
 }
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 24
     buildToolsVersion '24.0.0'
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
@@ -44,6 +49,8 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    useLibrary 'org.apache.http.legacy'
 
 
     sourceSets {

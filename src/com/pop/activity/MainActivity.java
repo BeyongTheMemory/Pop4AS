@@ -19,10 +19,7 @@ import com.pop.show.MixContext;
 
 
 import com.pop.context.AppContext;
-import com.pop.data.DataHandler;
 import com.pop.data.DataSourceList;
-import com.pop.data.DataSourceStorage;
-import com.pop.lib.marker.Marker;
 import com.pop.lib.render.Matrix;
 import com.pop.show.DataView;
 import com.pop.lib.gui.PaintScreen;
@@ -31,12 +28,7 @@ import com.pop.menu.SatelliteMenuItem;
 import com.pop.menu.SatelliteMenu.SateliteClickedListener;
 import com.pop.R;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.SearchManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
@@ -48,15 +40,10 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.util.DisplayMetrics;
-import android.util.FloatMath;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -70,8 +57,6 @@ import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,7 +64,7 @@ import android.widget.Toast;
  * @author xg
  *6.2
  */
-public class MainActivity extends Activity implements SensorEventListener, OnTouchListener{
+public class MainActivity extends BaseActivity implements SensorEventListener, OnTouchListener{
 	private SurfaceView cameraSurfaceView; //������SurfaceView���
 	private SurfaceHolder cameraSurfaceHolder; //SurfaceView��SurfaceHolder
 	private AugmentedView augScreen;

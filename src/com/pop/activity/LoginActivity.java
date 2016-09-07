@@ -11,14 +11,13 @@ import com.pop.R;
 import com.pop.enume.ClientCode;
 import com.pop.model.UserDto;
 import com.pop.request.LoginRequest;
-import com.pop.response.user.UserDtoResponse;
+import com.pop.response.user.LoginResponse;
 import com.pop.util.CollectionUtil;
 import com.pop.util.EncryptUtil;
 import com.pop.util.IpUtil;
 import com.pop.util.UrlUtil;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,14 +38,13 @@ import org.xutils.x;
 import java.util.List;
 
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
     private Button loginButton = null;
     private TextView registText = null;
     private TextView forgetPwdText = null;
     private TextView informationText = null;
     private EditText usernameText = null;
     private EditText passwordText = null;
-    private String url = "http://1.utifpop.sinaapp.com/getAccountByUsernameAndPwd.php";
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -55,8 +53,8 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        usernameText = (EditText)findViewById(R.id.username_text);
-        passwordText = (EditText)findViewById(R.id.password_text);
+        usernameText = (EditText) findViewById(R.id.username_text);
+        passwordText = (EditText) findViewById(R.id.password_text);
 
         loginButton = (Button) findViewById(R.id.login_button);
         loginButton.setOnClickListener(new LoginButtonClick(this));
@@ -70,22 +68,14 @@ public class LoginActivity extends Activity {
                 Intent intent = new Intent();
                 intent.setClass(LoginActivity.this, RegistActivity.class);
                 LoginActivity.this.startActivity(intent);
-                //LoginActivity.this.finish();
+                LoginActivity.this.finish();
             }
 
         });
 
         //忘记密码
         forgetPwdText = (TextView) findViewById(R.id.forgetpassword_text);
-        forgetPwdText.setOnClickListener(new OnClickListener() {
-
-
-            public void onClick(View v) {
-
-
-            }
-
-        });
+        forgetPwdText.setOnClickListener(new forgetPwdClick());
 
         //信息
         informationText = (TextView) findViewById(R.id.information_text);
@@ -93,9 +83,10 @@ public class LoginActivity extends Activity {
     }
 
 
-    private class LoginButtonClick implements OnClickListener{
+    private class LoginButtonClick implements OnClickListener {
         private Context context;
-        public LoginButtonClick(Context context){
+
+        public LoginButtonClick(Context context) {
             this.context = context;
         }
 
@@ -104,23 +95,24 @@ public class LoginActivity extends Activity {
         public void onClick(View v) {
             RequestParams params = new RequestParams(UrlUtil.getLogin());
             params.setAsJsonContent(true);
-            LoginRequest loginRequest = new LoginRequest(usernameText.getText().toString(),EncryptUtil.MD5(passwordText.getText().toString()),IpUtil.getIp(context));
+            LoginRequest loginRequest = new LoginRequest(usernameText.getText().toString(), EncryptUtil.MD5(passwordText.getText().toString()), IpUtil.getIp(context));
             params.setBodyContent(JSON.toJSONString(loginRequest));
             x.http().post(params, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String result) {
-                    UserDtoResponse userDtoResponse = JSONObject.parseObject(result,UserDtoResponse.class);
-                    if(userDtoResponse.getResult() == ClientCode.SUCCESS) {
+                    LoginResponse userDtoResponse = JSONObject.parseObject(result, LoginResponse.class);
+                    if (userDtoResponse.getResult() == ClientCode.SUCCESS) {
                         //保存账户信息
-                        DbManager db = x.getDb(((MyApplication)getApplication()).getDaoConfig());
+                        DbManager db = x.getDb(((MyApplication) getApplication()).getDaoConfig());
                         try {
                             List<UserDto> userDtos = db.selector(UserDto.class).findAll();
-                            if(!CollectionUtil.isEmpty(userDtos)){
+                            if (!CollectionUtil.isEmpty(userDtos)) {
                                 //清除现有到账户信息
                                 db.delete(userDtos);
                             }
                             //保存新的账户信息
                             db.save(userDtoResponse.getUserDto());
+                            //保存session信息
                         } catch (DbException e) {
                             Toast.makeText(x.app(), e.getMessage(), Toast.LENGTH_LONG).show();
                         }
@@ -128,7 +120,7 @@ public class LoginActivity extends Activity {
                         intent.setClass(LoginActivity.this, MainActivity.class);
                         LoginActivity.this.startActivity(intent);
                         LoginActivity.this.finish();
-                    }else {
+                    } else {
                         Toast.makeText(x.app(), userDtoResponse.getErrorMsg(), Toast.LENGTH_LONG).show();
                     }
                 }
@@ -148,6 +140,15 @@ public class LoginActivity extends Activity {
 
                 }
             });
+        }
+
+    }
+
+    private class forgetPwdClick implements OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+
         }
     }
 
