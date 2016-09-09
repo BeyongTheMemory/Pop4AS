@@ -16,6 +16,7 @@ import com.pop.util.CollectionUtil;
 import com.pop.util.EncryptUtil;
 import com.pop.util.IpUtil;
 import com.pop.util.UrlUtil;
+import com.syd.oden.circleprogressdialog.core.CircleProgressDialog;
 
 
 import android.content.Context;
@@ -45,9 +46,11 @@ public class LoginActivity extends BaseActivity {
     private TextView informationText = null;
     private EditText usernameText = null;
     private EditText passwordText = null;
-
+    private CircleProgressDialog circleProgressDialog;
 
     public void onCreate(Bundle savedInstanceState) {
+        circleProgressDialog = new CircleProgressDialog(this);
+        circleProgressDialog.setText("登录中...");
         Window window = this.getWindow();
         window.requestFeature(window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
@@ -93,6 +96,7 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public void onClick(View v) {
+            circleProgressDialog.showDialog();
             RequestParams params = new RequestParams(UrlUtil.getLogin());
             params.setAsJsonContent(true);
             LoginRequest loginRequest = new LoginRequest(usernameText.getText().toString(), EncryptUtil.MD5(passwordText.getText().toString()), IpUtil.getIp(context));
@@ -123,21 +127,24 @@ public class LoginActivity extends BaseActivity {
                     } else {
                         Toast.makeText(x.app(), userDtoResponse.getErrorMsg(), Toast.LENGTH_LONG).show();
                     }
+                    circleProgressDialog.dismiss();
                 }
 
                 @Override
                 public void onError(Throwable ex, boolean isOnCallback) {
                     Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
+                    circleProgressDialog.dismiss();
                 }
 
                 @Override
                 public void onCancelled(CancelledException cex) {
                     Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
+                    circleProgressDialog.dismiss();
                 }
 
                 @Override
                 public void onFinished() {
-
+                    circleProgressDialog.dismiss();
                 }
             });
         }

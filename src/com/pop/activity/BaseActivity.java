@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.Toast;
 
+import org.xutils.DbManager;
 import org.xutils.x;
 
 import java.util.Timer;
@@ -15,6 +16,7 @@ import java.util.TimerTask;
  * Created by xugang on 16/9/7.
  */
 public abstract class BaseActivity extends Activity{
+    protected DbManager db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Window window = this.getWindow();
@@ -22,6 +24,7 @@ public abstract class BaseActivity extends Activity{
         super.onCreate(savedInstanceState);
         super.requestWindowFeature(Window.FEATURE_NO_TITLE);
         x.view().inject(this);
+        db = x.getDb(((MyApplication) getApplication()).getDaoConfig());
     }
     /**
      * 菜单、返回键响应
