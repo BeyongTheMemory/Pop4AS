@@ -37,7 +37,11 @@ dependencies {
     //json
     compile 'com.alibaba:fastjson:1.2.16'
     //ui
+    //圆形进度条
     compile 'com.github.autume:CircleProgressDialog:1.0.0'
+    //弹窗
+    compile 'com.afollestad.material-dialogs:commons:0.9.0.1'
+
 }
 
 android {

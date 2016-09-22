@@ -20,6 +20,12 @@ public class UserDto {
     private String headUrl;
     @Column(name = "introduction")
     private String introduction;
+    @Column(name = "phone")
+    private String phone;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "address")
+    private String address;
 
     public UserDto() {
     }
@@ -72,6 +78,30 @@ public class UserDto {
         this.introduction = introduction;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "UserDto{" +
@@ -81,6 +111,9 @@ public class UserDto {
                 ", name='" + name + '\'' +
                 ", headUrl='" + headUrl + '\'' +
                 ", introduction='" + introduction + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 }

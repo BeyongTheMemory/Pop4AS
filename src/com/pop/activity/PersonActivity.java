@@ -19,6 +19,7 @@ import com.qiniu.android.storage.UploadManager;
 import com.syd.oden.circleprogressdialog.core.CircleProgressDialog;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.xutils.common.Callback;
 import org.xutils.ex.DbException;
 import org.xutils.http.RequestParams;
@@ -72,8 +74,8 @@ public class PersonActivity extends BaseActivity {
     private LinkedBlockingQueue<String> linkedBlockingQueue;//转移token
 
 
-    private Handler handler=new Handler(){
-        public void handleMessage(Message msg){
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
             switch (msg.arg1) {
                 case MsgType.SUCCESS:
                     circleProgressDialog.dismiss();
@@ -116,17 +118,6 @@ public class PersonActivity extends BaseActivity {
             }
 
         });
-        signatureText.setOnFocusChangeListener(new android.view.View.
-                OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    // 得到焦点时弹出提示
-                } else {
-                    // 失去焦点时上传信息
-                }
-            }
-        });
 
         RelativeLayout accountLayout = (RelativeLayout) findViewById(R.id.account_layout);
         accountLayout.setOnClickListener(new OnClickListener() {
@@ -143,20 +134,25 @@ public class PersonActivity extends BaseActivity {
 
     private void init() {
         try {
-             userDto = db.selector(UserDto.class).findFirst();
+            userDto = db.selector(UserDto.class).findFirst();
             if (userDto != null) {
                 usernameTextView.setText(userDto.getName());
                 if (StringUtil.isNotEmpty(userDto.getIntroduction())) {
                     signatureText.setText(userDto.getIntroduction());
                 }
                 if (StringUtil.isNotEmpty(userDto.getHeadUrl())) {
+                    Resources res = getResources();
+                    Drawable drawable = res.getDrawable(R.drawable.default_head);
                     ImageOptions imageOptions = new ImageOptions.Builder()
                             .setIgnoreGif(false)
                             // 如果使用本地文件url, 添加这个设置可以在本地文件更新后刷新立即生效.
                             //.setUseMemCache(false)
-                            .setImageScaleType(ImageView.ScaleType.CENTER).build();
+                            .setLoadingDrawable(drawable)
+                            .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                            .setPlaceholderScaleType(ImageView.ScaleType.CENTER_CROP)
+                            .build();
 
-                    x.image().bind(headPhotoImage, getIntent().getStringExtra("url"), imageOptions);
+                    x.image().bind(headPhotoImage, userDto.getHeadUrl(), imageOptions);
                 }
             }
         } catch (DbException e) {
@@ -204,6 +200,7 @@ public class PersonActivity extends BaseActivity {
             new Thread(uploadImgThread).start();
         }
     }
+
     private class UploadImgThread implements Runnable {
         public void run() {
             //压缩
@@ -237,16 +234,22 @@ public class PersonActivity extends BaseActivity {
                                                     //res包含hash、key等信息，具体字段取决于上传策略的设置。
                                                     Log.i("qiniu", key + ",\r\n " + info + ",\r\n " + res);
                                                     //更新头像地址
-                                                    updateHead(key);
+                                                    String url = "";
+                                                    try {
+                                                        url = res.getString("hash");
+                                                    } catch (JSONException e) {
+                                                        sendEroMsg();
+                                                        e.printStackTrace();
+                                                    }
+                                                    updateHead(url);
 
                                                 }
                                             }, null);
-                                }else {
-                                    Message msgMessage=new Message();
-                                    msgMessage.arg1=MsgType.FALI;
-                                    handler.sendMessage(msgMessage);
+                                } else {
+                                    sendEroMsg();
                                 }
                             } catch (InterruptedException e) {
+                                sendEroMsg();
                                 e.printStackTrace();
                             }
 
@@ -260,6 +263,8 @@ public class PersonActivity extends BaseActivity {
                                 String token = linkedBlockingQueue.take();
                             } catch (InterruptedException e2) {
                                 e2.printStackTrace();
+                            }finally {
+                                sendEroMsg();
                             }
                         }
                     }).launch();    //启动压缩
@@ -280,6 +285,7 @@ public class PersonActivity extends BaseActivity {
                             Toast.makeText(x.app(), tokenResponse.getErrorMsg(), Toast.LENGTH_LONG).show();
                         }
                     } catch (InterruptedException e) {
+                        sendEroMsg();
                         e.printStackTrace();
                     }
                 }
@@ -311,7 +317,7 @@ public class PersonActivity extends BaseActivity {
         }
 
 
-        private void updateHead(String url) {
+        private void updateHead(final String url) {
             RequestParams params = new RequestParams(UrlUtil.getUploadHead(url));
             params.setAsJsonContent(true);
             x.http().post(params, new Callback.CommonCallback<String>() {
@@ -319,36 +325,34 @@ public class PersonActivity extends BaseActivity {
                 public void onSuccess(String result) {
                     //更新本地缓存
                     try {
-                        UrlResponse urlResponse = JSONObject.parseObject(result,UrlResponse.class);
-                        if(urlResponse.getResult() == ClientCode.SUCCESS) {
-                            Toast.makeText(x.app(), userDto.getHeadUrl(), Toast.LENGTH_LONG).show();
+                        UrlResponse urlResponse = JSONObject.parseObject(result, UrlResponse.class);
+                        if (urlResponse.getResult() == ClientCode.SUCCESS) {
+                            userDto.setHeadUrl(urlResponse.getUrl());
                             db.update(userDto);
-                            userDto = db.selector(UserDto.class).findFirst();
-                            Toast.makeText(x.app(), userDto.getHeadUrl(), Toast.LENGTH_LONG).show();
-                        }else {
+                        } else {
                             Toast.makeText(x.app(), urlResponse.getErrorMsg(), Toast.LENGTH_LONG).show();
                         }
 
                     } catch (DbException e) {
                         e.printStackTrace();
                     }
-                    Message msgMessage=new Message();
-                    msgMessage.arg1=MsgType.SUCCESS;
+                    Message msgMessage = new Message();
+                    msgMessage.arg1 = MsgType.SUCCESS;
                     handler.sendMessage(msgMessage);
                 }
 
                 @Override
                 public void onError(Throwable ex, boolean isOnCallback) {
                     Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
-                    Message msgMessage=new Message();
-                    msgMessage.arg1=MsgType.FALI;
+                    Message msgMessage = new Message();
+                    msgMessage.arg1 = MsgType.FALI;
                     handler.sendMessage(msgMessage);
                 }
 
                 @Override
                 public void onCancelled(CancelledException cex) {
-                    Message msgMessage=new Message();
-                    msgMessage.arg1=MsgType.FALI;
+                    Message msgMessage = new Message();
+                    msgMessage.arg1 = MsgType.FALI;
                     handler.sendMessage(msgMessage);
                     Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
                 }
@@ -360,6 +364,11 @@ public class PersonActivity extends BaseActivity {
         }
     }
 
+    private void sendEroMsg(){
+        Message msgMessage = new Message();
+        msgMessage.arg1 = MsgType.FALI;
+        handler.sendMessage(msgMessage);
+    }
 
 
 

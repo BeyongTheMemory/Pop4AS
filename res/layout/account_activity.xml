@@ -53,37 +53,37 @@
             android:layout_marginRight="5dp"
             android:orientation="vertical" >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:orientation="horizontal" >
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:orientation="horizontal" >-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="13dp"
-                    android:text="等级  :"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:layout_marginTop="13dp"-->
+                    <!--android:text="等级  :"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textSize="15sp" />-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="13dp"
-                    android:src="@drawable/ic_user_lv0" />
+                <!--<ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:layout_marginTop="13dp"-->
+                    <!--android:src="@drawable/ic_user_lv0" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="13dp"
-                    android:text="积分  :  0"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginTop="13dp"-->
+                    <!--android:text="积分  :  0"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textSize="15sp" />-->
+            <!--</LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -97,26 +97,26 @@
                 android:layout_weight="1"
                 android:orientation="vertical" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:orientation="horizontal" >
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="55dp"-->
+                    <!--android:orientation="horizontal" >-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:text="当前成长值      : 0" />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center_vertical"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:text="当前成长值      : 0" />-->
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:background="@drawable/button_more"
-                        android:text="如何升级？"
-                        android:textColor="#9897bd" />
-                </LinearLayout>
+                    <!--<Button-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center_vertical"-->
+                        <!--android:background="@drawable/button_more"-->
+                        <!--android:text="如何升级？"-->
+                        <!--android:textColor="#9897bd" />-->
+                <!--</LinearLayout>-->
 
 
 
@@ -128,30 +128,30 @@
                     android:background="@color/shallowgray" >
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/linearlayout_myreward"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@drawable/selector_more"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp" >
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/linearlayout_myreward"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="55dp"-->
+                    <!--android:background="@drawable/selector_more"-->
+                    <!--android:paddingLeft="10dp"-->
+                    <!--android:paddingRight="10dp" >-->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="5dp"
-                        android:src="@drawable/user_admin_user_reward" />
+                    <!--<ImageView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center_vertical"-->
+                        <!--android:layout_margin="5dp"-->
+                        <!--android:src="@drawable/user_admin_user_reward" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="left|center_vertical"
-                        android:text="我的奖励"
-                        android:textColor="@color/black"
-                        android:textSize="15dp" />
-                </LinearLayout>
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:gravity="left|center_vertical"-->
+                        <!--android:text="我的奖励"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="15dp" />-->
+                <!--</LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -176,7 +176,7 @@
                         android:src="@drawable/user_admin_name" />
 
                     <TextView
-                        android:id="@+id/textview_amendusername"
+                        android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -188,6 +188,7 @@
                         android:textSize="15dp" />
 
                     <TextView
+                        android:id="@+id/modify_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -218,7 +219,7 @@
                         android:src="@drawable/user_admin_sign" />
 
                     <TextView
-                        android:id="@+id/textview_sign"
+                        android:id="@+id/tv_sign"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -230,6 +231,7 @@
                         android:textSize="15dp" />
 
                     <TextView
+                        android:id="@+id/modify_sign"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -261,11 +263,12 @@
                         android:src="@drawable/user_admin_modify_password" />
 
                     <TextView
+                        android:id="@+id/modify_pwd"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:gravity="left|center_vertical"
-                        android:text="修改用户密码"
+                        android:text="修改密码"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
                 </LinearLayout>
@@ -293,16 +296,18 @@
                         android:src="@drawable/user_admin_bind_phone" />
 
                     <TextView
+                        android:id="@+id/tv_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="55dp"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
-                        android:text="已绑定手机号 155****2433"
+                        android:text="未绑定"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
 
                     <TextView
+                        android:id="@+id/modify_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="修改"
@@ -331,16 +336,18 @@
                         android:src="@drawable/user_admin_email" />
 
                     <TextView
+                        android:id="@+id/tv_email"
                         android:layout_width="wrap_content"
                         android:layout_height="55dp"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
-                        android:text="已绑定邮箱 4965***@qq.com"
+                        android:text="未绑定"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
 
                     <TextView
+                        android:id="@+id/modify_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="修改"
@@ -354,38 +361,39 @@
                     android:layout_height="1dp"
                     android:background="@color/shallowgray" >
                 </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linearlayout_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@drawable/selector_more"
-                    android:orientation="horizontal"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp" >
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/linearlayout_address"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="55dp"-->
+                    <!--android:background="@drawable/selector_more"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:paddingLeft="10dp"-->
+                    <!--android:paddingRight="10dp" >-->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="5dp"
-                        android:src="@drawable/user_admin_address" />
+                    <!--<ImageView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center_vertical"-->
+                        <!--android:layout_margin="5dp"-->
+                        <!--android:src="@drawable/user_admin_address" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="55dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:gravity="left|center_vertical"
-                        android:text="浙江省杭州市"
-                        android:textColor="@color/black"
-                        android:textSize="15dp" />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="55dp"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="left|center_vertical"-->
+                        <!--android:text="未设置"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="15dp" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="修改"
-                        android:textColor="#9897bd" />
-                </LinearLayout>
+                    <!--<TextView-->
+                        <!--android:id="@+id/modify_ads"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="修改"-->
+                        <!--android:textColor="#9897bd" />-->
+                <!--</LinearLayout>-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"

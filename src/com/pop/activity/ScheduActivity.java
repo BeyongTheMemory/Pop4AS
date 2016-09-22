@@ -26,7 +26,7 @@ public class ScheduActivity extends Activity {
         
         ImageView mImageView = (ImageView)findViewById(R.id.welcomimageView1);
         AlphaAnimation mAlphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        mAlphaAnimation.setDuration(3000);
+        mAlphaAnimation.setDuration(5000);//持续5秒还无法完成登陆的话跳到登陆界面
         mImageView.setAnimation(mAlphaAnimation);
         
         mAlphaAnimation.setAnimationListener(new AnimationListener() {
