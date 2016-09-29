@@ -32,7 +32,7 @@ public class ImageMarker extends PluginMarker{
 //    public static final String jindian = "jindian";
 //    public static final String shangye = "shangye";
     private long popid;
-	public ImageMarker(int id, String title, double latitude, double longitude,
+	public ImageMarker(long id, String title, double latitude, double longitude,
 			double altitude, String URL, int type, int color) {
 		super(id, title, latitude, longitude, altitude, URL, type, color);
 		this.popid = id;

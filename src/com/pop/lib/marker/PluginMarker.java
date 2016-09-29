@@ -45,7 +45,7 @@ public abstract class PluginMarker implements Marker{
 	public Label txtLab = new Label();
 	protected TextObj textBlock;
 	
-	public PluginMarker(int id, String title, double latitude, double longitude, double altitude, String link, int type, int colour) {
+	public PluginMarker(long id, String title, double latitude, double longitude, double altitude, String link, int type, int colour) {
 		super();
 
 		this.active = true;
@@ -203,6 +203,6 @@ public abstract class PluginMarker implements Marker{
 	public void setExtras(String name, PrimitiveProperty primitiveProperty){
 		//can be overriden
 	}
-	
+
 
 }

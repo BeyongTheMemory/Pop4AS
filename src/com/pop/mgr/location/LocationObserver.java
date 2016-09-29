@@ -44,7 +44,6 @@ class LocationObserver implements LocationListener {
 						+ location.getAccuracy());
 		try {
 			//addWalkingPathPosition(location);
-			//λ�øı�ʱ����ͣ���к�̨��������
 			deleteAllDownloadActivity();
 			Log.v(MixContext.TAG, "Location Changed: " + location.getProvider()
 							+ " lat: " + location.getLatitude() + " lon: "

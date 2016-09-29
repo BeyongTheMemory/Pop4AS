@@ -48,6 +48,15 @@ public enum PopModelLayoutEnume implements Serializable{
         return COLOR;
     }
 
+    public static int getType(String name){
+        for (PopModelLayoutEnume c : PopModelLayoutEnume.values()) {
+            if (c.name == name) {
+                return c.type;
+            }
+        }
+        return COLOR.type;
+    }
+
 
     public int getType() {
         return type;

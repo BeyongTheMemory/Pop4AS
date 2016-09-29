@@ -4,161 +4,128 @@ package com.pop.mgr.downloader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.pop.enume.ClientCode;
 import com.pop.enume.PopModelEnume;
 import com.pop.enume.PopTypeEnum;
+import com.pop.model.PopDto;
+import com.pop.request.GetPopRequest;
+import com.pop.response.pop.PopResponse;
 import com.pop.show.MixContext;
-import com.pop.R;
-import com.pop.activity.MainActivity;
-import com.pop.http.HttpTools;
-import com.pop.http.JsonTools;
 import com.pop.lib.marker.Marker;
 import com.pop.lib.reality.PhysicalPlace;
 import com.pop.lib.marker.ImageMarker;
+import com.pop.util.CollectionUtil;
+import com.pop.util.UrlUtil;
 
-
-
-
-
-
-
-
-
-
-
-import com.pop.model.Pop;
-import com.pop.model.PopList;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
-import android.location.Location;
-import android.util.Log;
+import android.widget.Toast;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
+
 /**
  */
-public class DownloadMgrImpl implements Runnable,DownloadManager {
+public class DownloadMgrImpl implements Runnable, DownloadManager {
 
 
-	private MixContext ctx;
-	private DownloadManagerState state = DownloadManagerState.Confused;
-	//private LinkedBlockingQueue<ManagedDownloadRequest> todoList = new LinkedBlockingQueue<ManagedDownloadRequest>();//ʹ���̰߳�ȫ����������
-	private ConcurrentHashMap<String, DownloadResult> doneList = new ConcurrentHashMap<String, DownloadResult>();//�̰߳�ȫ��hashMap
-	private List<Marker> markers;
-	private boolean tag =true;
+    private MixContext ctx;
+    private DownloadManagerState state = DownloadManagerState.Confused;
+    //private LinkedBlockingQueue<ManagedDownloadRequest> todoList = new LinkedBlockingQueue<ManagedDownloadRequest>();//ʹ���̰߳�ȫ����������
+    private ConcurrentHashMap<String, DownloadResult> doneList = new ConcurrentHashMap<String, DownloadResult>();//�̰߳�ȫ��hashMap
+    private List<Marker> markers;
+    private boolean tag = true;
+    private boolean getPopResult = false;
+    double olatitude;
+    double olongitude;
+    double altitude;
 
-	public DownloadMgrImpl(MixContext ctx) {
-		if (ctx == null) {
-			throw new IllegalArgumentException("Mix Context IS NULL");
-		}
-		this.ctx = ctx;
-		state=DownloadManagerState.OffLine;
-	}
+    public DownloadMgrImpl(MixContext ctx) {
+        if (ctx == null) {
+            throw new IllegalArgumentException("Mix Context IS NULL");
+        }
+        this.ctx = ctx;
+        state = DownloadManagerState.OffLine;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.mixare.mgr.downloader.DownloadManager#run()
-	 */
-	public void run() {
-		if(tag){
-			state=DownloadManagerState.OnLine;
-		double olatitude = ctx.getActualMixView().getDataView().getCurFix().getLatitude();
-		  double olongitude = ctx.getActualMixView().getDataView().getCurFix().getLongitude();
-		  double altitude = ctx.getActualMixView().getDataView().getCurFix().getAltitude();
-		  SharedPreferences mySharedPreferences = ctx.getActualMixView().getSharedPreferences("loacation", 
-				  Activity.MODE_PRIVATE); 
-		  SharedPreferences.Editor editor = mySharedPreferences.edit(); 
-		  editor.putString("latitude", olatitude+ ""); 
-		  editor.putString("longitude", olongitude+""); 
-		  editor.putString("altitude", altitude+""); 
-		  editor.commit(); 
-		  markers = new ArrayList<Marker>();
-			Random random = new Random();
-		  for(int i =1;i<13;i++){
-			ImageMarker imge = new ImageMarker(i,null,olatitude+ random.nextFloat()/100000,olongitude+random.nextFloat()/100000,random.nextDouble(),null,1,-1);
-			imge.setDistance(PhysicalPlace.distanceBetween(olatitude, olongitude, imge.getLatitude(),imge.getLongitude()));
-			imge.setBitmap(BitmapFactory.decodeResource(ctx.getActualMixView().getResources(), PopModelEnume.getImg(i)));
-			imge.setType(PopTypeEnum.WORDS+"");
-			imge.setPopid(i);
-			markers.add(imge);
-		  }
-//				HttpTools http = new HttpTools();
-//				List<NameValuePair> params = new ArrayList<NameValuePair>();
-//				params.add(new BasicNameValuePair("latitude",olatitude+""));
-//				params.add(new BasicNameValuePair("logitude", olongitude+""));
-//				params.add(new BasicNameValuePair("range", 1+""));
-//				//Log.v("ok","caonima");
-//				Log.v("aacc","aacc:"+http.sendPostResult("http://121.40.120.82:8080/PopService/SearchPopServlet", params));
-//				String popString = http.sendPostResult("http://121.40.120.82:8080/PopService/SearchPopServlet", params);
-//				PopList popList = JsonTools.getPopFromResult(popString);			
-//			    List<Pop> adPops = popList.getAdList();
-//			   List<Pop> personPops = popList.getPersonalList();
-//			  List<Pop> pubPops = popList.getPublicList();
-//			   List<Pop> sightPops = popList.getSightList();
-//			if(adPops.size() > 0){
-//				for(int i =0;i< adPops.size();i++){
-//					Pop personPop = adPops.get(i); 
-//					ImageMarker imge = new ImageMarker(personPop.getId(),null,personPop.getLatitude(),personPop.getLongitude(),personPop.getHeight(),null,1,-1);
-//					imge.setDistance(PhysicalPlace.distanceBetween(olatitude, olongitude, imge.getLatitude(),imge.getLongitude()));
-//					imge.setBitmap(BitmapFactory.decodeResource(ctx.getActualMixView().getResources(),R.drawable.shangye));
-//					imge.setType(ImageMarker.shangye);
-//					imge.setPopid(personPop.getId());
-//					markers.add(imge);
-//				}
-//			}
-//			if(personPops.size() > 0){
-//				Log.v("aacc", "aacctianjia!!:tianjia!!");
-//				for(int i =0;i< personPops.size();i++){
-//					Pop personPop = personPops.get(i); 
-//					ImageMarker imge = new ImageMarker(personPop.getId(),null,personPop.getLatitude(),personPop.getLongitude(),personPop.getHeight(),null,1,-1);
-//					imge.setDistance(PhysicalPlace.distanceBetween(olatitude, olongitude, imge.getLatitude(),imge.getLongitude()));
-//					imge.setBitmap(BitmapFactory.decodeResource(ctx.getActualMixView().getResources(),R.drawable.geren));
-//					imge.setType(ImageMarker.geren);
-//					imge.setPopid(personPop.getId());
-//					markers.add(imge);
-//				}
-//			}
-//			if(pubPops.size() > 0){
-//				for(int i =0;i< pubPops.size();i++){
-//					Pop personPop = pubPops.get(i); 
-//					ImageMarker imge = new ImageMarker(personPop.getId(),null,personPop.getLatitude(),personPop.getLongitude(),personPop.getHeight(),null,1,-1);
-//					imge.setDistance(PhysicalPlace.distanceBetween(olatitude, olongitude, imge.getLatitude(),imge.getLongitude()));
-//					imge.setBitmap(BitmapFactory.decodeResource(ctx.getActualMixView().getResources(),R.drawable.gonggongxinxi));
-//					imge.setType(ImageMarker.gonggong);
-//					imge.setPopid(personPop.getId());
-//					markers.add(imge);
-//				}
-//			}
-//			if(sightPops.size() > 0){
-//				for(int i =0;i< sightPops.size();i++){
-//					Pop personPop = sightPops.get(i); 
-//					ImageMarker imge = new ImageMarker(personPop.getId(),null,personPop.getLatitude(),personPop.getLongitude(),personPop.getHeight(),null,1,-1);
-//					imge.setDistance(PhysicalPlace.distanceBetween(olatitude, olongitude, imge.getLatitude(),imge.getLongitude()));
-//					imge.setBitmap(BitmapFactory.decodeResource(ctx.getActualMixView().getResources(),R.drawable.jindian));
-//					imge.setType(ImageMarker.jindian);
-//					imge.setPopid(personPop.getId());
-//					markers.add(imge);
-//				}
-//				
-//			}
-			//new
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.mixare.mgr.downloader.DownloadManager#run()
+     */
+    public void run() {
+        if (tag) {
+            state = DownloadManagerState.OnLine;
+            olatitude = ctx.getActualMixView().getDataView().getCurFix().getLatitude();
+            olongitude = ctx.getActualMixView().getDataView().getCurFix().getLongitude();
+            getPopResult = false;
+            altitude = ctx.getActualMixView().getDataView().getCurFix().getAltitude();
+            SharedPreferences mySharedPreferences = ctx.getActualMixView().getSharedPreferences("loacation",
+                    Activity.MODE_PRIVATE);
+            SharedPreferences.Editor editor = mySharedPreferences.edit();
+            editor.putString("latitude", olatitude + "");
+            editor.putString("longitude", olongitude + "");
+            editor.putString("altitude", altitude + "");
+            editor.commit();
+            //发起请求获取pop数据
+            RequestParams params = new RequestParams(UrlUtil.getPop());
+            params.setAsJsonContent(true);
+            GetPopRequest getPopRequest = new GetPopRequest(olatitude, olongitude);
+            params.setBodyContent(JSON.toJSONString(getPopRequest));
+            x.http().post(params, new Callback.CommonCallback<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    PopResponse popResponse = JSONObject.parseObject(result, PopResponse.class);
+                    if (popResponse.getResult() == ClientCode.SUCCESS) {
+                        //获取pop信息
+                        List<PopDto> popDtos = popResponse.getPopDtoList();
+                        if (!CollectionUtil.isEmpty(popDtos)) {
+                            markers = new ArrayList<>(popDtos.size());
+                            for (PopDto popDto : popDtos) {
+                                ImageMarker imge = new ImageMarker(popDto.getId(), null, popDto.getLatitude(), popDto.getLongitude(), popDto.getAltitude(), null, 1, -1);
+                                imge.setDistance(PhysicalPlace.distanceBetween(olatitude, olongitude, imge.getLatitude(), imge.getLongitude()));
+                                imge.setBitmap(BitmapFactory.decodeResource(ctx.getActualMixView().getResources(), PopModelEnume.getImg(popDto.getModel())));
+                                imge.setType(PopTypeEnum.WORDS + "");
+                                markers.add(imge);
+                            }
+                        }
+                        getPopResult = true;
 
-			tag=false;
-		}
-	}
+                    } else {
+                        Toast.makeText(x.app(), popResponse.getErrorMsg(), Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+                    Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+                    Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onFinished() {
+                }
+            });
+
+
+            tag = false;
+        }
+    }
 
 	
 	/*
-	 * (non-Javadoc)
+     * (non-Javadoc)
 	 * ����������������
 	 * @see org.mixare.mgr.downloader.DownloadManager#purgeLists()
 	 */
@@ -168,48 +135,48 @@ public class DownloadMgrImpl implements Runnable,DownloadManager {
 //	}
 
 	/*
-	 * (non-Javadoc)
+     * (non-Javadoc)
 	 *��URL���䵽������Եõ���Ӧ��Ϣ��URL��ID
 	 * @see
 	 * org.mixare.mgr.downloader.DownloadManager#submitJob(org.mixare.mgr.downloader
 	 * .DownloadRequest)
 	 */
-	
 
-	/*
-	 * (non-Javadoc)
-	 * �õ����һ�����ؽ��
-	 * @see
-	 * org.mixare.mgr.downloader.DownloadManager#getReqResult(java.lang.String)
-	 */
-	public DownloadResult getReqResult(String jobId) {
-		DownloadResult result = doneList.get(jobId);
-		doneList.remove(jobId);
-		return result;
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.mixare.mgr.downloader.DownloadManager#getNextResult()
-	 */
-	public synchronized DownloadResult getNextResult() {
-		DownloadResult result = null;
-		if (!doneList.isEmpty()) {
-			String nextId = doneList.keySet().iterator().next();
-			result = doneList.get(nextId);
-			doneList.remove(nextId);
-		}
-		return result;
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.mixare.mgr.downloader.DownloadManager#getResultSize()
-	 */
-	public int getResultSize(){
-		return doneList.size();
-	}
+    /*
+     * (non-Javadoc)
+     * �õ����һ�����ؽ��
+     * @see
+     * org.mixare.mgr.downloader.DownloadManager#getReqResult(java.lang.String)
+     */
+    public DownloadResult getReqResult(String jobId) {
+        DownloadResult result = doneList.get(jobId);
+        doneList.remove(jobId);
+        return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.mixare.mgr.downloader.DownloadManager#getNextResult()
+     */
+    public synchronized DownloadResult getNextResult() {
+        DownloadResult result = null;
+        if (!doneList.isEmpty()) {
+            String nextId = doneList.keySet().iterator().next();
+            result = doneList.get(nextId);
+            doneList.remove(nextId);
+        }
+        return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.mixare.mgr.downloader.DownloadManager#getResultSize()
+     */
+    public int getResultSize() {
+        return doneList.size();
+    }
 
 	/*
 	 * (non-Javadoc)
@@ -225,35 +192,35 @@ public class DownloadMgrImpl implements Runnable,DownloadManager {
 	 * 
 	 * @see org.mixare.mgr.downloader.DownloadManager#goOnline()
 	 */
-	
-
-	public void switchOff() {
-		tag=false;
-	}
-
-	@Override
-	public DownloadManagerState getState() {
-		return state;
-	}
-
-	public List<Marker> getMarkers() {
-		return markers;
-	}
-
-	public void setMarkers(List<Marker> markers) {
-		this.markers = markers;
-	}
-
-	public boolean isTag() {
-		return tag;
-	}
-
-	public void setTag(boolean tag) {
-		this.tag = tag;
-	}
 
 
+    public void switchOff() {
+        tag = false;
+    }
 
-	
+    @Override
+    public DownloadManagerState getState() {
+        return state;
+    }
 
+    public List<Marker> getMarkers() {
+        return markers;
+    }
+
+    public void setMarkers(List<Marker> markers) {
+        this.markers = markers;
+    }
+
+    public boolean isTag() {
+        return tag;
+    }
+
+    public void setTag(boolean tag) {
+        this.tag = tag;
+    }
+
+
+    public boolean isGetPopResult() {
+        return getPopResult;
+    }
 }

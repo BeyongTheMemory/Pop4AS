@@ -6,6 +6,8 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.pop.show.MixContext;
+
 import org.xutils.DbManager;
 import org.xutils.x;
 

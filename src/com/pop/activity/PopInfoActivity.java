@@ -26,25 +26,17 @@ import com.pop.listview.MyListView.OnRefreshListener;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.R.integer;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class getPopActivity extends Activity {
+public class PopInfoActivity extends Activity {
 
 	//private Button downloadBtn;
 	private ImageView imageView;
@@ -68,7 +60,7 @@ public class getPopActivity extends Activity {
 				id =sharedPreferences.getInt("id", 2);
 				
 		myListView = (MyListView) findViewById(R.id.myListView);
-		inflater = LayoutInflater.from(getPopActivity.this);
+		inflater = LayoutInflater.from(PopInfoActivity.this);
 		headView = inflater.inflate(R.layout.listhead, null);
 		myListView.addHeaderView(headView);
 		httpTools = new HttpTools();
@@ -208,7 +200,7 @@ public class getPopActivity extends Activity {
 			System.out.print(imageView.getDrawingCache());
 			Bitmap bitmap = Bitmap.createBitmap(imageView.getDrawingCache());
 			imageView.setDrawingCacheEnabled(false);
-			AlertImageDialog dialog = new AlertImageDialog(getPopActivity.this, bitmap);
+			AlertImageDialog dialog = new AlertImageDialog(PopInfoActivity.this, bitmap);
 			//dialog.show("2", "2");
 			dialog.show("2", id+"");
 		}
@@ -335,7 +327,7 @@ public class getPopActivity extends Activity {
 			// TODO Auto-generated method stub
 			if(myAdapter == null && result != null){
 				list = jsonToList(result);////////////////
-				myAdapter = new MyAdapter(list, getPopActivity.this);
+				myAdapter = new MyAdapter(list, PopInfoActivity.this);
 				//myListView.addHeaderView(headView);
 				myListView.setAdapter(myAdapter);
 			}else if(myAdapter != null && result != null){
@@ -371,7 +363,7 @@ public class getPopActivity extends Activity {
 			// TODO Auto-generated method stub
 			if(myAdapter == null && result != null){
 				list.addAll(jsonToList(result));////////////////
-				myAdapter = new MyAdapter(list, getPopActivity.this);
+				myAdapter = new MyAdapter(list, PopInfoActivity.this);
 				//myListView.addHeaderView(headView);
 				myListView.setAdapter(myAdapter);
 			}else if(myAdapter != null && result != null){

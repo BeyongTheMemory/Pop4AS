@@ -1,13 +1,6 @@
 
 package com.pop.show;
 
-import static android.view.KeyEvent.KEYCODE_CAMERA;
-import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
-import static android.view.KeyEvent.KEYCODE_DPAD_DOWN;
-import static android.view.KeyEvent.KEYCODE_DPAD_LEFT;
-import static android.view.KeyEvent.KEYCODE_DPAD_RIGHT;
-import static android.view.KeyEvent.KEYCODE_DPAD_UP;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,24 +9,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 
-
-
-
-
-
-
-import com.pop.activity.AboutActivity;
 //import com.pop.activity.BusnisePopActivity;
-import com.pop.activity.OptionActivity;
-import com.pop.activity.getPopActivity;
-import com.pop.context.AppContext;
+import com.pop.activity.PopInfoActivity;
 import com.pop.data.DataHandler;
-import com.pop.data.DataSource;
 import com.pop.enume.PopTypeEnum;
 import com.pop.gui.RadarPoints;
 import com.pop.lib.MixUtils;
@@ -41,13 +23,9 @@ import com.pop.lib.gui.PaintScreen;
 import com.pop.lib.gui.ScreenLine;
 import com.pop.lib.marker.ImageMarker;
 import com.pop.lib.marker.Marker;
-import com.pop.lib.marker.PluginMarker;
 import com.pop.lib.render.Camera;
 import com.pop.lib.render.MixVector;
-import com.pop.mgr.downloader.DownloadManager;
 import com.pop.mgr.downloader.DownloadMgrImpl;
-import com.pop.mgr.downloader.DownloadRequest;
-import com.pop.mgr.downloader.DownloadResult;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -55,8 +33,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.location.Location;
-import android.util.Log;
-import android.view.Display;
 import android.widget.Toast;
 
 /**
@@ -217,7 +193,7 @@ public class DataView {
 			tag = false;
 			DownloadMgrImpl dm = (DownloadMgrImpl) mixContext.getDownloadManager();
 			 executor.execute(dm);
-			while(dm.isTag()){//监测线程完成 这里可以用信号量或者其他东西改写,这样忙等没意义
+			while(dm.isGetPopResult()){//监测线程完成 这里可以用信号量或者其他东西改写,这样忙等没意义
 			}
 		
 				retry = 0;
@@ -451,7 +427,7 @@ public class DataView {
 						  editor.commit(); 
 //					 Intent intent = new Intent();
 //	   			     intent.setClass(this.getContext(),getPopActivity.class);
-	   			          Intent intent = new Intent(this.getContext(), getPopActivity.class);  
+	   			          Intent intent = new Intent(this.getContext(), PopInfoActivity.class);
 	   			          this.getContext().startActivity(intent);  
 	   			          this.getContext().startActivity(intent);
 	   			          sureF = true;

@@ -83,7 +83,7 @@
             android:label="@string/app_name"></activity>
 
         <activity
-            android:name="com.pop.activity.NewPop_photo_Activity"
+            android:name=".activity.NewPopPhotoActivity"
             android:label="@string/app_name"></activity>
 
         <activity
@@ -133,7 +133,14 @@
 
 
         <activity
-            android:name="com.pop.activity.getPopActivity"
+            android:name="com.pop.activity.ModifyPwdActivity"
+            android:label="@string/app_name"></activity>
+
+
+
+
+        <activity
+            android:name=".activity.PopInfoActivity"
             android:label="@string/app_name"
             android:theme="@style/MyDialogTopRight"></activity>
 

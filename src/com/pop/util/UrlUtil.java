@@ -17,6 +17,10 @@ public class UrlUtil {
         return ip + "pop-control/user/uploadHead?url=" + url;
     }
 
+    public static String getUpdateUser() {
+        return ip + "pop-control/user/updateUser";
+    }
+
 
     public static String getLogin() {
         return ip + "pop-control/user/login";
@@ -24,6 +28,18 @@ public class UrlUtil {
 
     public static String getRegist(){
         return ip + "pop-control/user/regist";
+    }
+
+    public static String getUpdatePwd(){
+        return ip + "pop-control/user/updatePwd";
+    }
+
+    public static String getPop(){
+        return ip + "pop-control/pop/getPop";
+    }
+
+    public static String getNewPop(){
+        return ip + "pop-control/pop/newPop";
     }
 
     public static String getTest() {

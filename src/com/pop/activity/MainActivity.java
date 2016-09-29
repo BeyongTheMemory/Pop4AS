@@ -340,6 +340,7 @@ public class MainActivity extends BaseActivity implements SensorEventListener, O
 			getMixViewData().getSearchNotificationTxt().setVisibility(View.GONE);
 			getMixViewData().setSearchNotificationTxt(null);
 		}
+
 	}
 	
 	/**
@@ -991,7 +992,7 @@ public class MainActivity extends BaseActivity implements SensorEventListener, O
 					if(id == 8){
 						isPreview=false;
 						Intent intent = new Intent();
-						intent.setClass(MainActivity.this,NewPop_photo_Activity.class);//暂时只有图文泡泡
+						intent.setClass(MainActivity.this,NewPopPhotoActivity.class);//暂时只有图文泡泡
 						MainActivity.this.startActivity(intent);
 //						MainActivity.this.onPause();
 //						MainActivity.this.finish();

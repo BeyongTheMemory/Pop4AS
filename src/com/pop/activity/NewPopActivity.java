@@ -3,7 +3,6 @@ package com.pop.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore.Images;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -52,9 +51,9 @@ public class NewPopActivity extends Activity{
 
 			
 			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.setClass(NewPopActivity.this,NewPop_photo_Activity.class);
-				NewPopActivity.this.startActivity(intent);
+//				Intent intent = new Intent();
+//				intent.setClass(NewPopActivity.this,NewPopPhotoActivity.class);
+//				NewPopActivity.this.startActivity(intent);
 				
 				
 			}
