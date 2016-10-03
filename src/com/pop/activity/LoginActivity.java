@@ -115,6 +115,7 @@ public class LoginActivity extends BaseActivity {
                                 db.delete(userDtos);
                             }
                             //保存新的账户信息
+                            userDtoResponse.getUserDto().setPassword(EncryptUtil.MD5(passwordText.getText().toString()));
                             db.save(userDtoResponse.getUserDto());
                             //保存session信息
                         } catch (DbException e) {

@@ -87,6 +87,7 @@ public class NewPopPhotoActivity extends BaseActivity {
             switch (msg.arg1) {
                 case MsgType.SUCCESS:
                     circleProgressDialog.dismiss();
+                    NewPopPhotoActivity.this.finish();
                     break;
                 case MsgType.FALI:
                     Toast.makeText(x.app(), "投放失败,请重试!", Toast.LENGTH_LONG).show();

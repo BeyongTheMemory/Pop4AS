@@ -1,0 +1,94 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp">
+        <RelativeLayout
+            android:id="@+id/personLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            >
+
+            <com.pop.activity.widget.CircleImageView
+                android:id="@+id/headPhoto_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/default_head"
+                app:border_color="#ffffff"
+                app:border_width="2dp" />
+
+            <!--性别-->
+            <!--级别-->
+
+            <TextView
+                android:id="@+id/username_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/headPhoto_image"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/headPhoto_image"
+                android:background="@null"
+                android:text="用户名"
+                android:enabled="false"
+                android:maxLength="10"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+
+
+
+            <TextView
+                android:id="@+id/signature_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/username_textView"
+                android:layout_alignLeft="@id/username_textView"
+                android:background="@null"
+                android:text="Ta很懒,什么都没留下"
+                android:enabled="false"
+                android:textColor="#000000"
+                android:singleLine="true"
+                android:maxLength="20"
+                android:textSize="16sp" />
+
+            <!--关闭按钮-->
+            <ImageButton
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/close_icon"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"/>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/popwindow"
+        >
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <!--长文本布局-->
+        </ScrollView>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

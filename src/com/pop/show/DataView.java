@@ -193,7 +193,7 @@ public class DataView {
 			tag = false;
 			DownloadMgrImpl dm = (DownloadMgrImpl) mixContext.getDownloadManager();
 			 executor.execute(dm);
-			while(dm.isGetPopResult()){//监测线程完成 这里可以用信号量或者其他东西改写,这样忙等没意义
+			while(!dm.isGetPopResult()){//监测线程完成 这里可以用信号量或者其他东西改写,这样忙等没意义
 			}
 		
 				retry = 0;
@@ -417,7 +417,7 @@ public class DataView {
 				ImageMarker pm = (ImageMarker) dataHandler.getMarker(i);
 				evtHandled = pm.fClick(evt.x, evt.y, mixContext, state);
 				if(evtHandled){
-					if(pm.getType().equals(PopTypeEnum.WORDS)){
+					if(Integer.parseInt(pm.getType()) == PopTypeEnum.word_photo_person){
 						if(sureF){
 							sureF = false;
 						 SharedPreferences mySharedPreferences = this.getContext().getSharedPreferences("pop", 

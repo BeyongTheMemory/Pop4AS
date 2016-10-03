@@ -2,13 +2,22 @@ package com.pop.util;
 
 
 
+import android.text.TextUtils;
 import android.util.Log;
 
 
+import com.alibaba.fastjson.JSONObject;
+
+import org.xutils.http.cookie.DbCookieStore;
+
 import java.io.*;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,20 +25,23 @@ import java.util.Map;
  */
 public class HttpUtils {
 
-
+    // cookie manager
+    private static final CookieManager COOKIE_MANAGER =
+            new CookieManager(DbCookieStore.INSTANCE, CookiePolicy.ACCEPT_ALL);
     /**
      * Post 请求超时时间和读取数据的超时时间均为2000ms。
      *
      * @param urlPath       post请求地址
-     * @param parameterData post请求参数
+     * @param jsonObject json请求
      * @return String json字符串，成功：code=1001，否者为其他值
      * @throws Exception 链接超市异常、参数url错误格式异常
      */
-    public static String doPost(String urlPath, String parameterData, String who, String ip) throws Exception {
+    public static String doPost(String urlPath, JSONObject jsonObject, String who, String ip) throws Exception {
 
-        if (null == urlPath || null == parameterData) { // 避免null引起的空指针异常
+        if (null == urlPath || null == jsonObject) { // 避免null引起的空指针异常
             return "";
         }
+        String jsonParam = jsonObject.toJSONString();
         URL localURL = new URL(urlPath);
         URLConnection connection = localURL.openConnection();
         HttpURLConnection httpURLConnection = (HttpURLConnection) connection;
@@ -41,10 +53,16 @@ public class HttpUtils {
         if (!StringUtil.isEmpty(ip)) {
             httpURLConnection.setRequestProperty("clientIP", ip);
         }
+        Map<String, List<String>> singleMap =
+                COOKIE_MANAGER.get(localURL.toURI(), new HashMap<String, List<String>>(0));
+        List<String> cookies = singleMap.get("Cookie");
         httpURLConnection.setRequestMethod("POST");
         httpURLConnection.setRequestProperty("Accept-Charset", "utf-8");
-        httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        httpURLConnection.setRequestProperty("Content-Length", String.valueOf(parameterData.length()));
+        httpURLConnection.setRequestProperty("Content-Type", "application/json");
+        httpURLConnection.setRequestProperty("Content-Length", String.valueOf(jsonParam.length()));
+        if (cookies != null) {
+            httpURLConnection.setRequestProperty("Cookie", TextUtils.join(";", cookies));
+        }
         httpURLConnection.setConnectTimeout(18000);
         httpURLConnection.setReadTimeout(18000);
 
@@ -59,8 +77,7 @@ public class HttpUtils {
         try {
             outputStream = httpURLConnection.getOutputStream();
             outputStreamWriter = new OutputStreamWriter(outputStream);
-
-            outputStreamWriter.write(parameterData.toString());
+            outputStreamWriter.write(jsonParam);
             outputStreamWriter.flush();
 
             if (httpURLConnection.getResponseCode() >= 300) {
@@ -100,18 +117,9 @@ public class HttpUtils {
         return resultBuffer.toString();
     }
 
-    public static String doPost(String url, Map<String, Object> params) throws Exception {
-        StringBuffer sb = new StringBuffer();
-        for (Map.Entry<String, Object> entry : params.entrySet()) {
-            sb.append(entry.getKey())
-                    .append("=")
-                    .append(entry.getValue())
-                    .append("&");
-        }
+    public static String doPost(String url, JSONObject jsonObject) throws Exception {
 
-        // no matter for the last '&' character
-
-        return doPost(url, sb.toString(), "", "");
+        return doPost(url, jsonObject, "", "");
     }
 
     /**
