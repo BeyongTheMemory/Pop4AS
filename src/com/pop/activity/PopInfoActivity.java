@@ -1,377 +1,182 @@
 package com.pop.activity;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.image.ImageOptions;
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONObject;
 import com.pop.R;
-import com.pop.downloadtest.AlertImageDialog;
-import com.pop.downloadtest.HttpTools;
-import com.pop.listview.MyAdapter;
-import com.pop.listview.MyListView;
-import com.pop.listview.MyListView.OnLoadMoreListener;
-import com.pop.listview.MyListView.OnRefreshListener;
+import com.pop.activity.widget.CircleImageView;
+import com.pop.enume.ClientCode;
+import com.pop.model.PopInfoDto;
+import com.pop.response.pop.PopInfoResponse;
+import com.pop.util.MsgType;
+import com.pop.util.StringUtil;
+import com.pop.util.UrlUtil;
+import com.syd.oden.circleprogressdialog.core.CircleProgressDialog;
 
-
-
-
-
-
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.view.LayoutInflater;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
-import android.view.View.MeasureSpec;
-import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class PopInfoActivity extends Activity {
 
-	//private Button downloadBtn;
-	private ImageView imageView;
-	private HttpTools httpTools;
-	private TextView textView;
-	private List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-	private MyListView myListView;
-	private View headView;
-	private LayoutInflater inflater;
-	private MyAdapter myAdapter = null;
-	private ImageView ivIcon;
-	private TextView username;
-	private TextView date;
-	private int id;
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.getpop_activity);
-		SharedPreferences sharedPreferences = getSharedPreferences("pop", 
-				Activity.MODE_PRIVATE); 
-				id =sharedPreferences.getInt("id", 2);
-				
-		myListView = (MyListView) findViewById(R.id.myListView);
-		inflater = LayoutInflater.from(PopInfoActivity.this);
-		headView = inflater.inflate(R.layout.listhead, null);
-		myListView.addHeaderView(headView);
-		httpTools = new HttpTools();
-		imageView = (ImageView) findViewById(R.id.image);
-		textView = (TextView) findViewById(R.id.text);
-		ivIcon = (ImageView) findViewById(R.id.ivicon);
-		username = (TextView) findViewById(R.id.username);
-		date = (TextView) findViewById(R.id.date);
-		//downloadBtn = (Button) findViewById(R.id.download);
-		loadInfo();
-		loadMessage(0);
-		myListView.setOnRefreshListener(new OnRefreshListener(){
+@ContentView(R.layout.popinfo_activity)
+public class PopInfoActivity extends BaseActivity {
+    @ViewInject(R.id.headPhoto_image)
+    private CircleImageView headPhotoImage;
 
-			@Override
-			public void onRefresh() {
-				// TODO Auto-generated method stub
-				loadMessage(0);
-			}
-			
-		});
-		myListView.setOnLoadListener(new OnLoadMoreListener() {
+    @ViewInject(R.id.sex_img)
+    private ImageView sexImg;
 
-			@Override
-			public void onLoadMore() {
-				// TODO Auto-generated method stub
-				loadMessage(1);
-			}
-			
-		});
-		//downloadBtn.setOnClickListener(new DownloadListener());
-		imageView.setOnClickListener(new AlertImageListerner());
-	}
+    @ViewInject(R.id.username_textView)
+    private TextView usernameTextView;
 
-	
-	
-//	private class DownloadListener implements OnClickListener{
-//
-//		@Override
-//		public void onClick(View v) {
-			// TODO Auto-generated method stub
-//			new Thread(){
-//				public void run(){
-////					String url = "http://10.0.2.2:8080/PopService/GetThumbnailServlet";
-////					List<NameValuePair> params = new ArrayList<NameValuePair>();
-////					params.add(new BasicNameValuePair("type", "2"));
-////					params.add(new BasicNameValuePair("id", "2"));
-////					Bitmap bitmap = httpTools.downLoadPic(url, params);
-////					System.out.println(bitmap);
-////					if (bitmap != null){
-////						Message msg = downloadHanlder.obtainMessage(1, bitmap);
-////						downloadHanlder.sendMessage(msg);
-////					} else{
-////						Message msg = downloadHanlder.obtainMessage(0);
-////						downloadHanlder.sendMessage(msg);
-////					}
-//					
-//				}
-//			}.start();
-//			new GetContentTask().execute("2", "2");
-//		}
-//		
-//	}
-	
-//	/**
-//	 * @param url
-//	 * @return
-//	 * @throws UnsupportedEncodingException 
-//	 */
-//	public Bitmap getImageFromUrl(String url, List<NameValuePair> params){
-//		Bitmap bitmap = null;
-//		//HttpGet httpRequest = new HttpGet(url);   
-//		HttpPost httpRequest = new HttpPost(url);
-//		try {
-//		    httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-//            HttpClient httpclient = new DefaultHttpClient();      
-//            HttpResponse httpResponse = httpclient.execute(httpRequest);
-//            if(httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){    
-//                HttpEntity httpEntity = httpResponse.getEntity();
-//                InputStream is = httpEntity.getContent();                   
-//                bitmap = BitmapFactory.decodeStream(is);    
-//                is.close();     
-//            }else{    
-//                 Toast.makeText(MainActivity.this, "不知道!", Toast.LENGTH_SHORT).show();
-//            }     
-//                
-//        } catch (ClientProtocolException e) {    
-//            e.printStackTrace();    
-//        } catch (IOException e) {     
-//            e.printStackTrace();    
-//        }      
-//        return bitmap;
-//	}
-	
-//	Handler downloadHanlder = new Handler(){
-//		public void handleMessage(Message msg) {
-//			System.out.println(msg.what);
-//			switch (msg.what){
-//			case 0:
-//				Toast.makeText(MainActivity.this, "����ʧ��!", Toast.LENGTH_SHORT).show();
-//				break;
-//			case 1:
-//				System.out.println("su");	
-//				imageView.setImageBitmap((Bitmap) msg.obj);
-//			}
-//		}
-//	};
-	
-	public void loadInfo(){
-		//new GetContentTask().execute("2", "2");
-		new GetContentTask().execute("2", id+"");
-	}
-	
-	private  void loadMessage(final int type){
-		switch (type) {
-		case 0:
-			//new RefreshTask().execute("0","10","2","2");
-			new RefreshTask().execute("0","10","2",id+"");
-			break;
-			
-		case 1:
-			//new LoadMoreTask().execute(String.valueOf(list.size()),"10","2","2");
-			new LoadMoreTask().execute(String.valueOf(list.size()),"10","2",id+"");
-		default:
-			break;
-		}
-		
-	}
-	private class AlertImageListerner implements OnClickListener{
+    @ViewInject(R.id.signature_text)
+    private TextView signatureText;
 
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub 
-			imageView.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-			imageView.layout(0, 0, imageView.getMeasuredWidth(),imageView.getMeasuredHeight());
-			imageView.buildDrawingCache();
-			imageView.setDrawingCacheEnabled(true);
-			System.out.print(imageView.getDrawingCache());
-			Bitmap bitmap = Bitmap.createBitmap(imageView.getDrawingCache());
-			imageView.setDrawingCacheEnabled(false);
-			AlertImageDialog dialog = new AlertImageDialog(PopInfoActivity.this, bitmap);
-			//dialog.show("2", "2");
-			dialog.show("2", id+"");
-		}
-		
-	}
-	
-	private class GetContentTask extends AsyncTask<String, Void, Map<String, Object>>{
+    @ViewInject(R.id.close_ib)
+    private ImageButton closeIb;
 
-		protected void onPreExecute(){
-			super.onPreExecute();
-		}
-		
-		String getInfoURL = "http://121.40.120.82:8080/PopService/GetInfoServlet";
-		String getThumbnailURL = "http://121.40.120.82:8080/PopService/GetThumbnailServlet";
-		
-		@Override
-		protected Map<String, Object> doInBackground(String... arg0) {
-			// TODO Auto-generated method stub
-			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("type", arg0[0]));
-			params.add(new BasicNameValuePair("id", arg0[1]));
-			String info = httpTools.sendPostResult(getInfoURL, params);
-			Map<String, Object> map = jsonToMap(info);
-			Bitmap bitmap = null;
-			if (map.get("picture_url") != null){
-				bitmap = httpTools.downLoadPic(getThumbnailURL, params);
-				
-			}
-			map.put("bitmap", bitmap);
-			return map;
-		}
-		
+    @ViewInject(R.id.iv_pic)
+    private ImageView ivPic;
 
-		protected void onPostExecute(Map<String, Object> map){
-			System.out.println(map.get("info"));
-			if (map.get("info") != null){
-				textView.setText((String) map.get("info"));			
-			}
-			if (map.get("bitmap") != null){
-				imageView.setImageBitmap((Bitmap) map.get("bitmap"));
-			}
-			username.setText((String)map.get("username"));
-			date.setText((String)map.get("date"));
-		}
-		
-		
-	}
-	
-	public Map<String, Object> jsonToMap(String result){
-		Map<String, Object> map = new HashMap<String, Object>();
-		try{
-			JSONArray jsonArray = new JSONArray(result);
-			JSONObject jsonObject = jsonArray.getJSONObject(0);
-			map.put("date", jsonObject.getString("date"));
-			map.put("info", jsonObject.getString("info"));
-			map.put("username", jsonObject.getString("username"));
-			map.put("picture_url", jsonObject.getString("picture_url"));						
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return map;
-	}
-	
-	public List<Map<String, String>> jsonToList(String result) {
-		List<Map<String, String>> resultList = new ArrayList<Map<String, String>>();
-		try {
-			JSONObject jsonObject = new JSONObject(result);
-			JSONArray messageArray = (JSONArray) jsonObject.get("message");
-			JSONArray replyArray = (JSONArray) jsonObject.get("reply");
-			// System.out.println(messageArray);
-			for (int i = 0; i < messageArray.length(); i++) {
-				Map<String, String> map = new HashMap<String, String>();
-				JSONObject jb = messageArray.getJSONObject(i);
-				// map.put("messageLid", jb.getString("LID"));
-				map.put("message", jb.getString("words"));
-				map.put("date", jb.getString("date"));
-				map.put("username", jb.getString("username"));
-				// System.out.println(map);
-				for (int k = 0; k < replyArray.length(); k++) {
-					JSONObject object = replyArray.getJSONObject(k);
-					if (jb.getString("m_id").equals(object.getString("m_id"))) {
-						// map.put("RID", object.getString("RID"));
-						map.put("r_words", object.getString("r_words"));
-						//map.put("reDate", object.getString("date"));
-						// System.out.println(map);
-					} else if (map.get("r_words") == null) {
-						// map.put("RID", "");
-						// map.put("r_words", "");
-						// System.out.println(map);
-					}
-					// System.out.println(k);
-				}
-				// System.out.println(map);
-				resultList.add(map);
-				// System.out.println(dataList);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return resultList;
-	}
-	
+    @ViewInject(R.id.tv_content)
+    private TextView tvContent;
 
-	private class RefreshTask extends AsyncTask<String, Void, String>{
+    @ViewInject(R.id.fire_iv)
+    private ImageView fireIv;
 
-		String url = "http://121.40.120.82:8080/PopService/UpdateServlet";
-		List<NameValuePair> httpParams = new ArrayList<NameValuePair>();
-		String responseMsg = "";
-		
-		@Override
-		protected String doInBackground(String... params) {
-			// TODO Auto-generated method stub
-			httpParams.add(new BasicNameValuePair("m", params[0]));
-			httpParams.add(new BasicNameValuePair("n", params[1]));
-			httpParams.add(new BasicNameValuePair("type", params[2]));
-			httpParams.add(new BasicNameValuePair("id", params[3]));
-			responseMsg = httpTools.sendPostResult(url, httpParams);
-			return responseMsg;
-		}
-		
+    private CircleProgressDialog circleProgressDialog;
 
-		@Override
-		protected void onPostExecute(String result) {
-			// TODO Auto-generated method stub
-			if(myAdapter == null && result != null){
-				list = jsonToList(result);////////////////
-				myAdapter = new MyAdapter(list, PopInfoActivity.this);
-				//myListView.addHeaderView(headView);
-				myListView.setAdapter(myAdapter);
-			}else if(myAdapter != null && result != null){
-				list = jsonToList(result);
-				myAdapter.notifyDataSetChanged();
-			}
-			myListView.onRefreshComplete();
-		}
-		
-		
-	}
-	
-	private class LoadMoreTask extends AsyncTask<String, Void, String>{
+    private ImageOptions headImageOptions;
 
-		String url = "http://121.40.120.82:8080/PopService/UpdateServlet";
-		List<NameValuePair> httpParams = new ArrayList<NameValuePair>();
-		String responseMsg = "";
-		
-		@Override
-		protected String doInBackground(String... params) {
-			// TODO Auto-generated method stub
-			httpParams.add(new BasicNameValuePair("m", params[0]));
-			httpParams.add(new BasicNameValuePair("n", params[1]));
-			httpParams.add(new BasicNameValuePair("type", params[2]));
-			httpParams.add(new BasicNameValuePair("id", params[3]));
-			responseMsg = httpTools.sendPostResult(url, httpParams);
-			return responseMsg;
-		}
-		
+    private ImageOptions picImageOptions;
 
-		@Override
-		protected void onPostExecute(String result) {
-			// TODO Auto-generated method stub
-			if(myAdapter == null && result != null){
-				list.addAll(jsonToList(result));////////////////
-				myAdapter = new MyAdapter(list, PopInfoActivity.this);
-				//myListView.addHeaderView(headView);
-				myListView.setAdapter(myAdapter);
-			}else if(myAdapter != null && result != null){
-				list.addAll(jsonToList(result));
-				myAdapter.notifyDataSetChanged();
-			}
-			myListView.onLoadMoreComplete();
-		}
-		
-	}
+    private PopInfoDto popInfoDto;
+
+    private Resources res;
+
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.arg1) {
+                case MsgType.SUCCESS:
+                    //设置属性
+                    x.image().bind(headPhotoImage, popInfoDto.getUserHeadUrl(), headImageOptions);
+                    if(StringUtil.isNotEmpty(popInfoDto.getImgUrl())){
+                        x.image().bind(ivPic, popInfoDto.getUserHeadUrl(), picImageOptions);
+                    }
+                    //性别
+                    switch (popInfoDto.getSex()){
+                        case 1:sexImg.setImageDrawable(res.getDrawable(R.drawable.male));
+                            break;
+                        case 2:sexImg.setImageDrawable(res.getDrawable(R.drawable.female));
+                            break;
+                        default:sexImg.setImageDrawable(res.getDrawable(R.drawable.unknown_sex));
+                            break;
+                    }
+                    //阅后即焚
+                    if(popInfoDto.getOnlyOnce() > 0){
+                        fireIv.setVisibility(View.VISIBLE);
+                    }
+                    usernameTextView.setText(popInfoDto.getUserName());
+                    signatureText.setText(popInfoDto.getUserIntroduction());
+                    tvContent.setText(popInfoDto.getMessage());
+
+                    //创建时间
+                    //距离
+                    circleProgressDialog.dismiss();
+                    break;
+                case MsgType.FALI:
+                    circleProgressDialog.dismiss();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        circleProgressDialog = new CircleProgressDialog(this);
+        circleProgressDialog.setText("获取中...");
+
+
+    }
+
+    public void init(){
+        res = getResources();
+        headImageOptions = new ImageOptions.Builder()
+                .setIgnoreGif(false)
+                // 如果使用本地文件url, 添加这个设置可以在本地文件更新后刷新立即生效.
+                //.setUseMemCache(false)
+                .setLoadingDrawable(res.getDrawable(R.drawable.default_head))
+                .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                .setPlaceholderScaleType(ImageView.ScaleType.CENTER_CROP)
+                .build();
+        picImageOptions = new ImageOptions.Builder()
+                .setIgnoreGif(false)
+                // 如果使用本地文件url, 添加这个设置可以在本地文件更新后刷新立即生效.
+                //.setUseMemCache(false)
+                .setLoadingDrawable(res.getDrawable(R.drawable.updating))
+                .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                .setPlaceholderScaleType(ImageView.ScaleType.CENTER_CROP)
+                .build();
+    }
+
+    public void getPopInfo(){
+        circleProgressDialog.showDialog();
+        SharedPreferences sharedPreferences = getSharedPreferences("pop",
+                Activity.MODE_PRIVATE);
+        long popId =sharedPreferences.getLong("id",1);
+        RequestParams params = new RequestParams(UrlUtil.getPopInfo());
+        params.setAsJsonContent(true);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("popId",popId);
+        params.setBodyContent(jsonObject.toJSONString());
+        x.http().post(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                //更新本地缓存
+                    PopInfoResponse popInfoResponse = JSONObject.parseObject(result, PopInfoResponse.class);
+                    if (popInfoResponse.getResult() == ClientCode.SUCCESS) {
+                        popInfoDto = popInfoResponse.getPopInfoDto();
+                        Message msgMessage = new Message();
+                        msgMessage.arg1 = MsgType.SUCCESS;
+                        handler.sendMessage(msgMessage);
+                    } else {
+                        Toast.makeText(x.app(), popInfoResponse.getErrorMsg(), Toast.LENGTH_LONG).show();
+                    }
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+                Toast.makeText(x.app(), cex.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+
+    }
 }

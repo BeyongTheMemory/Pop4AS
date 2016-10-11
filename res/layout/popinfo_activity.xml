@@ -73,6 +73,7 @@
 
             <!--关闭按钮-->
             <ImageButton
+                android:id="@+id/close_ib"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/close_icon"
@@ -80,32 +81,56 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"/>
+            <!--阅后即焚-->
+            <ImageView
+                android:id="@+id/fire_iv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/fire"
+                android:layout_below="@+id/close_ib"
+                android:visibility="gone"
+                android:layout_alignLeft="@+id/close_ib"/>
 
 
         </RelativeLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/note_bg"
         >
         <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <!--长文本布局-->
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/iv_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="500dp"
+                android:maxHeight="500dp"
+                android:layout_marginTop="50dp"
+                android:layout_centerHorizontal="true"
+                />
+            <!--正文-->
             <TextView
+                android:id="@+id/tv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:text="亲爱的朋友们,躁动起来吧"
+                android:layout_below="@+id/iv_pic"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="40dp"/>
+                <!--评论-->
+            </RelativeLayout>
         </ScrollView>
-
-    </LinearLayout>
+    </RelativeLayout>
 
 
 
