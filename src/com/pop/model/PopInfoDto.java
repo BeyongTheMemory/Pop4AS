@@ -17,6 +17,9 @@ public class PopInfoDto {
     private Date createTime;
     private int sex;
     private int onlyOnce;
+    private int lookNum;
+    private double longitude;
+    private double latitude;
 
     public long getPopId() {
         return popId;
@@ -104,5 +107,29 @@ public class PopInfoDto {
 
     public void setOnlyOnce(int onlyOnce) {
         this.onlyOnce = onlyOnce;
+    }
+
+    public int getLookNum() {
+        return lookNum;
+    }
+
+    public void setLookNum(int lookNum) {
+        this.lookNum = lookNum;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 }

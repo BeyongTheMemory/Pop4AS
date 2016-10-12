@@ -1,17 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="65dp">
+
         <RelativeLayout
             android:id="@+id/personLayout"
             android:layout_width="fill_parent"
-            android:layout_height="65dp"
-            >
+            android:layout_height="65dp">
 
             <com.pop.activity.widget.CircleImageView
                 android:id="@+id/headPhoto_image"
@@ -35,8 +35,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/headPhoto_image"
-                android:src="@drawable/male"
-                />
+                android:src="@drawable/male" />
 
             <TextView
                 android:id="@+id/username_textView"
@@ -47,28 +46,26 @@
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/sex_img"
                 android:background="@null"
-                android:text="用户名"
                 android:enabled="false"
                 android:maxLength="10"
                 android:singleLine="true"
+                android:text="用户名"
                 android:textColor="#000000"
                 android:textSize="20sp" />
-
-
 
 
             <TextView
                 android:id="@+id/signature_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/sex_img"
                 android:layout_alignLeft="@id/sex_img"
+                android:layout_below="@id/sex_img"
                 android:background="@null"
-                android:text="Ta很懒,什么都没留下"
                 android:enabled="false"
-                android:textColor="#000000"
-                android:singleLine="true"
                 android:maxLength="20"
+                android:singleLine="true"
+                android:text="Ta很懒,什么都没留下"
+                android:textColor="#000000"
                 android:textSize="16sp" />
 
             <!--关闭按钮-->
@@ -76,20 +73,20 @@
                 android:id="@+id/close_ib"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/close_icon"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"/>
+                android:src="@drawable/close_icon" />
             <!--阅后即焚-->
             <ImageView
                 android:id="@+id/fire_iv"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/fire"
+                android:layout_alignLeft="@+id/close_ib"
                 android:layout_below="@+id/close_ib"
-                android:visibility="gone"
-                android:layout_alignLeft="@+id/close_ib"/>
+                android:src="@drawable/fire"
+                android:visibility="gone" />
 
 
         </RelativeLayout>
@@ -98,41 +95,166 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/note_bg"
-        >
+        android:background="@drawable/note_bg">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/iv_pic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxWidth="500dp"
-                android:maxHeight="500dp"
-                android:layout_marginTop="50dp"
-                android:layout_centerHorizontal="true"
-                />
-            <!--正文-->
-            <TextView
-                android:id="@+id/tv_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:text="亲爱的朋友们,躁动起来吧"
-                android:layout_below="@+id/iv_pic"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="40dp"/>
-                <!--评论-->
+
+                <ImageView
+                    android:id="@+id/iv_pic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    android:maxHeight="500dp"
+                    android:maxWidth="500dp" />
+                <!--正文-->
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_pic"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="载入中..."
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+                <!--浏览量-->
+                <TextView
+                    android:id="@+id/tv_look"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/tv_content"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text="浏览量:"
+                    android:textStyle="italic" />
+                <!--创建时间和距离-->
+                <ImageView
+                    android:id="@+id/iv_dis"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/loc_icon"
+                    android:layout_below="@+id/tv_look"/>
+                <TextView
+                    android:id="@+id/tv_dis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/iv_dis"
+                    android:layout_below="@+id/tv_look"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="0km"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_dis"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text="0000-00-00 00:00:00"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:textStyle="italic" />
+                <!--3个按钮:发送小纸条,收藏,评论-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/tv_time"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="10dp">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal|center_vertical">
+
+                        <ImageButton
+                            android:id="@+id/ib_note"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/send_note_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/ib_note"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:text="私  信"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_collect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal|center_vertical">
+
+                        <ImageButton
+                            android:id="@+id/ib_collect"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/collect_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/ib_collect"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:text="收  藏"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal|center_vertical">
+
+                        <ImageButton
+                            android:id="@+id/ib_comment"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/comment_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/ib_comment"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:text="评  论(0)"/>
+
+                    </RelativeLayout>
+                </LinearLayout>
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>
-
-
 
 
 </LinearLayout>

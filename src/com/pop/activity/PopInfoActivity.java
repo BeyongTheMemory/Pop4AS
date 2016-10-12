@@ -14,6 +14,8 @@ import com.pop.activity.widget.CircleImageView;
 import com.pop.enume.ClientCode;
 import com.pop.model.PopInfoDto;
 import com.pop.response.pop.PopInfoResponse;
+import com.pop.util.DateUtil;
+import com.pop.util.DistanceUtil;
 import com.pop.util.MsgType;
 import com.pop.util.StringUtil;
 import com.pop.util.UrlUtil;
@@ -59,6 +61,18 @@ public class PopInfoActivity extends BaseActivity {
     @ViewInject(R.id.fire_iv)
     private ImageView fireIv;
 
+    @ViewInject(R.id.tv_look)
+    private TextView tvLook;
+
+    @ViewInject(R.id.tv_dis)
+    private TextView tvDis;
+
+    @ViewInject(R.id.tv_time)
+    private TextView tvTime;
+
+    @ViewInject(R.id.iv_dis)
+    private ImageView ivDis;
+
     private CircleProgressDialog circleProgressDialog;
 
     private ImageOptions headImageOptions;
@@ -73,11 +87,9 @@ public class PopInfoActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.arg1) {
                 case MsgType.SUCCESS:
-                    //设置属性
+                    //用户属性
+                    //头像
                     x.image().bind(headPhotoImage, popInfoDto.getUserHeadUrl(), headImageOptions);
-                    if(StringUtil.isNotEmpty(popInfoDto.getImgUrl())){
-                        x.image().bind(ivPic, popInfoDto.getUserHeadUrl(), picImageOptions);
-                    }
                     //性别
                     switch (popInfoDto.getSex()){
                         case 1:sexImg.setImageDrawable(res.getDrawable(R.drawable.male));
@@ -93,10 +105,38 @@ public class PopInfoActivity extends BaseActivity {
                     }
                     usernameTextView.setText(popInfoDto.getUserName());
                     signatureText.setText(popInfoDto.getUserIntroduction());
+                    //正文
                     tvContent.setText(popInfoDto.getMessage());
+                    //图片
+                    if(StringUtil.isNotEmpty(popInfoDto.getImgUrl())){
+                        x.image().bind(ivPic, popInfoDto.getUserHeadUrl(), picImageOptions);
+                    }
 
+                    //浏览量
+                    int lookNum = popInfoDto.getLookNum();
+                    StringBuilder lookStr = new StringBuilder("浏览量:");
+                    if (lookNum > 999){
+                        lookStr.append("999+");
+                    }else {
+                        lookStr.append(lookNum);
+                    }
+                    tvLook.setText(lookStr);
                     //创建时间
+                    tvTime.setText(DateUtil.getDate(popInfoDto.getCreateTime()));
                     //距离
+                    //经纬度
+                    SharedPreferences sharedPreferences = getSharedPreferences("loacation",
+                            Activity.MODE_PRIVATE);
+                    double latitude = Double.parseDouble(sharedPreferences.getString("latitude", ""));
+                    double longitude = Double.parseDouble(sharedPreferences.getString("longitude", ""));
+                    int dis = (int)DistanceUtil.GetDistance(latitude,longitude,popInfoDto.getLatitude(),popInfoDto.getLongitude());
+                    if(dis > 1000){
+                        tvDis.setText(dis / 1000 +"km");
+                        //漂浮
+                        ivDis.setImageDrawable(res.getDrawable(R.drawable.float_icon));
+                    }else {
+                        tvDis.setText(dis+"m");
+                    }
                     circleProgressDialog.dismiss();
                     break;
                 case MsgType.FALI:
