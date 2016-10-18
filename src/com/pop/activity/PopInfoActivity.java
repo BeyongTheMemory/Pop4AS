@@ -109,7 +109,7 @@ public class PopInfoActivity extends BaseActivity {
                     tvContent.setText(popInfoDto.getMessage());
                     //图片
                     if(StringUtil.isNotEmpty(popInfoDto.getImgUrl())){
-                        x.image().bind(ivPic, popInfoDto.getUserHeadUrl(), picImageOptions);
+                        x.image().bind(ivPic, popInfoDto.getImgUrl(), picImageOptions);
                     }
 
                     //浏览量
@@ -131,7 +131,7 @@ public class PopInfoActivity extends BaseActivity {
                     double longitude = Double.parseDouble(sharedPreferences.getString("longitude", ""));
                     int dis = (int)DistanceUtil.GetDistance(latitude,longitude,popInfoDto.getLatitude(),popInfoDto.getLongitude());
                     if(dis > 1000){
-                        tvDis.setText(dis / 1000 +"km");
+                        tvDis.setText((dis / 1000) +"km");
                         //漂浮
                         ivDis.setImageDrawable(res.getDrawable(R.drawable.float_icon));
                     }else {
@@ -152,8 +152,8 @@ public class PopInfoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         circleProgressDialog = new CircleProgressDialog(this);
         circleProgressDialog.setText("获取中...");
-
-
+        circleProgressDialog.showDialog();
+        init();
     }
 
     public void init(){
@@ -174,18 +174,20 @@ public class PopInfoActivity extends BaseActivity {
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
                 .setPlaceholderScaleType(ImageView.ScaleType.CENTER_CROP)
                 .build();
+        closeIb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopInfoActivity.this.finish();
+            }
+        });
+        getPopInfo();
     }
 
     public void getPopInfo(){
-        circleProgressDialog.showDialog();
         SharedPreferences sharedPreferences = getSharedPreferences("pop",
                 Activity.MODE_PRIVATE);
         long popId =sharedPreferences.getLong("id",1);
-        RequestParams params = new RequestParams(UrlUtil.getPopInfo());
-        params.setAsJsonContent(true);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("popId",popId);
-        params.setBodyContent(jsonObject.toJSONString());
+        RequestParams params = new RequestParams(UrlUtil.getPopInfo(popId));
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {

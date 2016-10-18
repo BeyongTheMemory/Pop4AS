@@ -28,6 +28,7 @@ import com.pop.menu.SatelliteMenuItem;
 import com.pop.menu.SatelliteMenu.SateliteClickedListener;
 import com.pop.R;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -60,6 +61,9 @@ import android.widget.FrameLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.xutils.x;
+
 /**
  * @author xg
  *6.2
@@ -990,12 +994,19 @@ public class MainActivity extends BaseActivity implements SensorEventListener, O
 						
 					}
 					if(id == 8){
-						isPreview=false;
-						Intent intent = new Intent();
-						intent.setClass(MainActivity.this,NewPopPhotoActivity.class);//暂时只有图文泡泡
-						MainActivity.this.startActivity(intent);
-//						MainActivity.this.onPause();
-//						MainActivity.this.finish();
+						//经纬度
+						SharedPreferences sharedPreferences = getSharedPreferences("loacation",
+								Activity.MODE_PRIVATE);
+						double latitude = Double.parseDouble(sharedPreferences.getString("latitude", ""));
+						double longitude = Double.parseDouble(sharedPreferences.getString("longitude", ""));
+						if(latitude <= 0.00001 || longitude <= 0.00001){
+							Toast.makeText(x.app(), "无法获取您的位置,请稍后再试", Toast.LENGTH_LONG).show();
+						}else {
+							isPreview = false;
+							Intent intent = new Intent();
+							intent.setClass(MainActivity.this, NewPopPhotoActivity.class);//暂时只有图文泡泡
+							MainActivity.this.startActivity(intent);
+						}
 					}
 					
 				}
